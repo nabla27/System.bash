@@ -53,7 +53,7 @@ do
 		num=$((num-1))
 		;;
 		q)
-		tmp_pwd=`pwd` && cd .. && pwd=`pwd`
+		tmp_pwd=`pwd` && pwd=`pwd` #cd .. #これがなくてもqでディレクトリが戻ってしまう。
 		num=1
 		;;
 		e)
@@ -65,6 +65,7 @@ do
 	   	echo "$pwd/`sed -n "$num"p ~/data_folder/System/File_System/directory_list`" > ~/data_folder/System/File_System/memory_File_System
 		echo "$num" >> ~/data_folder/System/File_System/memory_File_System
 		echo "$pwd" > ~/data_folder/System/GUI_System/tmp_pwd
+		echo 
 		exit
 		;;
 	esac

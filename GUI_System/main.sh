@@ -1,4 +1,5 @@
 #!/bin/bash
+cd ~
 
 echo "menu" > ~/data_folder/System/GUI_System/GUI_mode
 
