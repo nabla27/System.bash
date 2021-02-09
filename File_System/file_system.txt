@@ -1,0 +1,15 @@
+    Arduino/
+    Untitled.ipynb
+    a.out
+    anaconda3/
+ → backup_data/
+    data_folder/
+    foo
+    git/
+    gnuplot/
+    myfolder/
+    pass
+    program/
+    test.cpp
+    test_c++
+    work/
