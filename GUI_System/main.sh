@@ -1,6 +1,10 @@
 #!/bin/bash
 cd ~
 
+PATH_mode="~/data_folder/System/GUI_System/GUI_mode"
+PATH_tmpath="~/data_folder/System/GUI_System/tmp_pwd"
+PATH_subfield="~/data_folder/System/Subfield_System/file_subfil
+
 echo "menu" > ~/data_folder/System/GUI_System/GUI_mode
 
 state="menu"
