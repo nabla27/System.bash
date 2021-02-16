@@ -1,0 +1,7 @@
+
+**********パスの設定************
+main.sh, display.sh, subfield.sh 内の先頭に記述されている変数 PATH_ をこの System_ver3 が存在するパスに設定する必要がある。
+例えば、homeディレクトリ内のユーザー名"defalt"内にSystem_ver3を置いているとき、
+PATH_="/home/defalt/System_ver3"
+とパスを設定する。
+********************************
