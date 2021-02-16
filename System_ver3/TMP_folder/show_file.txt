@@ -1,1 +1,5 @@
- → /home/nabla27_2/data_folder/System_ver2/TMP_folder/pwd.txt
+    List/
+    TMP_folder/
+    display.sh
+    main.sh
+ → subfield.sh

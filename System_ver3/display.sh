@@ -1,20 +1,22 @@
 #!/bin/bash
-######################################################
-PATH_="/home/nabla27_2/data_folder/System_ver2"
-######################################################
+############################################################
+PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
+############################################################
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_direct_list="$PATH_/TMP_folder/direct_list.txt"
 PATH_file_show="$PATH_/TMP_folder/show_file.txt"
 PATH_mode="$PATH_/TMP_folder/mode.txt"
-######################################################
+############################################################
 
-echo "/home/nabla27_2" > $PATH_pwd
+echo `pwd` > $PATH_pwd	#tpwdファイルか読み取る
+rm $PATH_tpwd && touch $PATH_tpwd #tpwdファイルをここで削除せず、main内で削除する
 num=1
+num_tpwd=1
 
 function output(){
 	local list_num="1"
-	ls -F -w "10" "$PATH_pwd" > $PATH_direct_list
+	ls -F -w10 `cat $PATH_pwd` > $PATH_direct_list
 	for line in `cat $PATH_direct_list`
 	do
 		if [ "$num" -eq "$list_num" ]; then
@@ -60,46 +62,19 @@ do
 		q)
 		echo `pwd` >> $PATH_tpwd && cd .. && echo `pwd` > $PATH_pwd
 		num=1
+		num_tpwd=1
 		;;
 		e)
-		cd `sed -n 1 $PATH_tpwd` && echo `pwd` > $PATH_pwd
+		cd `cat $PATH_tpwd | tail -n $num_tpwd | head -n 1` && echo `pwd` > $PATH_pwd
+		num_tpwd=$((num_tpwd+1))
 		num=1
 		;;
+		d)
+		echo "subfield" > $PATH_mode
+		exit
 	esac
 	clear
 done
 
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-done
 
