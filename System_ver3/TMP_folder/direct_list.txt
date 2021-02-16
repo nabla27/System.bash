@@ -1,3 +1,2 @@
 test_dir1/
 test_dir2/
-test_dir3/

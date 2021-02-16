@@ -34,8 +34,10 @@ do
 	#描写ファイルの生成
 	output
 
-	#カレントディレクトリの描写
+	#カレント0ディレクトリの描写
+	echo `pwd` > $PATH_pwd
 	cat $PATH_pwd
+	echo `pwd`
 	echo
 	echo "--------------------" 
 
@@ -70,6 +72,14 @@ do
 		d)
 		echo "subfield" > $PATH_mode
 		exit
+		;;
+		:)
+		echo "< Command Line > "
+		read _getcher
+		$_getcher
+		echo `pwd` > $PATH_pwd
+		exit
+		;;
 	esac
 	clear
 done

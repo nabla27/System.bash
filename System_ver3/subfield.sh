@@ -9,12 +9,15 @@ PATH_file_show="$PATH_/TMP_folder/show_file.txt"
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_list_f="$PATH_/List/list_f"
 PATH_list_d="$PATH_/List/list_d"
+PATH_trash_d="$PATH_/List/Trash_Boxd"
+PATH_trash_f="$PATH_/List/Trash_Boxf"
 ############################################################
 
 #cd `cat $PATH_pwd`
 mode="subfield"
 list_num=1
 num=1
+date=`date '+%Y-%m-%d'`
 
 for line in `cat $PATH_file_show`
 do
@@ -52,6 +55,9 @@ function choices_f(){
 		echo " [Are you sure to delete $string2 ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
+			new_name="$string2.zip"
+			zip -q "${new_name}_$date" $terget
+			mv "${new_name}_$date" $PATH_trash_f
 			rm $terget
 		fi
 		mode="display" && echo "display" > $PATH_mode
@@ -84,6 +90,9 @@ function choices_d(){
 		echo " [Are you sure to delete $string2 ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
+			new_name=`echo $string2 | sed -e "s/\//.zip/g"`
+			zip -rq "${new_name}_$date" $terget
+			mv "${new_name}_$date" $PATH_trash_d
 			rm -r $terget
 		fi
 		mode="display" && echo "display" > $PATH_mode
