@@ -1,5 +1,3 @@
-List/
-TMP_folder/
-display.sh
-main.sh
-subfield.sh
+test_dir1/
+test_dir2/
+test_dir3/

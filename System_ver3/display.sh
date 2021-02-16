@@ -8,9 +8,6 @@ PATH_direct_list="$PATH_/TMP_folder/direct_list.txt"
 PATH_file_show="$PATH_/TMP_folder/show_file.txt"
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 ############################################################
-
-cat $PATH_tpwd > $PATH_pwd
-
 num=1
 num_tpwd=1
 
@@ -39,7 +36,8 @@ do
 
 	#カレントディレクトリの描写
 	cat $PATH_pwd
-	echo 
+	echo
+	echo "--------------------" 
 
 	#画面への描写
 	if [ "$num" -le "10" ]; then
