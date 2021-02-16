@@ -9,8 +9,8 @@ PATH_file_show="$PATH_/TMP_folder/show_file.txt"
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 ############################################################
 
-echo `pwd` > $PATH_pwd	#tpwdファイルか読み取る
-rm $PATH_tpwd && touch $PATH_tpwd #tpwdファイルをここで削除せず、main内で削除する
+cat $PATH_tpwd > $PATH_pwd
+
 num=1
 num_tpwd=1
 
