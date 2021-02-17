@@ -37,7 +37,6 @@ do
 	#カレント0ディレクトリの描写
 	echo `pwd` > $PATH_pwd
 	cat $PATH_pwd
-	echo `pwd`
 	echo
 	echo "--------------------" 
 
@@ -78,6 +77,10 @@ do
 		read _getcher
 		$_getcher
 		echo `pwd` > $PATH_pwd
+		exit
+		;;
+		r)
+		mode="menu" && echo "menu" > $PATH_mode
 		exit
 		;;
 	esac
