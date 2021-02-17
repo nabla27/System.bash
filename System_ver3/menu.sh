@@ -38,6 +38,14 @@ function Book_Mark(){
 clear
 while [ $mode = "menu" ]
 do
+	#numの制約
+	if [ $num -eq 0 ]; then
+		num=4
+	elif [ $num -eq 5 ]; then
+		num=1
+	fi
+
+	#描写
 	clear
 	mode=`cat $PATH_mode`
 	cat $PATH_pwd
@@ -46,6 +54,7 @@ do
 
 	output
 
+	#パラメータ変化
 	read -n 1 _getch
 	
 	case $_getch in

@@ -51,7 +51,7 @@ function choices_f(){
 		read _getcher
 		touch $_getcher
 		mode="display" && echo "display" > $PATH_mode
-	elif [ $num -eq 7 ]; then
+	elif [ $num -eq 6 ]; then
 		echo " [Are you sure to delete $string2 ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
@@ -61,7 +61,7 @@ function choices_f(){
 			rm $terget
 		fi
 		mode="display" && echo "display" > $PATH_mode
-	elif [ $num -eq 8 ]; then
+	elif [ $num -eq 7 ]; then
 		echo
 		ls -l $terget
 		read -n 1 _gether
@@ -108,10 +108,18 @@ function choices_d(){
 
 while [ $mode = "subfield" ]
 do
-	clear
 	list_num2=1
 	mode=`cat $PATH_mode`
 
+	#numの制約
+	if [ $num -eq 0 ]; then
+		num=8
+	elif [ $num -eq 9 ]; then
+		num=1
+	fi
+	
+	#描写
+	clear
 	cat $PATH_pwd
 	echo
 	echo "--------------------"
