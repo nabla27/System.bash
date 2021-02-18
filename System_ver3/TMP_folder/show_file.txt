@@ -1,6 +1,6 @@
     List/
-    TMP_folder/
- → description
+ → TMP_folder/
+    description
     display.sh
     main.sh
     menu.sh
