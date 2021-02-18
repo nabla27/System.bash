@@ -31,24 +31,35 @@ function Command_Searching(){
 function func_search(){
 	IFS_BACKUP=$IFS
 	IFS=$'\n'
-	# $1:path $2:keyword $3:order
-	rm $PATH_searf && touch $PATH_searf
-	for fname in `ls --time-style=long-iso --sort="$order" -ogh $path`
-	do
-		echo $fname >> $PATH_searf
-	done
-	cat $PATH_searf
+	# $1:path $2:keyword
+
+	local filepath=$1
+	local key=$2
+
+	if [ -f "$filepath" ]; then
+		if [ $key != "none" ]; then
+		if [[ $filepath = *"$key"* ]]; then
+		echo `ls --time-style=long-iso -oqgh "$filepath"` | cut -f 3-6 --delim=" " >> $PATH_searf
+		fi
+		fi
+		if [ "$key" = "none" ]; then
+		echo `ls --time-style=long-iso -oqgh "$filepath"` | cut -f 3-6 --delim=" " >> $PATH_searf
+		fi
+	elif [ -d "$filepath" -a -r "$filepath" ]; then
+		local fname
+		for fname in `ls "$filepath"`
+		do
+			func_search "${filepath}/${fname}" $key
+
+		done
+	fi
 
 	IFS=$IFS_BACKUP	
 }
 
 function File_Searching(){
 	point=1
-	point1="→"
-	point2="  "
-	point3="  "
-	point4="  "
-	point5="  "
+	point1="→"; point2="  "; point3="  "; point4="  "; point5="  "
 	path="        "
 	keyword="        "
 	order="        "
@@ -111,13 +122,23 @@ function File_Searching(){
 				if [ "$path" = "        " ]; then
 					path=`cat $PATH_pwd`
 				fi
-				if [ "$keyword" = "        " ]; then
-					keyword="*"
+				if [ "$keyword" = "        " -o "$keyword" = "" ]; then
+					keyword="none"
 				fi
 				if [ "$order" = "        " ]; then
 					order="none"
 				fi
-				func_search
+				rm $PATH_searf && touch $PATH_searf
+				echo "------------------wating--------------------"
+				func_search $path $keyword
+				if [ $order = "time" ]; then
+					cat $PATH_searf | sort -k 2,3V
+				elif [ $order = "size" ]; then
+					cat $PATH_searf | sort -k 1V
+				elif [ $order = "none" ]; then
+					cat $PATH_searf	
+				fi
+				echo "--------------------end---------------------"
 				read -n 4 _exit
 			fi	
 			;;

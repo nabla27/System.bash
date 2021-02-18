@@ -1,53 +1,72 @@
-total 3.6M
--r-xr-xr-x 1 1.4M 2015-10-23 09:18 VC_RED.cab
--r-xr-xr-x 1 550K 2015-10-23 09:18 install.exe
--r-xr-xr-x 1 266K 2021-01-27 17:04 okldr
--r-xr-xr-x 1 228K 2015-10-23 09:18 VC_RED.MSI
--r-xr-xr-x 1 217K 2016-06-30 17:32 amldr
--r-xr-xr-x 1  96K 2015-10-23 09:18 install.res.1036.dll
--r-xr-xr-x 1  95K 2015-10-23 09:18 install.res.1031.dll
--r-xr-xr-x 1  95K 2015-10-23 09:18 install.res.3082.dll
--r-xr-xr-x 1  94K 2015-10-23 09:18 install.res.1040.dll
--r-xr-xr-x 1  90K 2015-10-23 09:18 install.res.1033.dll
--r-xr-xr-x 1  80K 2015-10-23 09:18 install.res.1041.dll
--r-xr-xr-x 1  79K 2015-10-23 09:18 install.res.1042.dll
--r-xr-xr-x 1  75K 2015-10-23 09:18 install.res.1028.dll
--r-xr-xr-x 1  75K 2015-10-23 09:18 install.res.2052.dll
--r-xr-xr-x 1  18K 2015-10-23 09:18 eula.1028.txt
--r-xr-xr-x 1  18K 2015-10-23 09:18 eula.1031.txt
--r-xr-xr-x 1  18K 2015-10-23 09:18 eula.1036.txt
--r-xr-xr-x 1  18K 2015-10-23 09:18 eula.1040.txt
--r-xr-xr-x 1  18K 2015-10-23 09:18 eula.1042.txt
--r-xr-xr-x 1  18K 2015-10-23 09:18 eula.2052.txt
--r-xr-xr-x 1  18K 2015-10-23 09:18 eula.3082.txt
--r-xr-xr-x 1 9.9K 2015-10-23 09:18 eula.1033.txt
--r-xr-xr-x 1 9.0K 2016-06-30 17:32 amldr.mbr
--r-xr-xr-x 1 8.0K 2021-01-27 17:04 okldr.mbr
--r-xr-xr-x 1 5.6K 2015-10-23 09:18 vcredist.bmp
--r-xr-xr-x 1 1.1K 2015-10-23 09:18 globdata.ini
--r-xr-xr-x 1 1.0K 2021-01-27 17:12 AMTAG.BIN
--r-xr-xr-x 1 1.0K 2021-01-27 17:12 OKTAG.BIN
--r-xr-xr-x 1  843 2015-10-23 09:18 install.ini
-drwxrwxrwx 1  512 2021-01-27 16:22 $Recycle.Bin
-drwxrwxrwx 1  512 2021-01-27 17:04 Aomei
-drwxrwxrwx 1  512 2021-02-08 20:35 GameOn
-drwxrwxrwx 1  512 2021-02-03 16:13 Intel
-drwxrwxrwx 1  512 2021-02-11 10:37 KingsoftData
-drwxrwxrwx 1  512 2021-02-03 16:08 OneDriveTemp
-drwxrwxrwx 1  512 2021-02-03 16:55 PerfLogs
-dr-xr-xr-x 1  512 2021-02-16 23:13 Program Files
-dr-xr-xr-x 1  512 2021-02-16 21:42 Program Files (x86)
-drwxrwxrwx 1  512 2021-02-16 23:13 ProgramData
-d--x--x--x 1  512 2021-02-11 10:29 Recovery
-d--x--x--x 1  512 2021-02-16 19:21 System Volume Information
-dr-xr-xr-x 1  512 2021-01-16 17:43 Users
-drwxrwxrwx 1  512 2021-02-03 16:18 VM_Guest
-dr-xr-xr-x 1  512 2021-02-16 23:11 Windows
--r-xr-xr-x 1  221 2021-01-27 17:03 amcf.lst
--r-xr-xr-x 1  212 2021-01-27 17:04 okcf.lst
--r-xr-xr-x 1  118 2015-10-23 09:18 eula.1041.txt
--r-xr-xr-x 1   32 2021-01-27 17:12 OkBootConfig.dat
-lrwxrwxrwx 1   12 2021-01-16 17:34 Documents and Settings -> /mnt/c/Users
--????????? ?    ?                ? hiberfil.sys
--????????? ?    ?                ? pagefile.sys
--????????? ?    ?                ? swapfile.sys
+182 2021-02-16 23:06 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxd/test_dir10.zip_2021-02-16
+214 2021-02-16 23:00 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxd/test_dir100.zip_2021-02-16
+1.4K 2021-02-16 23:06 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxd/test_dir1_cp.zip_2021-02-16
+2.0K 2021-02-16 20:57 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxd/test_dir2.zip_2021-02-16
+1.8K 2021-02-16 22:58 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxd/test_dir2_cp.zip_2021-02-16
+2.1K 2021-02-17 20:43 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxd/test_dir2_cp.zip_2021-02-17
+1.8K 2021-02-16 22:58 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxd/test_dir2_cp_cp.zip_2021-02-16
+180 2021-02-16 21:52 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxd/test_dir3.zip_2021-02-16
+234 2021-02-16 23:01 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file1.zip_2021-02-16
+182 2021-02-16 23:04 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file10.zip_2021-02-16
+212 2021-02-17 20:42 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file10.zip_2021-02-17
+184 2021-02-16 22:59 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file100.zip_2021-02-16
+214 2021-02-17 20:42 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file100.zip_2021-02-17
+218 2021-02-17 20:41 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file10_cp.zip_2021-02-17
+240 2021-02-16 23:01 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file1_cp.zip_2021-02-16
+180 2021-02-16 21:52 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file2.zip_2021-02-16
+244 2021-02-16 21:40 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file_{1..10}.zip_2021-02-16
+242 2021-02-16 21:40 /home/nabla27_2/data_folder/System.bash/System_ver3/List/Trash_Boxf/test_file{1..10}.zip_2021-02-16
+106 2021-02-18 12:17 /home/nabla27_2/data_folder/System.bash/System_ver3/TMP_folder/test.sh
+84 2021-02-10 11:42 /home/nabla27_2/data_folder/System_first/System_ver2/test.sh
+25 2021-02-10 11:42 /home/nabla27_2/data_folder/System_first/System_ver2/test.txt
+84 2021-02-10 10:59 /home/nabla27_2/data_folder/System_ver2/test.sh
+25 2021-02-10 10:41 /home/nabla27_2/data_folder/System_ver2/test.txt
+255 2021-02-18 17:05 /home/nabla27_2/work/test.sh
+69 2021-02-18 19:17 /home/nabla27_2/work/test2.sh
+20 2021-02-16 23:05 /home/nabla27_2/work/test_dir1/file2
+0 2021-02-09 20:15 /home/nabla27_2/work/test_dir1/file3
+0 2021-02-09 20:15 /home/nabla27_2/work/test_dir1/file4
+0 2021-02-09 20:15 /home/nabla27_2/work/test_dir1/file5
+0 2021-02-09 20:15 /home/nabla27_2/work/test_dir1/file7
+0 2021-02-09 20:15 /home/nabla27_2/work/test_dir1/file8
+0 2021-02-09 20:15 /home/nabla27_2/work/test_dir1/file9
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_1
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_10
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_2
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_3
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_4
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_5
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_6
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_7
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_8
+0 2021-02-18 15:53 /home/nabla27_2/work/test_dir1/file_9
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_1
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_10
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_2
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_3
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_4
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_5
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_6
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_7
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_8
+0 2021-02-18 18:54 /home/nabla27_2/work/test_dir1/test_dir_10/dirfile_9
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_11
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_12
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_13
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_14
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_15
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_16
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_17
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_18
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_19
+0 2021-02-18 15:54 /home/nabla27_2/work/test_dir2/file_20
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_21
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_22
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_23
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_24
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_25
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_26
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_27
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_28
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_29
+0 2021-02-18 16:09 /home/nabla27_2/work/test_dir3/file_30
