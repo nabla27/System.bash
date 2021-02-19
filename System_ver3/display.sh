@@ -12,6 +12,8 @@ num=1
 num_tpwd=1
 
 function output(){
+	IFS_BACKUP=$IFS
+	IFS=$'\n'
 	local list_num="1"
 	ls -F -w10 `cat $PATH_pwd` > $PATH_direct_list
 	for line in `cat $PATH_direct_list`
@@ -23,6 +25,7 @@ function output(){
 		fi
 		list_num=$((list_num+1))
 	done
+	IFS=$IFS_BACKUP
 }
 
 clear

@@ -34,12 +34,13 @@ do
 done
 
 function choices_f(){
+	echo "$terget_num"
 	if [ $num -eq 1 ]; then
-		less $terget
+		less "$terget"
 	elif [ $num -eq 2 ]; then
-		vim $terget
+		vim "$terget"
 	elif [ $num -eq 3 ]; then
-		cp $terget "${string2}_cp"
+		cp "$terget" "${string2}_cp"
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 4 ]; then
 		echo " [Enter the name of new folder]"
@@ -56,25 +57,25 @@ function choices_f(){
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
 			new_name="$string2.zip"
-			zip -q "${new_name}_$date" $terget
+			zip -q "${new_name}_$date" "$terget"
 			mv "${new_name}_$date" $PATH_trash_f
-			rm $terget
+			rm "$terget"
 		fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
 		echo
-		ls -l $terget
+		ls -l "$terget"
 		read -n 1 _gether
 	
 	fi
 }
 function choices_d(){
 	if [ $num -eq 1 ]; then
-		cd $terget && echo `pwd` > $PATH_pwd
+		cd "$terget" && echo `pwd` > $PATH_pwd
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 2 ]; then
-		new_name=`echo $string2 | sed -e "s/\//_cp/g"`
-		cp -r $terget "$new_name"
+		new_name=`echo "$string2" | sed -e "s/\//_cp/g"`
+		cp -r "$terget" "$new_name"
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 3 ]; then
 		echo " [Enter the name of new folder]"
@@ -91,14 +92,14 @@ function choices_d(){
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
 			new_name=`echo $string2 | sed -e "s/\//.zip/g"`
-			zip -rq "${new_name}_$date" $terget
+			zip -rq "${new_name}_$date" "$terget"
 			mv "${new_name}_$date" $PATH_trash_d
-			rm -r $terget
+			rm -r "$terget"
 		fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
 		echo
-		ls -l $terget
+		ls -l "$terget"
 		read -n 1 _getcher
 
 	fi
@@ -133,7 +134,7 @@ do
 	echo
 	echo "____________________"
 
-	if [ -f $terget ]; then
+	if [ -f "$terget" ]; then
 		for line in `cat $PATH_list_f`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
@@ -143,7 +144,7 @@ do
 			fi
 			list_num2=$((list_num2+1))
 		done
-	elif [ -d $terget ]; then
+	elif [ -d "$terget" ]; then
 		for line in `cat $PATH_list_d`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
@@ -169,9 +170,9 @@ do
 		exit
 		;;
 		d)
-		if [ -f $terget ]; then
+		if [ -f "$terget" ]; then
 			choices_f
-		elif [ -d $terget ]; then
+		elif [ -d "$terget" ]; then
 			choices_d
 		fi
 		;;
