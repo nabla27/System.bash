@@ -1,1 +1,1 @@
-//mnt/c/Users/pc/Downloads
+/home/nabla27_2/data_folder/System.bash/System_ver3

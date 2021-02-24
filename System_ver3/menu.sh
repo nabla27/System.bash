@@ -32,27 +32,48 @@ function Command_Searching(){
 function func_search(){
 	IFS_BACKUP=$IFS
 	IFS=$'\n'
-	# $1:path $2:keyword
+	# $1:path $2:keyword $3:order
 
 	local filepath=$1
 	local key=$2
+	local order=$3
+	if [ "$order" != "none" ]; then
+		if [ -f "$filepath" ]; then
+			if [ "$key" != "none" ]; then
+			if [[ "$filepath" = *"$key"* ]]; then
+			echo `ls --time-style=long-iso -oqgh "$filepath"` | cut -f 3-6 --delim=" " >> $PATH_searf
+			fi
+			fi
+			if [ "$key" = "none" ]; then
+			echo `ls --time-style=long-iso -oqgh "$filepath"` | cut -f 3-6 --delim=" " >> $PATH_searf
+			fi
+		elif [ -d "$filepath" -a -r "$filepath" ]; then
+			local fname
+			for fname in `ls "$filepath"`
+			do
+				func_search "${filepath}/${fname}" "$key" $order
 
-	if [ -f "$filepath" ]; then
-		if [ $key != "none" ]; then
-		if [[ $filepath = *"$key"* ]]; then
-		echo `ls --time-style=long-iso -oqgh "$filepath"` | cut -f 3-6 --delim=" " >> $PATH_searf
+			done
 		fi
+	elif [ "$order" = "none" -a "$key" != "none" ]; then
+		if [ -f "$filepath" ]; then
+			if [ "$key" != "none" ]; then
+			if [[ "$filepath" = *"$key"* ]]; then
+			ls --time-style=long-iso -oqgh "$filepath" | cut -f 3-6 --delim=" "
+			fi
+			fi
+			if [ "$key" = "none" ]; then
+			ls --time-style=long-iso -oqgh "$filepath" | cut -f 3-6 --delim=" "
+			fi
+		elif [ -d "$filepath" -a -r "$filepath" ]; then
+			local fname
+			for fname in `ls "$filepath"`
+			do
+				func_search "${filepath}/${fname}" "$key" $order
+			done
 		fi
-		if [ "$key" = "none" ]; then
-		echo `ls --time-style=long-iso -oqgh "$filepath"` | cut -f 3-6 --delim=" " >> $PATH_searf
-		fi
-	elif [ -d "$filepath" -a -r "$filepath" ]; then
-		local fname
-		for fname in `ls "$filepath"`
-		do
-			func_search "${filepath}/${fname}" $key
-
-		done
+	elif [ "$order" = "none" -a "$key" = "none" ]; then
+		ls --time-style=long-iso -oqghR "$filepath"
 	fi
 
 	IFS=$IFS_BACKUP	
@@ -69,7 +90,7 @@ function File_Searching(){
 		clear
 		cat $PATH_pwd
 		echo
-		echo "**********Command_Searching**********"
+		echo "**********File_Searching**********"
 		echo
 		echo " $point1 Path            [$path]"
 		echo
@@ -81,7 +102,7 @@ function File_Searching(){
 		echo " $point4 <Clear>"
 		echo " $point5 <Search>"
 		echo
-		echo "*************************************"
+		echo "**********************************"
 
 		read -n 1 _getch
 		
@@ -133,17 +154,26 @@ function File_Searching(){
 					order="none"
 				fi
 				rm $PATH_searf && touch $PATH_searf
-				echo "------------------wating--------------------"
-				func_search $path $keyword
-				if [ $order = "time" ]; then
-					cat $PATH_searf | sort -k 2,3V
-				elif [ $order = "size" ]; then
-					cat $PATH_searf | sort -k 1V
-				elif [ $order = "none" ]; then
-					cat $PATH_searf	
+				echo
+				if [ "$order" != "none" ]; then
+					echo "------------------Searching...--------------------"
+					func_search $path $keyword $order
+					echo "-------------------Wating...----------------------"
+					if [ $order = "time" ]; then
+						cat $PATH_searf | sort -k 2,3V
+					elif [ $order = "size" ]; then
+						cat $PATH_searf | sort -k 1V
+					elif [ $order = "none" ]; then
+						cat $PATH_searf	
+					fi
+					echo "---------------------end--------------------------"
+					read -n 4 _exit
+				elif [ "$order" = "none" ]; then
+					echo "-------------------Wating...----------------------"
+					func_search $path $keyword $order
+					echo "---------------------end--------------------------"
+					read -n 4 _exit
 				fi
-				echo "--------------------end---------------------"
-				read -n 4 _exit
 			fi	
 			;;
 		esac
