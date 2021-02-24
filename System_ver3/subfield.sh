@@ -19,6 +19,8 @@ list_num=1
 num=1
 date=`date '+%Y-%m-%d'`
 
+IFS_BACKUP=$IFS
+IFS=$'\n'
 for line in `cat $PATH_file_show`
 do
 	case $line in
@@ -32,7 +34,7 @@ do
 	
 	list_num=$((list_num+1))
 done
-
+IFS=$IFS_BACKUP
 function choices_f(){
 	echo "$terget_num"
 	if [ $num -eq 1 ]; then
@@ -133,6 +135,7 @@ do
 
 	echo
 	echo "____________________"
+	echo "$terget_num"	#test
 
 	if [ -f "$terget" ]; then
 		for line in `cat $PATH_list_f`

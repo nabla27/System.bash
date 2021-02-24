@@ -1,7 +1,3 @@
-List/
-TMP_folder/
-description
-display.sh
-main.sh
-menu.sh
-subfield.sh
+c/
+e/
+wsl/

@@ -17,6 +17,8 @@ mode="display"
 
 while [ $mode != "exit" ]
 do
+	IFS_BACKUP=$IFS
+	IFS=$'\n'
 	mode=`cat $PATH_mode`
 
 	if [ $mode = "display" ]; then
@@ -29,6 +31,7 @@ do
 		cd `cat $PATH_pwd`
 		bash $PATH_menu
 	fi
+	IFS=$IFS_BACKUP
 done
 
 	

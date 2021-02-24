@@ -14,14 +14,14 @@ num_tpwd=1
 function output(){
 	IFS_BACKUP=$IFS
 	IFS=$'\n'
-	local list_num="1"
+	local list_num=1
 	ls -F -w10 `cat $PATH_pwd` > $PATH_direct_list
 	for line in `cat $PATH_direct_list`
 	do
 		if [ "$num" -eq "$list_num" ]; then
-			echo " → $line" >> $PATH_file_show
+			echo " → ${list_num}.$line" >> "$PATH_file_show"
 		elif [ "$num" -ne "$list_num" ]; then
-			echo "    $line" >> $PATH_file_show
+			echo "    ${list_num}.$line" >> "$PATH_file_show"
 		fi
 		list_num=$((list_num+1))
 	done
