@@ -10,7 +10,8 @@ PATH_searf="$PATH_/TMP_folder/search_file.txt"
 
 mode="menu"
 num=1
-
+IFS_BACKUP=$IFS
+IFS=$'\n'
 function output(){
 	list_num=1
 	for line in `cat $PATH_list_menu`
@@ -91,12 +92,15 @@ function File_Searching(){
 			s)
 			point=$((point+1))
 			;;
+			a|q)
+			exit
+			;;
 			d)
 			if [ $point -eq 1 ]; then
 				echo " <Enter the path>"
 				read _getcher
-				if [ -d $_getcher ]; then
-					path=$_getcher
+				if [ -d "$_getcher" ]; then
+					path="$_getcher"
 				else
 					echo
 					echo "!! Enter the directory !!"
@@ -105,12 +109,12 @@ function File_Searching(){
 			elif [ $point -eq 2 ]; then
 				echo " <Specify the keyword>"
 				read _getcher
-				keyword=$_getcher
+				keyword="$_getcher"
 			elif [ $point -eq 3 ]; then
 				echo " <Choose the order>"
 				read _getcher
 				if [ $_getcher = "size" -o $_getcher = "time" -o $_getcher = "extension" ]; then
-					order=$_getcher
+					order="$_getcher"
 				else
 					echo
 					echo "!! choose from <size>, <time>, <extension> !!"
@@ -227,4 +231,4 @@ do
 
 
 done
-
+IFS=$IFS_BACKUP

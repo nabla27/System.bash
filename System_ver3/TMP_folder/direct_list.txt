@@ -1,3 +1,30 @@
-c/
-e/
-wsl/
+3DBA9834-5FEB-4E1A-B1EB-761E2349AC24.jpeg*
+Anaconda3-2020.11-Windows-x86_64.exe*
+Git-2.30.1-64-bit.exe*
+MovaviScreenCaptureSetupC.exe*
+MovaviVideoEditorPlusSetupE.exe*
+OBS-Studio-26.1.1-Full-Installer-x64.exe*
+Oracle_VM_VirtualBox_Extension_Pack-6.1.18.vbox-extpack*
+SteamSetup.exe*
+VSCodeUserSetup-x64-1.53.1.exe*
+VirtualBox-6.1.14-140239-Win.exe*
+avast_free_antivirus_setup_online.exe*
+desktop.ini*
+fm202013-kb2726958-fullfile-x64-glb (1).exe*
+fm202013-kb2726958-fullfile-x64-glb.exe*
+imeloc2010-kb2899516-fullfile-x64-glb (1).exe*
+imeloc2010-kb2899516-fullfile-x64-glb.exe*
+kali-linux-2020-4-vbox-amd64-ova/
+kali-linux-2020.4-vbox-amd64.ova.torrent*
+pmang_common_module.exe*
+uTorrent.exe*
+ve_setup_full1103.exe*
+videoproc-file.exe*
+vs_community__1668247831.1612424718 (1).exe*
+vs_community__1668247831.1612424718.exe*
+wsl_update_x64.msi*
+ファインマン 電磁気学 5章 (1).pdf*
+ファインマン 電磁気学 5章.pdf*
+未確認 910931.crdownload*
+第5章解答.pdf*
+第6章解答.pdf*

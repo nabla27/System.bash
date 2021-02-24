@@ -3,9 +3,5 @@
 /home/nabla27_2/data_folder
 /home/nabla27_2
 /home
-//mnt/c/Program Files/Intel/Media SDK
-//mnt/c/Program Files/Intel
-//mnt/c/Program Files
-//mnt/c
-//mnt/c/$Recycle.Bin
-//mnt/c
+//mnt/c/PerfLogs/Admin
+//mnt/c/PerfLogs
