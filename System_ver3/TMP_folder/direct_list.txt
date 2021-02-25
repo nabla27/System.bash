@@ -2,4 +2,6 @@ Git/
 How_to/
 data_folder/
 my_folder/
+test.sh
+test.txt
 work/

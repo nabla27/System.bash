@@ -2,4 +2,6 @@
     2. How_to/
     3. data_folder/
     4. my_folder/
-    5. work/
+    5. test.sh
+    6. test.txt
+    7. work/

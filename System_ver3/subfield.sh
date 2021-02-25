@@ -55,6 +55,11 @@ function choices_f(){
 		touch $_getcher
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 6 ]; then
+		echo " [Enter the new name]"
+		read _getcher
+		mv "$terget" "$_getcher"
+		mode="display" && echo "display" > $PATH_mode
+	elif [ $num -eq 7 ]; then
 		echo " [Are you sure to delete $string2 ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
@@ -64,7 +69,7 @@ function choices_f(){
 			rm "$terget"
 		fi
 		mode="display" && echo "display" > $PATH_mode
-	elif [ $num -eq 7 ]; then
+	elif [ $num -eq 8 ]; then
 		echo
 		ls -l "$terget"
 		read -n 1 _gether
@@ -90,6 +95,11 @@ function choices_d(){
 		touch $_getcher
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 6 ]; then
+		echo " [Enter the new name]"
+		read _getcher
+		mv "$terget" "$_getcher"
+		mode="display" && echo "display" > $PATH_mode
+	elif [ $num -eq 7 ]; then
 		echo " [Are you sure to delete $string2 ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
@@ -99,7 +109,7 @@ function choices_d(){
 			rm -r "$terget"
 		fi
 		mode="display" && echo "display" > $PATH_mode
-	elif [ $num -eq 7 ]; then
+	elif [ $num -eq 8 ]; then
 		echo
 		ls -l "$terget"
 		read -n 1 _getcher
@@ -116,8 +126,8 @@ do
 
 	#numの制約
 	if [ $num -eq 0 ]; then
-		num=8
-	elif [ $num -eq 9 ]; then
+		num=9
+	elif [ $num -eq 10 ]; then
 		num=1
 	fi
 	
@@ -128,11 +138,15 @@ do
 	echo "[display] > [subfield]"
 	echo "--------------------"
 
-	if [ "$terget_num" -le "10" ]; then
-		cat $PATH_file_show | head -n 10
-	elif [ "$terget_num" -gt "10" ]; then
-		cat $PATH_file_show | sed -n '10,20p'
-	fi
+	#if [ "$terget_num" -le "10" ]; then
+		#cat $PATH_file_show | head -n 10
+	#elif [ "$terget_num" -gt "10" ]; then
+		#cat $PATH_file_show | sed -n '10,20p'
+	#fi
+
+	number=$((terget_num/10)); inf=$((number*10)); sup=$((inf+10)); if [ $inf -eq 0 ]; then inf=1; fi
+	cat $PATH_file_show | sed -n ${inf},${sup}p
+
 
 	echo
 	echo "____________________"
