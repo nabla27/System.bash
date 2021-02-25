@@ -8,9 +8,24 @@ PATH_direct_list="$PATH_/TMP_folder/direct_list.txt"
 PATH_file_show="$PATH_/TMP_folder/show_file.txt"
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 ############################################################
-num=1
+get_num=1
 num_tpwd=1
 
+#subfieldからnumの取得
+IFS_BACKUP=$IFS
+IFS=$'\n'
+for line in `cat $PATH_file_show`
+do
+	case "$line" in
+		*→*)
+		num=$get_num
+		;;
+	esac
+	get_num=$((get_num+1))
+done
+IFS=$IFS_BACKUP
+
+#描写
 function output(){
 	IFS_BACKUP=$IFS
 	IFS=$'\n'
@@ -40,7 +55,7 @@ do
 	#カレント0ディレクトリの描写
 	echo `pwd` > $PATH_pwd
 	cat $PATH_pwd
-	echo
+	echo 
 	echo "[display]"
 	echo "--------------------" 
 
@@ -59,15 +74,15 @@ do
 		w)
 		num=$((num-1))
 		;;
-		q)
+		q|a)
 		echo `pwd` >> $PATH_tpwd && cd .. && echo `pwd` > $PATH_pwd
-		num=1
+		echo "→" > $PATH_file_show
 		num_tpwd=1
 		;;
 		e)
 		cd `cat $PATH_tpwd | tail -n $num_tpwd | head -n 1` && echo `pwd` > $PATH_pwd
 		num_tpwd=$((num_tpwd+1))
-		num=1
+		echo "→" > $PATH_file_show
 		;;
 		d)
 		echo "subfield" > $PATH_mode

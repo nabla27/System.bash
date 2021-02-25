@@ -1,5 +1,5 @@
- → 1. Git/
-    2. How_to/
+    1. Git/
+ → 2. How_to/
     3. data_folder/
     4. my_folder/
     5. test.sh

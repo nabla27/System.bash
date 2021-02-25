@@ -8,12 +8,14 @@ PATH_subfield="$PATH_/subfield.sh"
 PATH_menu="$PATH_/menu.sh"
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
+PATH_file_show="$PATH_/TMP_folder/show_file.txt"
 ############################################################
 clear
 cd $PATH_ && echo $PATH_ > $PATH_pwd
 rm $PATH_tpwd && touch $PATH_tpwd
 echo "display" > $PATH_mode
 mode="display"
+echo "→" > $PATH_file_show
 
 while [ $mode != "exit" ]
 do

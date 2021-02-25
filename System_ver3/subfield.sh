@@ -13,17 +13,17 @@ PATH_trash_d="$PATH_/List/Trash_Boxd"
 PATH_trash_f="$PATH_/List/Trash_Boxf"
 ############################################################
 
-#cd `cat $PATH_pwd`
 mode="subfield"
 list_num=1
 num=1
 date=`date '+%Y-%m-%d'`
 
+#displayのnumの取得→$terget_num
 IFS_BACKUP=$IFS
 IFS=$'\n'
 for line in `cat $PATH_file_show`
 do
-	case $line in
+	case "$line" in
 		*→*)
 		string1=`cat $PATH_pwd`
 		string2=`sed -n ${list_num}p $PATH_direct_list`
@@ -35,6 +35,7 @@ do
 	list_num=$((list_num+1))
 done
 IFS=$IFS_BACKUP
+
 function choices_f(){
 	echo "$terget_num"
 	if [ $num -eq 1 ]; then
@@ -80,6 +81,7 @@ function choices_d(){
 	if [ $num -eq 1 ]; then
 		cd "$terget" && echo `pwd` > $PATH_pwd
 		mode="display" && echo "display" > $PATH_mode
+		echo "→" > $PATH_file_show
 	elif [ $num -eq 2 ]; then
 		new_name=`echo "$string2" | sed -e "s/\//_cp/g"`
 		cp -r "$terget" "$new_name"
@@ -138,15 +140,8 @@ do
 	echo "[display] > [subfield]"
 	echo "--------------------"
 
-	#if [ "$terget_num" -le "10" ]; then
-		#cat $PATH_file_show | head -n 10
-	#elif [ "$terget_num" -gt "10" ]; then
-		#cat $PATH_file_show | sed -n '10,20p'
-	#fi
-
 	number=$((terget_num/10)); inf=$((number*10)); sup=$((inf+10)); if [ $inf -eq 0 ]; then inf=1; fi
 	cat $PATH_file_show | sed -n ${inf},${sup}p
-
 
 	echo
 	echo "____________________"
