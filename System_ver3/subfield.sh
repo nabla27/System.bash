@@ -136,7 +136,6 @@ do
 
 	echo
 	echo "____________________"
-	echo "$terget_num"	#test
 
 	if [ -f "$terget" ]; then
 		for line in `cat $PATH_list_f`
@@ -169,7 +168,7 @@ do
 		s)
 		num=$((num+1))
 		;;
-		a)
+		a|q)
 		echo "display" > $PATH_mode
 		exit
 		;;

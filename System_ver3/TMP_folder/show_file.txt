@@ -1,24 +1,5 @@
-    1. bin@
-    2. boot/
- → 3. dev/
-    4. etc/
-    5. home/
-    6. init
-    7. lib@
-    8. lib32@
-    9. lib64@
-    10. libx32@
-    11. lost+found/
-    12. media/
-    13. mnt/
-    14. opt/
-    15. proc/
-    16. root/
-    17. run/
-    18. sbin@
-    19. snap/
-    20. srv/
-    21. sys/
-    22. tmp/
-    23. usr/
-    24. var/
+ → 1. Git/
+    2. How_to/
+    3. data_folder/
+    4. my_folder/
+    5. work/

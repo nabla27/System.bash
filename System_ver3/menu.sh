@@ -90,6 +90,7 @@ function File_Searching(){
 		clear
 		cat $PATH_pwd
 		echo
+		echo "[display] > [menu] > [file_search]"
 		echo "**********File_Searching**********"
 		echo
 		echo " $point1 Path            [$path]"
@@ -217,6 +218,7 @@ do
 	mode=`cat $PATH_mode`
 	cat $PATH_pwd
 	echo
+	echo "[display] > [menu]"
 	echo "**********MENU**********"
 
 	output
