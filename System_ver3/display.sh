@@ -19,9 +19,9 @@ function output(){
 	for line in `cat $PATH_direct_list`
 	do
 		if [ "$num" -eq "$list_num" ]; then
-			echo " → ${list_num}.$line" >> "$PATH_file_show"
+			echo " → ${list_num}. $line" >> "$PATH_file_show"
 		elif [ "$num" -ne "$list_num" ]; then
-			echo "    ${list_num}.$line" >> "$PATH_file_show"
+			echo "    ${list_num}. $line" >> "$PATH_file_show"
 		fi
 		list_num=$((list_num+1))
 	done
@@ -41,14 +41,12 @@ do
 	echo `pwd` > $PATH_pwd
 	cat $PATH_pwd
 	echo
+	echo "[display]"
 	echo "--------------------" 
 
 	#画面への描写
-	if [ "$num" -le "10" ]; then
-		cat $PATH_file_show | head -n 10
-	elif [ "$num" -gt "10" ]; then
-	        cat $PATH_file_show | sed -n '10,20p'
-	fi
+	number=$((num/10)); inf=$((number*10)); sup=$((inf+10)); if [ $inf -eq 0 ]; then inf=1; fi
+	cat $PATH_file_show | sed -n ${inf},${sup}p
 
 	#キー入力待機
 	read -n 1 _getch
@@ -88,6 +86,10 @@ do
 		;;
 	esac
 	clear
+	
+	#numの制約
+	num_sup=`cat $PATH_file_show | wc -l`
+	if [ $num -gt $num_sup ]; then num=$num_sup; fi
 done
 
 	

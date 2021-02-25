@@ -1,12 +1,6 @@
 #!/bin/bash
 
-IFS_BACKUP=$IFS
-IFS=$`\n`
-path="/"
+num=5
 
-for L in `ls -l $path`
-do
-	echo $L
-done
-
-IFS=$IFS_BACKUP
+a=$((num/10))
+echo $a

@@ -125,6 +125,7 @@ do
 	clear
 	cat $PATH_pwd
 	echo
+	echo "[display] > [subfield]"
 	echo "--------------------"
 
 	if [ "$terget_num" -le "10" ]; then
