@@ -1,7 +1,4 @@
-    1. Git/
- → 2. How_to/
-    3. data_folder/
-    4. my_folder/
-    5. test.sh
-    6. test.txt
-    7. work/
+ → 1. test_dir10/
+    2. test_file1
+    3. test_file2
+    4. test_file3

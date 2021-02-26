@@ -12,7 +12,6 @@ PATH_list_d="$PATH_/List/list_d"
 PATH_trash_d="$PATH_/List/Trash_Boxd"
 PATH_trash_f="$PATH_/List/Trash_Boxf"
 ############################################################
-
 mode="subfield"
 list_num=1
 num=1
@@ -187,6 +186,9 @@ do
 		elif [ -d "$terget" ]; then
 			choices_d
 		fi
+		;;
+		*)
+		echo "Not an assigned key."
 		;;
 	esac
 done

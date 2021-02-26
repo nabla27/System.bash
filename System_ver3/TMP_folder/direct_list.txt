@@ -1,7 +1,4 @@
-Git/
-How_to/
-data_folder/
-my_folder/
-test.sh
-test.txt
-work/
+test_dir10/
+test_file1
+test_file2
+test_file3
