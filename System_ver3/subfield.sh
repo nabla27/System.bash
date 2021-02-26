@@ -61,7 +61,7 @@ function choices_f(){
 	elif [ $num -eq 6 ]; then
 		echo " [Enter the new name]"
 		read _getcher
-		mv "$terget" "$_getcher"
+		if [ "$_getcher" != "exit" ]; then mv "$terget" "$_getcher"; fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
 		echo " [Are you sure to delete $string2 ?(y/n)]"
@@ -102,7 +102,7 @@ function choices_d(){
 	elif [ $num -eq 6 ]; then
 		echo " [Enter the new name]"
 		read _getcher
-		mv "$terget" "$_getcher"
+		if [ "$_getcher" != "exit" ]; then mv "$terget" "$_getcher"; fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
 		echo " [Are you sure to delete $string2 ?(y/n)]"
