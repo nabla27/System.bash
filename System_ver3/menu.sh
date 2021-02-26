@@ -6,10 +6,13 @@ PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_list_menu="$PATH_/List/list_menu"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_searf="$PATH_/TMP_folder/search_file.txt"
+PATH_Set="$PATH_/List/Setting"
 ############################################################
-
 mode="menu"
 num=1
+C_path=`sed -n 4p $PATH_Set`; C_title=`sed -n 6p $PATH_Set`; C_caution=`sed -n 7p $PATH_Set`
+Cend="\e[m"
+
 IFS_BACKUP=$IFS
 IFS=$'\n'
 function output(){
@@ -88,10 +91,10 @@ function File_Searching(){
 	while [ $point -ne -1 ]
 	do
 		clear
-		cat $PATH_pwd
+		echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 		echo
 		echo "[display] > [menu] > [file_search]"
-		echo "**********File_Searching**********"
+		echo -e "**********${C_title}File_Searching${Cend}**********"
 		echo
 		echo " $point1 Path            [$path]"
 		echo
@@ -125,7 +128,7 @@ function File_Searching(){
 					path="$_getcher"
 				else
 					echo
-					echo "!! Enter the directory !!"
+					echo -e "${C_caution}!! Enter the directory !!${Cend}"
 					read -n 1 warning
 				fi
 			elif [ $point -eq 2 ]; then
@@ -139,7 +142,7 @@ function File_Searching(){
 					order="$_getcher"
 				else
 					echo
-					echo "!! choose from <size>, <time>, <extension> !!"
+					echo -e "${C_caution}!! choose from <size>, <time>, <extension> !!${Cend}"
 					read -n 1 warning
 				fi
 			elif [ $point -eq 4 ]; then
@@ -157,9 +160,9 @@ function File_Searching(){
 				rm $PATH_searf && touch $PATH_searf
 				echo
 				if [ "$order" != "none" ]; then
-					echo "------------------Searching...--------------------"
+					echo -e "------------------${C_title}Searching...${Cend}--------------------"
 					func_search $path $keyword $order
-					echo "-------------------Wating...----------------------"
+					echo -e "-------------------${C_title}Wating...${Cend}----------------------"
 					if [ $order = "time" ]; then
 						cat $PATH_searf | sort -k 2,3V
 					elif [ $order = "size" ]; then
@@ -167,10 +170,10 @@ function File_Searching(){
 					elif [ $order = "none" ]; then
 						cat $PATH_searf	
 					fi
-					echo "---------------------end--------------------------"
+					echo -e "---------------------${C_title}end${Cend}--------------------------"
 					read -n 4 _exit
 				elif [ "$order" = "none" ]; then
-					echo "-------------------Wating...----------------------"
+					echo -e "-------------------${C_title}Wating...${C_end}----------------------"
 					func_search $path $keyword $order
 					echo "---------------------end--------------------------"
 					read -n 4 _exit
@@ -216,10 +219,10 @@ do
 	#描写
 	clear
 	mode=`cat $PATH_mode`
-	cat $PATH_pwd
+	echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 	echo
 	echo "[display] > [menu]"
-	echo "**********MENU**********"
+	echo -e "**********${C_title}MENU${Cend}**********"
 
 	output
 

@@ -11,11 +11,15 @@ PATH_list_f="$PATH_/List/list_f"
 PATH_list_d="$PATH_/List/list_d"
 PATH_trash_d="$PATH_/List/Trash_Boxd"
 PATH_trash_f="$PATH_/List/Trash_Boxf"
+PATH_Set="$PATH_/List/Setting"
 ############################################################
 mode="subfield"
 list_num=1
 num=1
 date=`date '+%Y-%m-%d'`
+C_path=`sed -n 4p $PATH_Set`; C_c=`sed -n 5p $PATH_Set`
+Cend="\e[m"
+supNum=`sed -n 1p $PATH_Set`
 
 #displayのnumの取得→$terget_num
 IFS_BACKUP=$IFS
@@ -134,18 +138,20 @@ do
 	
 	#描写
 	clear
-	cat $PATH_pwd
+	echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 	echo
 	echo "[display] > [subfield]"
 	echo "--------------------"
 
-	number=$((terget_num/10)); inf=$((number*10)); sup=$((inf+10)); if [ $inf -eq 0 ]; then inf=1; fi
+	number=$((terget_num/supNum)); inf=$((number*supNum)); sup=$((inf+supNum)); if [ $inf -eq 0 ]; then inf=1; fi
 	cat $PATH_file_show | sed -n ${inf},${sup}p
 
 	echo
 	echo "____________________"
 
 	if [ -f "$terget" ]; then
+		echo -e "**${C_c}${string2}${Cend}** is a file."
+		echo
 		for line in `cat $PATH_list_f`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
@@ -156,6 +162,8 @@ do
 			list_num2=$((list_num2+1))
 		done
 	elif [ -d "$terget" ]; then
+		echo -e "**${C_c}${string2}${Cend}** is a directory."
+		echo
 		for line in `cat $PATH_list_d`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
@@ -165,6 +173,7 @@ do
 			fi
 			list_num2=$((list_num2+1))
 		done
+	else echo "$terget is unknown type"; read -n 1 a; echo "display" > $PATH_mode; exit
 	fi
 
 	read -n 1 _getch

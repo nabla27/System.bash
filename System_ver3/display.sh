@@ -7,10 +7,14 @@ PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_direct_list="$PATH_/TMP_folder/direct_list.txt"
 PATH_file_show="$PATH_/TMP_folder/show_file.txt"
 PATH_mode="$PATH_/TMP_folder/mode.txt"
+PATH_Set="$PATH_/List/Setting"
 ############################################################
 get_num=1
 num_tpwd=1
 mode="display"
+Cend="\e[m"
+C_dir=`sed -n 2p $PATH_Set`; C_path=`sed -n 4p $PATH_Set`; C_f=`sed -n 3p $PATH_Set`
+supNum=`sed -n 1p $PATH_Set`
 
 #subfieldからnumの取得
 IFS_BACKUP=$IFS
@@ -35,9 +39,13 @@ function output(){
 	for line in `cat $PATH_direct_list`
 	do
 		if [ "$num" -eq "$list_num" ]; then
-			echo " → ${list_num}. $line" >> "$PATH_file_show"
+			if [ -d "$line" ]; then echo -e " → ${list_num}. ${C_dir}$line${Cend}" >> "$PATH_file_show"
+			elif [ -f "$line" ]; then echo " → ${list_num}. $line" >> "$PATH_file_show"
+			else echo -e " → ${list_num}. ${C_f}$line${Cend}" >> "$PATH_file_show"; fi
 		elif [ "$num" -ne "$list_num" ]; then
-			echo "    ${list_num}. $line" >> "$PATH_file_show"
+			if [ -d "$line" ]; then echo -e "    ${list_num}. ${C_dir}$line${Cend}" >> "$PATH_file_show"
+			elif [ -f "$line" ]; then echo "    ${list_num}. $line" >> "$PATH_file_show"
+			else echo -e "    ${list_num}. ${C_f}$line${Cend}" >> "$PATH_file_show"; fi
 		fi
 		list_num=$((list_num+1))
 	done
@@ -57,13 +65,13 @@ do
 
 	#カレント0ディレクトリの描写
 	echo `pwd` > $PATH_pwd
-	cat $PATH_pwd
+	echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 	echo 
 	echo "[display]"
 	echo "--------------------" 
 
 	#画面への描写
-	number=$((num/10)); inf=$((number*10)); sup=$((inf+10)); if [ $inf -eq 0 ]; then inf=1; fi
+	number=$((num/supNum)); inf=$((number*supNum)); sup=$((inf+supNum)); if [ $inf -eq 0 ]; then inf=1; fi
 	cat $PATH_file_show | sed -n ${inf},${sup}p
 
 	#キー入力待機
@@ -115,7 +123,7 @@ do
 		echo "--------------------"
 		mvd="`cat $PATH_pwd`/`cat $PATH_direct_list | sed -n ${_getch}p`"
 		if [ -f "$mvd" ]; then cat "$mvd"; read -n 1 a
-		elif [ -d "$mvd" ]; then echo "→" > $PATH_file_show; cd $mvd
+		elif [ -d "$mvd" ]; then echo "→" > $PATH_file_show; cd "$mvd"
 		else echo  "${_getch}'s file is not accessible."; read -n 1; fi
 		echo `pwd` > $PATH_pwd; exit
 		;;
