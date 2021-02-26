@@ -13,7 +13,8 @@ get_num=1
 num_tpwd=1
 mode="display"
 Cend="\e[m"
-C_dir=`sed -n 2p $PATH_Set`; C_path=`sed -n 4p $PATH_Set`; C_f=`sed -n 3p $PATH_Set`
+C_dir="\e[3`sed -n 2p $PATH_Set`m"; C_path="\e[3`sed -n 4p $PATH_Set`m"; C_f="\e[3`sed -n 3p $PATH_Set`m"
+C_nf="\e[3`sed -n 8p $PATH_Set`m"; C_mode="\e[3`sed -n 9p $PATH_Set`m"
 supNum=`sed -n 1p $PATH_Set`
 
 #subfieldからnumの取得
@@ -40,11 +41,11 @@ function output(){
 	do
 		if [ "$num" -eq "$list_num" ]; then
 			if [ -d "$line" ]; then echo -e " → ${list_num}. ${C_dir}$line${Cend}" >> "$PATH_file_show"
-			elif [ -f "$line" ]; then echo " → ${list_num}. $line" >> "$PATH_file_show"
+			elif [ -f "$line" ]; then echo -e " → ${list_num}. ${C_nf}$line${Cend}" >> "$PATH_file_show"
 			else echo -e " → ${list_num}. ${C_f}$line${Cend}" >> "$PATH_file_show"; fi
 		elif [ "$num" -ne "$list_num" ]; then
 			if [ -d "$line" ]; then echo -e "    ${list_num}. ${C_dir}$line${Cend}" >> "$PATH_file_show"
-			elif [ -f "$line" ]; then echo "    ${list_num}. $line" >> "$PATH_file_show"
+			elif [ -f "$line" ]; then echo -e "    ${list_num}. ${C_nf}$line${Cend}" >> "$PATH_file_show"
 			else echo -e "    ${list_num}. ${C_f}$line${Cend}" >> "$PATH_file_show"; fi
 		fi
 		list_num=$((list_num+1))
@@ -67,7 +68,7 @@ do
 	echo `pwd` > $PATH_pwd
 	echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 	echo 
-	echo "[display]"
+	echo -e "${C_mode}[display]${Cend}"
 	echo "--------------------" 
 
 	#画面への描写
@@ -100,7 +101,7 @@ do
 		exit
 		;;
 		:)
-		echo "< Command Line > "
+		echo -e "${C_mode}< Command Line >${Cend}"
 		read _getcher
 		if expr "$_getcher" : "[0-9]*$" >&/dev/null; then
 			mvd="`cat $PATH_pwd`/`cat $PATH_direct_list | sed -n ${_getcher}p`"

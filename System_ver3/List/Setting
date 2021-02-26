@@ -1,18 +1,10 @@
 10
-\e[36m
-\e[35m
-\e[33m
-\e[32m
-\e[32m
-\e[31m
-
-
-
-
-#1. number of showing file.
-#2. color of directory.
-#3. color of unknown file.
-#4. color of path.
-#5. color of confirmation display.(subfield.sh
-#6. color of title.(menu.sh)
-#7. color of warning text.
+6
+5
+3
+2
+2
+1
+7
+7
+7

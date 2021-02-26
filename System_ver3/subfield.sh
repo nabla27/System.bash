@@ -17,7 +17,8 @@ mode="subfield"
 list_num=1
 num=1
 date=`date '+%Y-%m-%d'`
-C_path=`sed -n 4p $PATH_Set`; C_c=`sed -n 5p $PATH_Set`
+C_path="\e[3`sed -n 4p $PATH_Set`m"; C_c="\e[3`sed -n 5p $PATH_Set`m"; C_mode="\e[3`sed -n 9p $PATH_Set`m"
+C_sub="\e[3`sed -n 10p $PATH_Set`m"
 Cend="\e[m"
 supNum=`sed -n 1p $PATH_Set`
 
@@ -140,7 +141,7 @@ do
 	clear
 	echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 	echo
-	echo "[display] > [subfield]"
+	echo -e "${C_mode}[display] > [subfield]${Cend}"
 	echo "--------------------"
 
 	number=$((terget_num/supNum)); inf=$((number*supNum)); sup=$((inf+supNum)); if [ $inf -eq 0 ]; then inf=1; fi
@@ -155,9 +156,9 @@ do
 		for line in `cat $PATH_list_f`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
-				echo " → $line"
+				echo -e " → ${C_sub}$line${Cend}"
 			elif [ "$num" -ne "$list_num2" ]; then	
-				echo "    $line"
+				echo -e "    ${C_sub}$line${Cend}"
 			fi
 			list_num2=$((list_num2+1))
 		done
@@ -167,9 +168,9 @@ do
 		for line in `cat $PATH_list_d`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
-				echo " → $line"
+				echo -e " → ${C_sub}$line${Cend}"
 			elif [ "$num" -ne "$list_num2" ]; then
-				echo "    $line"
+				echo -e "    ${C_sub}$line${Cend}"
 			fi
 			list_num2=$((list_num2+1))
 		done

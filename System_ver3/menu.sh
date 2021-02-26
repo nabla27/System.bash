@@ -10,7 +10,8 @@ PATH_Set="$PATH_/List/Setting"
 ############################################################
 mode="menu"
 num=1
-C_path=`sed -n 4p $PATH_Set`; C_title=`sed -n 6p $PATH_Set`; C_caution=`sed -n 7p $PATH_Set`
+C_path="\e[3`sed -n 4p $PATH_Set`m"; C_title="\e[3`sed -n 6p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"
+C_mode="\e[3`sed -n 9p $PATH_Set`m"
 Cend="\e[m"
 
 IFS_BACKUP=$IFS
@@ -93,7 +94,7 @@ function File_Searching(){
 		clear
 		echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 		echo
-		echo "[display] > [menu] > [file_search]"
+		echo -e "${C_mode}[display] > [menu] > [file_search]${Cend}"
 		echo -e "**********${C_title}File_Searching${Cend}**********"
 		echo
 		echo " $point1 Path            [$path]"
@@ -204,6 +205,89 @@ function Book_Mark(){
 	echo "Book_Mark"
 }
 
+function Setting(){
+local num_s=1
+	while [ $num_s -ne 0 ]
+	do
+		clear
+
+		#設定の反映
+		for number in {1..10}
+		do
+			S_num[$number]="`sed -n ${number}p $PATH_Set`"
+		done
+		
+		#カーソル位置を設定
+		for number in {1..10}
+		do
+			if [ $num_s = $number ]; then space[$number]=" → ${number}."
+			else space[$number]="    ${number}."; fi
+		done
+		
+		echo -e "${C_path}`cat $PATH_pwd`${Cend}"
+		echo
+		echo -e "${C_mode}[display] > [menu] > [Setting]${Cend}"
+		echo -e "*******************${C_title}Setting${Cend}********************"
+		echo    "${space[1]} number of showing file.(display)          [${S_num[1]}]"
+		echo -e "${space[2]} color of directory.(display)              [\e[3${S_num[2]}msample${Cend}]"
+		echo -e "${space[3]} color of unknown file.(display)           [\e[3${S_num[3]}msample${Cend}]"
+		echo -e "${space[4]} color of path.                            [\e[3${S_num[4]}msample${Cend}]"
+		echo -e "${space[5]} Color of confirmation display.(subfield)  [\e[3${S_num[5]}msample${Cend}]"
+		echo -e "${space[6]} Color of title.(menu)                     [\e[3${S_num[6]}msample${Cend}]"
+		echo -e "${space[7]} Color of warning text.(menu)              [\e[3${S_num[7]}msample${Cend}]"
+		echo -e "${space[8]} Color of Normal file.(display)            [\e[3${S_num[8]}msample${Cend}]"
+		echo -e "${space[9]} Color of mode.                            [\e[3${S_num[9]}msample${Cend}]"
+		echo -e "${space[10]} Color of subfield list.(subfield)        [\e[3${S_num[10]}msample${Cend}]" 
+		
+		read -n 1 _getcher
+		case $_getcher in
+			w)
+			num_s=$((num_s-1))
+			;;
+			s)
+			num_s=$((num_s+1))
+			;;
+			q)
+			exit
+			;;
+			d)
+			for number in {1..10}
+			do
+				if [ $num_s -eq $number ]; then S_num[$number]=$((S_num[number]+1)); fi
+			done
+			;;
+			a)
+			for number in {1..10}
+			do
+				if [ $num_s -eq $number ]; then S_num[$number]=$((S_num[number]-1)); fi
+			done
+			;;
+		esac
+
+		#各パラメータの制約
+		for number in {2..10}
+		do
+			if [ ${S_num[$number]} -eq 8 ]; then S_num[$number]=7
+			elif [ ${S_num[$number]} -lt 1 ]; then S_num[$number]=1; fi
+		done
+		if [ $num_s -eq 11 ]; then num_s=10
+		elif [ $num_s -eq 0 ]; then num_s=1; fi
+		if [ ${S_num[1]} -eq 3 ]; then S_num[1]=4; fi
+
+		
+		
+		#Settingファイルへの書き込み
+		rm $PATH_Set && touch $PATH_Set
+		for number in {1..10}
+		do
+			echo ${S_num[$number]} >> $PATH_Set
+			
+		done
+
+
+	done
+
+}
 
 
 clear
@@ -221,7 +305,7 @@ do
 	mode=`cat $PATH_mode`
 	echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 	echo
-	echo "[display] > [menu]"
+	echo -e "${C_mode}[display] > [menu]${Cend}"
 	echo -e "**********${C_title}MENU${Cend}**********"
 
 	output
@@ -247,6 +331,8 @@ do
 			File_Searching
 		elif [ $num -eq 3 ]; then
 			Book_Mark
+		elif [ $num -eq 4 ]; then
+			Setting
 		fi
 
 
