@@ -173,7 +173,7 @@ do
 			fi
 			list_num2=$((list_num2+1))
 		done
-	else echo "$terget is unknown type"; read -n 1 a; echo "display" > $PATH_mode; exit
+	else echo -e "${C_c}${string2}${Cend} is unknown type"; read -n 1 a; echo "display" > $PATH_mode; exit
 	fi
 
 	read -n 1 _getch
