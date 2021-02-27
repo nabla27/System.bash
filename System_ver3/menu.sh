@@ -7,6 +7,7 @@ PATH_list_menu="$PATH_/List/list_menu"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_searf="$PATH_/TMP_folder/search_file.txt"
 PATH_Set="$PATH_/List/Setting"
+PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 ############################################################
 mode="menu"
 num=1
@@ -289,14 +290,56 @@ local num_s=1
 
 }
 
+function Directory_hist(){
+	local list_sup=`cat $PATH_tpwd | wc -l`
+	echo $list_sup
+	if [ $list_sup -eq 0 ]; then
+		echo
+		echo -e "${C_caution}!! There is no directory history !!${Cend}"
+		read -n 1 _wait
+	fi
+	while [ $list_sup -ne 0 ]
+	do
+		clear
+		local list_num=1
+		echo -e "${C_path}`cat $PATH_pwd`${Cend}"
+		echo
+		echo -e "${C_mode}[display] > [menu] > [Directory_hist]${Cend}"
+		echo -e "********************${C_title}Directory_hist${Cend}********************"
+		while [ $list_num -le $list_sup ]
+		do
+			echo " ${list_num}. `sed -n ${list_num}p $PATH_tpwd`"
+			list_num=$((list_num+1))
+		done
+
+		read _getcher
+		case $_getcher in
+			[1-9]|[1-9][0-9])
+			if [ $_getcher -le $list_sup ]; then
+				#cat "$PATH_pwd" >> $PATH_tpwd
+				echo `sed -n ${_getcher}p $PATH_tpwd` > $PATH_pwd
+				exit
+			else echo -e "${C_caution}!! This is an unassigned number !!${Cend}"
+			read -n 1 _wait
+			fi
+			;;
+			q|exit)
+			exit
+			;;
+		esac
+		echo
+		echo " You can move it by enterning a number."
+	done
+}
+
 
 clear
 while [ $mode = "menu" ]
 do
 	#numの制約
 	if [ $num -eq 0 ]; then
-		num=4
-	elif [ $num -eq 5 ]; then
+		num=5
+	elif [ $num -eq 6 ]; then
 		num=1
 	fi
 
@@ -333,6 +376,8 @@ do
 			Book_Mark
 		elif [ $num -eq 4 ]; then
 			Setting
+		elif [ $num -eq 5 ]; then
+			Directory_hist
 		fi
 
 
