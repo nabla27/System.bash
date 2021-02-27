@@ -1,4 +1,0 @@
-15 2021-02-26 22:51 /home/nabla27_2/work/test.txt
-253 2021-02-25 16:50 /home/nabla27_2/work/test_dir1/test_file1
-147 2021-02-25 16:51 /home/nabla27_2/work/test_dir1/test_file2
-85 2021-02-25 16:52 /home/nabla27_2/work/test_dir1/test_file3

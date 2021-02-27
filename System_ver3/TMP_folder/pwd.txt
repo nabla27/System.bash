@@ -1,1 +1,1 @@
-//mnt/c/VM_Guest/VBox/Kali-Linux-2020.4-vbox-amd64/Logs
+/home/nabla27_2
