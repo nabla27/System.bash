@@ -158,7 +158,7 @@ do
 		read -n 1 _yn
 		if [ "$_yn" = y ]; then cd "$path_link" && echo `pwd` > $PATH_pwd
 					mode="display" && echo "display" > $PATH_mode; exit
-		else exit; fi
+		else mode="display" && echo "display" > $PATH_mode && exit; fi
 	elif [ -f "$terget" ]; then
 		echo -e " ${C_c}${string2}${Cend} is a file."
 		echo

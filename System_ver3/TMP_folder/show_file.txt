@@ -1,6 +1,6 @@
-    1. [36mGit/[m
+ → 1. [36mGit/[m
     2. [36mHow_to/[m
- → 3. [36mdata_folder/[m
+    3. [36mdata_folder/[m
     4. [36mmy_folder/[m
     5. [37mtest.txt[m
     6. [36mwork/[m
