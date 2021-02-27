@@ -1,4 +1,51 @@
+/home/nabla27_2/work/test_dir1
+/home/nabla27_2/work
+/home/nabla27_2
+/home/nabla27_2/data_folder/System.bash/System_ver3/List/CMD.List
+/home/nabla27_2/data_folder/System.bash/System_ver3/List
 /home/nabla27_2/data_folder/System.bash/System_ver3
 /home/nabla27_2/data_folder/System.bash
 /home/nabla27_2/data_folder
 /home/nabla27_2
+/home/nabla27_2/data_folder/System.bash/System_ver3/List/CMD.List
+/home/nabla27_2/data_folder/System.bash/System_ver3/List
+/home/nabla27_2/data_folder/System.bash/System_ver3
+/home/nabla27_2/data_folder/System.bash
+/home/nabla27_2/data_folder
+/home/nabla27_2
+/home/nabla27_2/data_folder/System.bash/System_ver3/List/CMD.List
+/home/nabla27_2/data_folder/System.bash/System_ver3/List
+/home/nabla27_2/data_folder/System.bash/System_ver3
+/home/nabla27_2/data_folder/System.bash
+/home/nabla27_2/data_folder
+/home/nabla27_2/work/test_dir1
+/home/nabla27_2/work
+/home/nabla27_2
+/home/nabla27_2
+/home
+//mnt/c
+//mnt/c
+//mnt/c/GameOn/Common files/dump
+//mnt/c/GameOn/Common files
+//mnt/c/GameOn/Common files
+//mnt/c/GameOn
+//mnt/c/GameOn/Common files
+//mnt/c/GameOn
+//mnt/c
+//mnt
+//
+/home/nabla27_2/data_folder/System.bash
+/home/nabla27_2/data_folder
+/home/nabla27_2/work
+/home/nabla27_2
+/home
+//mnt/c/VM_Guest/VBox/Kali-Linux-2020.4-vbox-amd64/Snapshots
+//mnt/c/VM_Guest/VBox/Kali-Linux-2020.4-vbox-amd64/Snapshots
+//mnt/c/VM_Guest/VBox/Kali-Linux-2020.4-vbox-amd64/Logs
+//mnt/c/VM_Guest/VBox/Kali-Linux-2020.4-vbox-amd64/Logs
+//mnt/c/VM_Guest/VBox/Kali-Linux-2020.4-vbox-amd64/Snapshots
+//mnt/c/VM_Guest/VBox/Kali-Linux-2020.4-vbox-amd64
+//mnt/c/VM_Guest/VBox
+//mnt/c/VM_Guest
+//mnt/c
+//mnt

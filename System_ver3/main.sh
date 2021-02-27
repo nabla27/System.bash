@@ -17,6 +17,7 @@ sed -i -e 3d display.sh && sed -i -e "3i PATH_=\"${PATH_}\"" display.sh
 sed -i -e 3d subfield.sh && sed -i -e "3i PATH_=\"${PATH_}\"" subfield.sh
 sed -i -e 3d menu.sh && sed -i -e "3i PATH_=\"${PATH_}\"" menu.sh
 ##########################################################################
+cd ~ && echo `pwd` > $PATH_pwd
 clear
 rm $PATH_tpwd && touch $PATH_tpwd
 echo "display" > $PATH_mode
