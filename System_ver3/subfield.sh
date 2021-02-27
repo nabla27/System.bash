@@ -150,8 +150,17 @@ do
 	echo
 	echo "____________________"
 
-	if [ -f "$terget" ]; then
-		echo -e "**${C_c}${string2}${Cend}** is a file."
+	if [ -h "$terget" ]; then
+		path_link=`readlink -f "$terget"`
+		echo -e " ${C_c}${string2}${Cend} is a Symbolic link."
+		echo -e "The path to this link is ${C_c}${path_link}${Cend}."; echo
+		echo -e "Do you want to move the path??(${C_c}y/n${Cend})"
+		read -n 1 _yn
+		if [ "$_yn" = y ]; then cd "$path_link" && echo `pwd` > $PATH_pwd
+					mode="display" && echo "display" > $PATH_mode; exit
+		else exit; fi
+	elif [ -f "$terget" ]; then
+		echo -e " ${C_c}${string2}${Cend} is a file."
 		echo
 		for line in `cat $PATH_list_f`
 		do
@@ -163,7 +172,7 @@ do
 			list_num2=$((list_num2+1))
 		done
 	elif [ -d "$terget" ]; then
-		echo -e "**${C_c}${string2}${Cend}** is a directory."
+		echo -e " ${C_c}${string2}${Cend} is a directory."
 		echo
 		for line in `cat $PATH_list_d`
 		do
@@ -174,7 +183,7 @@ do
 			fi
 			list_num2=$((list_num2+1))
 		done
-	else echo -e "${C_c}${string2}${Cend} is unknown type"; read -n 1 a; echo "display" > $PATH_mode; exit
+	else echo -e " ${C_c}${string2}${Cend} is unknown type"; read -n 1 a; echo "display" > $PATH_mode; exit
 	fi
 
 	read -n 1 _getch

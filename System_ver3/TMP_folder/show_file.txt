@@ -1,3 +1,5 @@
- → 1. [37mtest.txt[m
-    2. [36mtest_dir1/[m
-    3. [36mtest_dir2/[m
+    1. [37mVBox.log[m
+ → 2. [37mVBox.log.1[m
+    3. [37mVBox.log.2[m
+    4. [37mVBox.log.3[m
+    5. [37mVBoxHardening.log[m

@@ -36,15 +36,17 @@ function output(){
 	IFS_BACKUP=$IFS
 	IFS=$'\n'
 	local list_num=1
-	ls -F -w10 `cat $PATH_pwd` > $PATH_direct_list
+	ls -w10 `cat $PATH_pwd` > $PATH_direct_list
 	for line in `cat $PATH_direct_list`
 	do
 		if [ "$num" -eq "$list_num" ]; then
-			if [ -d "$line" ]; then echo -e " → ${list_num}. ${C_dir}$line${Cend}" >> "$PATH_file_show"
+			if [ -h "$line" ]; then echo -e " → ${list_num}. ${C_f}${line}@${Cend}" >> "$PATH_file_show"
+			elif [ -d "$line" ]; then echo -e " → ${list_num}. ${C_dir}${line}/${Cend}" >> "$PATH_file_show"
 			elif [ -f "$line" ]; then echo -e " → ${list_num}. ${C_nf}$line${Cend}" >> "$PATH_file_show"
 			else echo -e " → ${list_num}. ${C_f}$line${Cend}" >> "$PATH_file_show"; fi
 		elif [ "$num" -ne "$list_num" ]; then
-			if [ -d "$line" ]; then echo -e "    ${list_num}. ${C_dir}$line${Cend}" >> "$PATH_file_show"
+			if [ -h "$line" ]; then echo -e "    ${list_num}. ${C_f}${line}@${Cend}" >> "$PATH_file_show"
+			elif [ -d "$line" ]; then echo -e "    ${list_num}. ${C_dir}${line}/${Cend}" >> "$PATH_file_show"
 			elif [ -f "$line" ]; then echo -e "    ${list_num}. ${C_nf}$line${Cend}" >> "$PATH_file_show"
 			else echo -e "    ${list_num}. ${C_f}$line${Cend}" >> "$PATH_file_show"; fi
 		fi
