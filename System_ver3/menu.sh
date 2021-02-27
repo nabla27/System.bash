@@ -177,7 +177,7 @@ function File_Searching(){
 				elif [ "$order" = "none" ]; then
 					echo -e "-------------------${C_title}Wating...${Cend}----------------------"
 					func_search $path $keyword $order
-					echo "---------------------end--------------------------"
+					echo "---------------------${C_title}end${Cend}--------------------------"
 					read -n 4 _exit
 				fi
 			fi	
