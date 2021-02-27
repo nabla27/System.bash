@@ -1,7 +1,8 @@
 #!/bin/bash
-############################################################
+##########################################################################
+#It is necessary to set the following path to "System_ver3" exists.
 PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
-############################################################
+##########################################################################
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_disp="$PATH_/display.sh"
 PATH_subfield="$PATH_/subfield.sh"
@@ -9,9 +10,14 @@ PATH_menu="$PATH_/menu.sh"
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_file_show="$PATH_/TMP_folder/show_file.txt"
-############################################################
-clear
+##########################################################################
 cd $PATH_ && echo $PATH_ > $PATH_pwd
+##########################################################################
+sed -i -e 3d display.sh && sed -i -e "3i PATH_=\"${PATH_}\"" display.sh
+sed -i -e 3d subfield.sh && sed -i -e "3i PATH_=\"${PATH_}\"" subfield.sh
+sed -i -e 3d menu.sh && sed -i -e "3i PATH_=\"${PATH_}\"" menu.sh
+##########################################################################
+clear
 rm $PATH_tpwd && touch $PATH_tpwd
 echo "display" > $PATH_mode
 mode="display"
