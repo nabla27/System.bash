@@ -18,7 +18,7 @@ list_num=1
 num=1
 date=`date '+%Y-%m-%d'`
 C_path="\e[3`sed -n 4p $PATH_Set`m"; C_c="\e[3`sed -n 5p $PATH_Set`m"; C_mode="\e[3`sed -n 9p $PATH_Set`m"
-C_sub="\e[3`sed -n 10p $PATH_Set`m"
+C_sub="\e[3`sed -n 10p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"
 Cend="\e[m"
 supNum=`sed -n 1p $PATH_Set`
 
@@ -65,7 +65,7 @@ function choices_f(){
 		if [ "$_getcher" != "exit" ]; then mv "$terget" "$_getcher"; fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
-		echo " [Are you sure to delete $string2 ?(y/n)]"
+		echo -e " [Are you sure to ${C_caution}delete${Cend} ${C_c}${string2}${Cend} ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
 			new_name="$string2.zip"
@@ -106,10 +106,10 @@ function choices_d(){
 		if [ "$_getcher" != "exit" ]; then mv "$terget" "$_getcher"; fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
-		echo " [Are you sure to delete $string2 ?(y/n)]"
+		echo -e " [Are you sure to ${C_caution}delete${Cend} ${C_c}${string2}${Cend} ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
-			new_name=`echo $string2 | sed -e "s/\//.zip/g"`
+			new_name="${string2}.zip"
 			zip -rq "${new_name}_$date" "$terget"
 			mv "${new_name}_$date" $PATH_trash_d
 			rm -r "$terget"
@@ -153,12 +153,23 @@ do
 	if [ -h "$terget" ]; then
 		path_link=`readlink -f "$terget"`
 		echo -e " ${C_c}${string2}${Cend} is a Symbolic link."
-		echo -e "The path to this link is ${C_c}${path_link}${Cend}."; echo
-		echo -e "Do you want to move the path??(${C_c}y/n${Cend})"
-		read -n 1 _yn
-		if [ "$_yn" = y ]; then cd "$path_link" && echo `pwd` > $PATH_pwd
-					mode="display" && echo "display" > $PATH_mode; exit
-		else mode="display" && echo "display" > $PATH_mode && exit; fi
+		echo -e " The path to this link is ${C_c}${path_link}${Cend}."; echo
+		if [ -d "$path_link" ]; then
+			echo -e " Do you want to move the path??(${C_c}y/n${Cend})"
+			read -n 1 _yn
+			if [ "$_yn" = y ]; then cd "$path_link" && echo `pwd` > $PATH_pwd
+						mode="display" && echo "display" > $PATH_mode
+						echo "→" > $PATH_file_show && exit
+			else mode="display" && echo "display" > $PATH_mode && exit; fi
+		elif [ -f "$path_link" ]; then
+			echo " This is not directory."
+			echo " Plese select the operation from \"cat\", \"less\", \"vim\", \"none\"."
+			read _getcher
+			if [ "$_getcher" = cat ]; then cat "$path_link"; read -n 1 _wait
+			elif [ "$_getcher" = less ]; then less "$path_link"
+			elif [ "$_getcher" = vim ]; then vim "$path_link"; fi
+			mode="display" && echo "display" > $PATH_mode && exit
+		fi
 	elif [ -f "$terget" ]; then
 		echo -e " ${C_c}${string2}${Cend} is a file."
 		echo
