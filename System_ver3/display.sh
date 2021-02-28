@@ -130,6 +130,12 @@ do
 		else echo  "${_getch}'s file is not accessible."; read -n 1; fi
 		echo `pwd` > $PATH_pwd; exit
 		;;
+		"[")
+		num=$((num-supNum))
+		;;
+		"]")
+		num=$((num+supNum))
+		;;
 		*)
 		echo "Not an assgined key."
 		;;
@@ -139,7 +145,7 @@ do
 	#numの制約
 	num_sup=`cat $PATH_file_show | wc -l`
 	if [ $num -gt $num_sup ]; then num=$num_sup; fi
-	if [ $num -eq 0 ]; then num=1; fi
+	if [ $num -le 0 ]; then num=1; fi
 done
 
 	
