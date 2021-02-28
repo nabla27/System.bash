@@ -1,5 +1,6 @@
 Git
 How_to
 data_folder
+home
 my_folder
 work

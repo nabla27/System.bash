@@ -67,8 +67,10 @@ function choices_f(){
 		echo -e " [Are you sure to ${C_caution}delete${Cend} ${C_c}${string2}${Cend} ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
+			if [ -s "$terget" ]; then sed -i -e "1i `cat $PATH_pwd`" "$terget"
+			else echo `cat $PATH_pwd` > "$terget"; fi
 			new_name="$string2.zip"
-			zip -q "${new_name}_$date" "$terget"
+			zip -q "${new_name}_$date" "$string2"
 			mv "${new_name}_$date" $PATH_trash_f
 			rm "$terget"
 		fi
@@ -108,8 +110,9 @@ function choices_d(){
 		echo -e " [Are you sure to ${C_caution}delete${Cend} ${C_c}${string2}${Cend} ?(y/n)]"
 		read -n 1 _getcher
 		if [ $_getcher = "y" ]; then
+			touch "${terget}/.tpwd"; echo `cat $PATH_pwd` > "${terget}/.tpwd"
 			new_name="${string2}.zip"
-			zip -rq "${new_name}_$date" "$terget"
+			zip -rq "${new_name}_$date" "$string2"
 			mv "${new_name}_$date" $PATH_trash_d
 			rm -r "$terget"
 		fi

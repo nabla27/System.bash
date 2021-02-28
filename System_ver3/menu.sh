@@ -356,10 +356,9 @@ do
 		num_=$((num_+1))
 	done
 	echo "****************************************************************"
-	read -n 1 _wait
-	if [ $_wait = q -o $_wait = a ]; then exit; fi
 	echo -e "> ${C_title}Enter the number.${Cend}  Ex) 3  Ex) 2,3,4  Ex) 2-10"
 	read _number
+	if [ "$_number" = a -o "$_number" = q -o "$_number" = "exit" ]; then exit; fi
 	if [[ "$_number" = *","* ]]; then
 		local field_sup=`echo "$_number" | awk -F, '{print NF}'`
 		local bound=`ls -1 $PATH_Tb_d | wc -l`
@@ -368,18 +367,84 @@ do
 		do
 			cut_num=`echo "$_number" | awk -v "fn=${array_num}" -F, '{print $fn}'`
 			if [ $cut_num -le $bound ]; then
-				echo -e " ${C_title}`ls -1 $PATH_Tb_d | sed -n ${cut_num}p`${Cend}"
+				file_name[$array_num]="`ls -1 $PATH_Tb_d | sed -n ${cut_num}p`"
 			elif [ $cut_num -gt $bound ]; then
 				local cutting_num=$((cut_num-bound))
-				echo -e " ${C_title}`ls -1 $PATH_Tb_f | sed -n ${cutting_num}p`${Cend}"
+				file_name[$array_num]="`ls -1 $PATH_Tb_f | sed -n ${cutting_num}p`"
 			fi
 			array_num=$((array_num+1))
 		done
+		array_num=1
+		while [ $array_num -le $field_sup ]
+		do
+			echo -e " ${C_title}${file_name[array_num]}${Cend}"
+			array_num=$((array_num+1))
+		done
 		echo "> Select the operation for the above file from the following."
-		echo -e "  ${C_title}1:Complete deletion${Cend}   or   ${C_title}2.Unzip${Cend}"
-		read _operation
-
-
+		echo -e "  ${C_title}[1]${Cend}:Complete deletion   or   ${C_title}[2]${Cend}:Unzip   or   ${C_title}[3]${Cend}:Detail view"
+		read -n 1 _operation
+		array_num=1; echo
+		echo "****************************************************************"
+		while [ $array_num -le $field_sup ]
+		do
+			if [ "$_operation" -eq 1 ]; then
+				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
+					rm "${PATH_Tb_d}/${file_name[array_num]}"
+				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
+					rm "${PATH_Tb_f}/${file_name[array_num]}"; fi
+			elif [ "$_operation" -eq 2 ]; then
+				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
+					cd $PATH_Tb_d
+					unzip -q "${PATH_Tb_d}/${file_name[array_num]}"
+					name_=`echo ${file_name[array_num]} | awk -F '.zip' '{print $(NF-1)}'`
+					mv_path=`cat ${name_}/.tpwd`
+					echo -e "The original path for ${C_title}${name_}${Cend} is ${C_title}${mv_path}${Cend}."
+					rm "${name_}/.tpwd" && rm ${file_name[array_num]}
+					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
+					else
+						echo " The file has been moved to home directory."
+						mv ${name_} ~
+					fi
+					cd `cat $PATH_pwd`
+				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
+					cd $PATH_Tb_f
+					unzip -q "${PATH_Tb_f}/${file_name[array_num]}"
+					name_=`echo ${file_name[array_num]} | awk -F '.zip' '{print $(NF-1)}'`
+					mv_path=`cat ${name_} | sed -n 1p`
+					echo -e "The original path for ${C_title}${name_}${Cend} is ${C_title}${mv_path}${Cend}."
+					sed -i -e 1d ${name_} && rm ${file_name[array_num]}
+					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
+					else 
+						echo " The file has been moved to home directory."
+						mv ${name_} ~
+					fi
+					cd `cat $PATH_pwd`
+				fi
+			elif [ "$_operation" -eq 3 ]; then
+				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
+					cd "$PATH_Tb_d"
+					local int=1
+					for line in `unzip -l "${file_name[array_num]}"`
+					do
+						if [ $int -eq 1 ]; then echo -e "${C_title}${line}${Cend}"
+						else echo "$line"; fi
+						int=$((int+1))
+					done
+					cd `cat $PATH_pwd`
+				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
+					cd "$PATH_Tb_f"
+					local int=1
+					for line in `unzip -l "${file_name[array_num]}"`
+					do
+						if [ $int -eq 1 ]; then echo -e "${C_title}${line}${Cend}"
+						else echo "$line"; fi
+						int=$((int+1))
+					done
+					cd `cat $PATH_pwd`
+				fi
+			fi
+			array_num=$((array_num+1))
+		done
 	elif [[ "$_number" = *"-"* ]]; then
 		echo "bar"
 	elif [ "$_number" -ge "$num_" ]; then echo -e "${C_caution}!! Incorrect number !!${Cend}"
