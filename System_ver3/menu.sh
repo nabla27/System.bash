@@ -8,6 +8,8 @@ PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_searf="$PATH_/TMP_folder/search_file.txt"
 PATH_Set="$PATH_/List/Setting"
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
+PATH_Tb_d="$PATH_/List/Trash_Boxd"
+PATH_Tb_f="$PATH_/List/Trash_Boxf"
 ############################################################
 mode="menu"
 num=1
@@ -332,14 +334,70 @@ function Directory_hist(){
 	done
 }
 
+function Trash_Box(){
+local num_=1
+while [ $num_ != 0 ]
+do
+	num_=1
+	clear
+	echo -e "${C_path}`cat $PATH_pwd`${Cend}"
+	echo
+	echo -e "${C_mode}[display] > [menu] > [Trash_Box]${Cend}"
+	echo -e "********************${C_title}directory${Cend}********************"
+	for line in `ls -1 $PATH_Tb_d`
+	do
+		echo -e "${C_title}${num_}${Cend}. ${line}"
+		num_=$((num_+1))
+	done
+	echo -e "********************${C_title}file${Cend}********************"
+	for line in `ls -1 $PATH_Tb_f`
+	do
+		echo -e "${C_title}${num_}${Cend}. ${line}"
+		num_=$((num_+1))
+	done
+	echo "****************************************************************"
+	read -n 1 _wait
+	if [ $_wait = q -o $_wait = a ]; then exit; fi
+	echo -e "> ${C_title}Enter the number.${Cend}  Ex) 3  Ex) 2,3,4  Ex) 2-10"
+	read _number
+	if [[ "$_number" = *","* ]]; then
+		local field_sup=`echo "$_number" | awk -F, '{print NF}'`
+		local bound=`ls -1 $PATH_Tb_d | wc -l`
+		local array_num=1
+		while [ $array_num -le $field_sup ]
+		do
+			cut_num=`echo "$_number" | awk -v "fn=${array_num}" -F, '{print $fn}'`
+			if [ $cut_num -le $bound ]; then
+				echo -e " ${C_title}`ls -1 $PATH_Tb_d | sed -n ${cut_num}p`${Cend}"
+			elif [ $cut_num -gt $bound ]; then
+				local cutting_num=$((cut_num-bound))
+				echo -e " ${C_title}`ls -1 $PATH_Tb_f | sed -n ${cutting_num}p`${Cend}"
+			fi
+			array_num=$((array_num+1))
+		done
+		echo "> Select the operation for the above file from the following."
+		echo -e "  ${C_title}1:Complete deletion${Cend}   or   ${C_title}2.Unzip${Cend}"
+		read _operation
+
+
+	elif [[ "$_number" = *"-"* ]]; then
+		echo "bar"
+	elif [ "$_number" -ge "$num_" ]; then echo -e "${C_caution}!! Incorrect number !!${Cend}"
+	elif expr "$_number" : "[0-9]*$" >&/dev/null; then
+		echo "number"
+	else echo -e "${C_caution}!! The key is incorrect !!${Cend}"
+	fi
+	read -n 1 a
+done
+}
 
 clear
 while [ $mode = "menu" ]
 do
 	#numの制約
 	if [ $num -eq 0 ]; then
-		num=5
-	elif [ $num -eq 6 ]; then
+		num=6
+	elif [ $num -eq 7 ]; then
 		num=1
 	fi
 
@@ -378,6 +436,8 @@ do
 			Setting
 		elif [ $num -eq 5 ]; then
 			Directory_hist
+		elif [ $num -eq 6 ]; then
+			Trash_Box
 		fi
 
 
