@@ -41,7 +41,6 @@ done
 IFS=$IFS_BACKUP
 
 function choices_f(){
-	echo "$terget_num"
 	if [ $num -eq 1 ]; then
 		less "$terget"
 	elif [ $num -eq 2 ]; then
@@ -194,6 +193,17 @@ do
 			fi
 			list_num2=$((list_num2+1))
 		done
+	elif [ -z "$terget" ]; then
+		echo " There is no file."
+		echo -e " Do you create the file??(${C_c}y/n${Cend})"
+		read -n 1 _yn
+		if [ $_yn = y ]; then
+			echo; echo " Enter the name of new file."
+			read _name
+			echo; echo -e " Created ${C_c}${_name}${Cend}."; read -n 1 _wait
+			touch "${_name}"; echo "→" > $PATH_file_show
+			mode="display" && echo "display" > $PATH_mode; exit
+		else mode="display" && echo "display" > $PATH_mode; exit; fi
 	else echo -e " ${C_c}${string2}${Cend} is unknown type"; read -n 1 a; echo "display" > $PATH_mode; exit
 	fi
 

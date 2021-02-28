@@ -33,6 +33,8 @@ IFS=$IFS_BACKUP
 
 #描写
 function output(){
+	if expr "$num" : "[0-9]*$" >&/dev/null; then num=$num
+	else num=1; fi
 	IFS_BACKUP=$IFS
 	IFS=$'\n'
 	local list_num=1

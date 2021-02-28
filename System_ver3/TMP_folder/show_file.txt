@@ -1,24 +1,5 @@
-    1. [35mbin@[m
-    2. [34mboot/[m
-    3. [34mdev/[m
-    4. [34metc/[m
-    5. [34mhome/[m
-    6. [37minit[m
-    7. [35mlib@[m
-    8. [35mlib32@[m
-    9. [35mlib64@[m
-    10. [35mlibx32@[m
-    11. [34mlost+found/[m
-    12. [34mmedia/[m
-    13. [34mmnt/[m
-    14. [34mopt/[m
-    15. [34mproc/[m
-    16. [34mroot/[m
-    17. [34mrun/[m
-    18. [35msbin@[m
-    19. [34msnap/[m
-    20. [34msrv/[m
-    21. [34msys/[m
-    22. [34mtmp/[m
-    23. [34musr/[m
- → 24. [34mvar/[m
+    1. [34mGit/[m
+    2. [34mHow_to/[m
+    3. [34mdata_folder/[m
+    4. [34mmy_folder/[m
+ → 5. [34mwork/[m
