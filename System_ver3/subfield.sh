@@ -46,11 +46,11 @@ function Other(){
 		if [ $number = $other_num ]; then space[$number]="${C_cor}${Cor}${Cend}"
 		else space[$number]="  "; fi
 	done
-	echo -e " ${space[1]} |${C_sub}Permission${Cend}  |"
-	echo -e "          ${space[2]} |${C_sub}Link${Cend}        |"
-	echo -e "          ${space[3]} |${C_sub}Zip or Unzip${Cend}|"
-	echo -e "          ${space[4]} |${C_sub}Movement${Cend}    |"
-	echo -e "          ${space[5]} |${C_sub}Exeution${Cend}    |"
+	echo -e " ${space[1]} |${C_sub}Permission${Cend}  |${comment[1]}"
+	echo -e "          ${space[2]} |${C_sub}Link${Cend}        |${comment[2]}"
+	echo -e "          ${space[3]} |${C_sub}Zip or Unzip${Cend}|${comment[3]}"
+	echo -e "          ${space[4]} |${C_sub}Movement${Cend}    |${comment[4]}"
+	echo -e "          ${space[5]} |${C_sub}Exeution${Cend}    |${comment[5]}"
 }
 
 
@@ -255,6 +255,11 @@ do
 		else echo "display" > $PATH_mode; exit; fi
 		;;
 		d)
+		if [ -f "$terget" -a $num -ne 9 ]; then
+			choices_f
+		elif [ -d "$terget" -a $num -ne 9 ]; then
+			choices_d
+		fi
 		if [ $num -eq 9 ]; then 
 			if [ $other_num -eq 0 ]; then other_num=1
 			elif [ $other_num -eq 1 ]; then
@@ -264,21 +269,69 @@ do
 			elif [ $other_num -eq 3 ]; then
 				echo "other_num=3"; read -n 1 a
 			elif [ $other_num -eq 4 ]; then
-				echo "other_num=4"; read -n 1 a
+				roop="true"
+				while [ $roop = true ]
+				do
+				echo "${C_c}>${Cend} Enter the destination path."
+				read _mvpath
+				if [ -d "$_mvpath" ]; then 
+					mv "$terget" "$_mvpath"; roop="false"
+					mode="display" && echo "display" > $PATH_mode; exit
+				else echo -e "${C_caution}!! Not correct path !!${Cend}"; fi
+				done	
 			elif [ $other_num -eq 5 ]; then
-				echo "other_num=5"; read -n 1 a
+				echo -e "${C_c}>${Cend} Which way do you excute??"
+				echo -e " ${C_c}[1]${Cend}:bash    ${C_c}[2]${Cend}:source"
+				read _operation
+				if [ "$_operation" -eq 1 -o "$_operation" = bash ]; then bash "$terget"
+				elif [ "$_operation" -eq 2 -o "$_operation" = source ]; then source "$terget"
+				else echo -e "${C_caution}!! Not correct operation !!${Cend}"; fi
+				read -n 1 _wait
 			fi
-		fi
-		if [ -f "$terget" ]; then
-			choices_f
-		elif [ -d "$terget" ]; then
-			choices_d
 		fi
 		;;
 		*)
 		echo "Not an assigned key."
 		;;
 	esac
+
+	perm=`ls -ld $terget | awk '{print $1}'`
+
+	if [ $other_num -eq 1 ]; then
+		comment[1]="Change the permission of this file."
+		comment[2]="Permission of this file is ${C_c}${perm}${Cend}."
+		comment[3]=""; comment[4]=""; comment[5]=""
+	elif [ $other_num -eq 2 ]; then
+		comment[1]="Create hard or symbolic links."
+		comment[2]=""
+	elif [ $other_num -eq 3 ]; then
+		comment[1]="Make it a zip file or unzip. Or display its details."
+		comment[2]=""
+	elif [ $other_num -eq 4 ]; then
+		comment[1]="Move the file to a different path."
+		comment[2]=""
+	elif [ $other_num -eq 5 ]; then
+		comment[1]="Execute with the sorce or bash command."
+		comment[2]=""
+	fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 done
 
 
