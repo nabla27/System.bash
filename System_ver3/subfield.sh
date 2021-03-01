@@ -15,6 +15,7 @@ PATH_Set="$PATH_/List/Setting"
 ############################################################
 mode="subfield"
 list_num=1
+other_num=0
 num=1
 date=`date '+%Y-%m-%d'`
 C_path="\e[3`sed -n 4p $PATH_Set`m"; C_c="\e[3`sed -n 5p $PATH_Set`m"; C_mode="\e[3`sed -n 9p $PATH_Set`m"
@@ -39,6 +40,20 @@ do
 	list_num=$((list_num+1))
 done
 IFS=$IFS_BACKUP
+function Other(){
+	for number in {1..5}
+	do
+		if [ $number = $other_num ]; then space[$number]="${C_cor}${Cor}${Cend}"
+		else space[$number]="  "; fi
+	done
+	echo -e " ${space[1]} |${C_sub}Permission${Cend}  |"
+	echo -e "          ${space[2]} |${C_sub}Link${Cend}        |"
+	echo -e "          ${space[3]} |${C_sub}Zip or Unzip${Cend}|"
+	echo -e "          ${space[4]} |${C_sub}Movement${Cend}    |"
+	echo -e "          ${space[5]} |${C_sub}Exeution${Cend}    |"
+}
+
+
 
 function choices_f(){
 	if [ $num -eq 1 ]; then
@@ -79,7 +94,7 @@ function choices_f(){
 		echo
 		ls -l "$terget"
 		read -n 1 _gether
-	
+	elif [ $num -eq 9 ]; then Other
 	fi
 }
 function choices_d(){
@@ -121,7 +136,7 @@ function choices_d(){
 		echo
 		ls -l "$terget"
 		read -n 1 _getcher
-
+	elif [ $num -eq 9 ]; then Other
 	fi
 }
 		
@@ -133,11 +148,11 @@ do
 	mode=`cat $PATH_mode`
 
 	#numの制約
-	if [ $num -eq 0 ]; then
-		num=9
-	elif [ $num -eq 10 ]; then
-		num=1
-	fi
+	if [ $num -eq 0 ]; then num=9
+	elif [ $num -eq 10 ]; then num=1; fi
+	#other_numの制約
+	if [ $other_num -lt 0 ]; then other_num=0
+	elif [ $other_num -gt 5 ]; then other_num=5; fi
 	
 	#描写
 	clear
@@ -178,24 +193,38 @@ do
 		for line in `cat $PATH_list_f`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
-				echo -e " ${C_cor}${Cor}${Cend} ${C_sub}$line${Cend}"
-			elif [ "$num" -ne "$list_num2" ]; then	
-				echo -e "    ${C_sub}$line${Cend}"
+				if [ $list_num2 -eq 9 -a $other_num -gt 0 ]; then
+					echo -en " ${C_cor}${Cor}${Cend} ${C_sub}$line${Cend}"
+				else
+					echo -e " ${C_cor}${Cor}${Cend} ${C_sub}$line${Cend}"; fi
+			elif [ "$num" -ne "$list_num2" ]; then
+				if [ $list_num2 -eq 9 -a $other_num -gt 0 ]; then
+					echo -en "    ${C_sub}$line${Cend}"	
+				else
+					echo -e "    ${C_sub}$line${Cend}"; fi
 			fi
 			list_num2=$((list_num2+1))
 		done
+		if [ $other_num -gt 0 ]; then Other; fi
 	elif [ -d "$terget" ]; then
 		echo -e " ${C_c}${string2}${Cend} is a directory."
 		echo
 		for line in `cat $PATH_list_d`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
-				echo -e " ${C_cor}${Cor}${Cend} ${C_sub}$line${Cend}"
+				if [ $list_num2 -eq 9 -a $other_num -gt 0 ]; then
+					echo -en " ${C_cor}${Cor}${Cend} ${C_sub}$line${Cend}"
+				else
+					echo -e " ${C_cor}${Cor}${Cend} ${C_sub}$line${Cend}"; fi
 			elif [ "$num" -ne "$list_num2" ]; then
-				echo -e "    ${C_sub}$line${Cend}"
+				if [ $list_num2 -eq 9 -a $other_num -gt 0 ]; then
+					echo -en "    ${C_sub}$line${Cend}"
+				else
+					echo -e "    ${C_sub}$line${Cend}"; fi
 			fi
 			list_num2=$((list_num2+1))
 		done
+		if [ $other_num -gt 0 ]; then Other; fi
 	elif [ -z "$terget" ]; then
 		echo " There is no file."
 		echo -e " Do you create the file??(${C_c}y/n${Cend})"
@@ -214,16 +243,32 @@ do
 	
 	case $_getch in
 		w)
-		num=$((num-1))
+		if [ $other_num -gt 0 ]; then other_num=$((other_num-1))
+		else num=$((num-1)); fi
 		;;
 		s)
-		num=$((num+1))
+		if [ $other_num -gt 0 ]; then other_num=$((other_num+1))
+		else num=$((num+1)); fi
 		;;
 		a|q)
-		echo "display" > $PATH_mode
-		exit
+		if [ $other_num -gt 0 ]; then other_num=0
+		else echo "display" > $PATH_mode; exit; fi
 		;;
 		d)
+		if [ $num -eq 9 ]; then 
+			if [ $other_num -eq 0 ]; then other_num=1
+			elif [ $other_num -eq 1 ]; then
+				echo "other_num=1"; read -n 1 a
+			elif [ $other_num -eq 2 ]; then
+				echo "other_num=2"; read -n 1 a
+			elif [ $other_num -eq 3 ]; then
+				echo "other_num=3"; read -n 1 a
+			elif [ $other_num -eq 4 ]; then
+				echo "other_num=4"; read -n 1 a
+			elif [ $other_num -eq 5 ]; then
+				echo "other_num=5"; read -n 1 a
+			fi
+		fi
 		if [ -f "$terget" ]; then
 			choices_f
 		elif [ -d "$terget" ]; then
