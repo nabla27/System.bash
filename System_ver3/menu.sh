@@ -280,6 +280,15 @@ local num_s=1
 				elif [ ${S_num[13]} = Yes ]; then S_num[13]="No"; fi
 			fi
 			;;
+			[1-9])
+			num_s=$_getcher
+			;;
+			"[")
+			num_s=1
+			;;
+			"]")
+			num_s=13
+			;;
 		esac
 
 		#各パラメータの制約

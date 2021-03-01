@@ -28,7 +28,7 @@ IFS=$'\n'
 for line in `cat $PATH_file_show`
 do
 	case "$line" in
-		*→*)
+		*${Cor}*)
 		string1=`cat $PATH_pwd`
 		string2=`sed -n ${list_num}p $PATH_direct_list`
 		terget="$string1/$string2"
@@ -151,6 +151,7 @@ do
 
 	echo
 	echo "____________________"
+	echo "terget=$terget"
 
 	if [ -h "$terget" ]; then
 		path_link=`readlink -f "$terget"`

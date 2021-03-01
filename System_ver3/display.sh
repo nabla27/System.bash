@@ -23,7 +23,7 @@ IFS=$'\n'
 for line in `cat $PATH_file_show`
 do
 	case "$line" in
-		*→*)
+		*${Cor}*)
 		num=$get_num
 		;;
 	esac

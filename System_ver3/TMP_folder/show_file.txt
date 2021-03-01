@@ -1,1 +1,5 @@
- [36m→[m 1 [36mnabla27_2/[m
+    1 [36mGit/[m
+ [36m ■[m 2 [36mHow_to/[m
+    3 [36mdata_folder/[m
+    4 [36mmy_folder/[m
+    5 [36mwork/[m
