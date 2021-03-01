@@ -362,7 +362,7 @@ function Trash_Box(){
 local num_=1
 while [ $num_ != 0 ]
 do
-	num_=1
+	num_=1; local tf=1
 	clear
 	echo -e "${C_path}`cat $PATH_pwd`${Cend}"
 	echo
@@ -426,8 +426,15 @@ do
 					rm "${name_}/.tpwd" && rm ${file_name[array_num]}
 					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
 					else
-						echo " The file has been moved to home directory."
-						mv ${name_} ~
+						echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
+						tf=1
+						while [ $tf -eq 1 ]
+						do
+						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
+						read _path
+						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
+						done
 					fi
 					cd `cat $PATH_pwd`
 				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
@@ -439,8 +446,15 @@ do
 					sed -i -e 1d ${name_} && rm ${file_name[array_num]}
 					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
 					else 
-						echo " The file has been moved to home directory."
-						mv ${name_} ~
+						echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
+						tf=1
+						while [ $tf -eq 1 ]
+						do
+						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
+						read _path
+						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
+						done
 					fi
 					cd `cat $PATH_pwd`
 				fi
@@ -512,8 +526,15 @@ do
 					rm "${name_}/.tpwd" && rm ${file_name[array_num]}
 					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
 					else
-						echo " The file has been moved to home directory."
-						mv ${name_} ~
+						echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
+						tf=1
+						while [ $tf -eq 1 ]
+						do
+						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
+						read _path
+						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
+						done
 					fi
 					cd `cat $PATH_pwd`
 				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
@@ -525,8 +546,15 @@ do
 					sed -i -e 1d ${name_} && rm ${file_name[array_num]}
 					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
 					else
-						echo " The file has been moved to home directory."
-						mv ${name_} ~
+						echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}."
+						tf=1
+						while [ $tf -eq 1 ]
+						do
+						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
+						read _path
+						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2	
+						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
+						done
 					fi
 					cd `cat $PATH_pwd`
 				fi	
@@ -583,8 +611,15 @@ do
 				rm "${name_}/.tpwd" && rm ${file_name}
 				if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
 				else
-					echo " The file has been moved to home directory."
-					mv ${name_} ~
+					echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
+					tf=1
+					while [ $tf -eq 1 ]
+					do
+					echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
+					read _path
+					if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+					else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
+					done
 				fi
 				cd `cat $PATH_pwd`
 			elif [ -e "${PATH_Tb_f}/${file_name}" ]; then
@@ -596,8 +631,15 @@ do
 				sed -i -e 1d ${name_} && rm ${file_name}
 				if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
 				else
-					echo " The file has been moved to home directory."
-					mv ${name_} ~
+					echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
+					tf=1
+					while [ $tf -eq 1 ]
+					do
+					echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
+					read _path
+					if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+					else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
+					done
 				fi
 				cd `cat $PATH_pwd`
 			fi
