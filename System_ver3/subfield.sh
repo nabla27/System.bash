@@ -18,9 +18,9 @@ list_num=1
 num=1
 date=`date '+%Y-%m-%d'`
 C_path="\e[3`sed -n 4p $PATH_Set`m"; C_c="\e[3`sed -n 5p $PATH_Set`m"; C_mode="\e[3`sed -n 9p $PATH_Set`m"
-C_sub="\e[3`sed -n 10p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"
+C_sub="\e[3`sed -n 10p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"; C_cor="\e[3`sed -n 11p $PATH_Set`m"
 Cend="\e[m"
-supNum=`sed -n 1p $PATH_Set`
+supNum=`sed -n 1p $PATH_Set`; Cor="`sed -n 12p $PATH_Set`"
 
 #displayのnumの取得→$terget_num
 IFS_BACKUP=$IFS
@@ -178,7 +178,7 @@ do
 		for line in `cat $PATH_list_f`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
-				echo -e " → ${C_sub}$line${Cend}"
+				echo -e " ${C_cor}${Cor}${Cend} ${C_sub}$line${Cend}"
 			elif [ "$num" -ne "$list_num2" ]; then	
 				echo -e "    ${C_sub}$line${Cend}"
 			fi
@@ -190,7 +190,7 @@ do
 		for line in `cat $PATH_list_d`
 		do
 			if [ "$num" -eq "$list_num2" ]; then
-				echo -e " → ${C_sub}$line${Cend}"
+				echo -e " ${C_cor}${Cor}${Cend} ${C_sub}$line${Cend}"
 			elif [ "$num" -ne "$list_num2" ]; then
 				echo -e "    ${C_sub}$line${Cend}"
 			fi

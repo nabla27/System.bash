@@ -14,7 +14,8 @@ PATH_Tb_f="$PATH_/List/Trash_Boxf"
 mode="menu"
 num=1
 C_path="\e[3`sed -n 4p $PATH_Set`m"; C_title="\e[3`sed -n 6p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"
-C_mode="\e[3`sed -n 9p $PATH_Set`m"
+C_mode="\e[3`sed -n 9p $PATH_Set`m"; C_cor="\e[3`sed -n 11p $PATH_Set`m"
+Cor="`sed -n 12p $PATH_Set`"
 Cend="\e[m"
 
 IFS_BACKUP=$IFS
@@ -24,7 +25,7 @@ function output(){
 	for line in `cat $PATH_list_menu`
 	do
 		if [ "$num" -eq $list_num ]; then
-			echo " → $line"
+			echo -e " ${C_cor}${Cor}${Cend} $line"
 		elif [ "$num" -ne $list_num ]; then
 			echo "    $line"
 		fi
@@ -88,7 +89,7 @@ function func_search(){
 
 function File_Searching(){
 	point=1
-	point1="→"; point2="  "; point3="  "; point4="  "; point5="  "
+	point1="${C_cor}${Cor}${Cend}"; point2="  "; point3="  "; point4="  "; point5="  "
 	path="        "
 	keyword="        "
 	order="        "
@@ -100,15 +101,15 @@ function File_Searching(){
 		echo -e "${C_mode}[display] > [menu] > [file_search]${Cend}"
 		echo -e "**********${C_title}File_Searching${Cend}**********"
 		echo
-		echo " $point1 Path            [$path]"
+		echo -e " $point1 Path            [$path]"
 		echo
-		echo " $point2 Keyword         [$keyword]"
+		echo -e " $point2 Keyword         [$keyword]"
 		echo
-		echo " $point3 /size /time /extension [$order]"
+		echo -e " $point3 /size /time /extension [$order]"
 		echo
 		echo
-		echo " $point4 <Clear>"
-		echo " $point5 <Search>"
+		echo -e " $point4 <Clear>"
+		echo -e " $point5 <Search>"
 		echo
 		echo "**********************************"
 
@@ -189,15 +190,15 @@ function File_Searching(){
 		if [ $point -eq 0 ]; then
 			point=1
 		elif [ $point -eq 1 ]; then
-			point1="→"; point2="  "; point3="  "; point4="  "; point5="  "
+			point1="${C_cor}${Cor}${Cend} "; point2="  "; point3="  "; point4="  "; point5="  "
 		elif [ $point -eq 2 ]; then
-			point1="  "; point2="→"; point3="  "; point4="  "; point5="  "
+			point1="  "; point2="${C_cor}${Cor}${Cend}"; point3="  "; point4="  "; point5="  "
 		elif [ $point -eq 3 ]; then
-			point1="  "; point2="  "; point3="→"; point4="  "; point5="  "
+			point1="  "; point2="  "; point3="${C_cor}${Cor}${Cend}"; point4="  "; point5="  "
 		elif [ $point -eq 4 ]; then
-			point1="  "; point2="  "; point3="  "; point4="→"; point5="  "
+			point1="  "; point2="  "; point3="  "; point4="${C_cor}${Cor}${Cend}"; point5="  "
 		elif [  $point -eq 5 ]; then
-			point1="  "; point2="  "; point3="  "; point4="  "; point5="→"
+			point1="  "; point2="  "; point3="  "; point4="  "; point5="${C_cor}${Cor}${Cend}"
 		elif [ $point -eq 6 ]; then
 			point=5
 		fi
@@ -215,15 +216,15 @@ local num_s=1
 		clear
 
 		#設定の反映
-		for number in {1..10}
+		for number in {1..12}
 		do
 			S_num[$number]="`sed -n ${number}p $PATH_Set`"
 		done
 		
 		#カーソル位置を設定
-		for number in {1..10}
+		for number in {1..12}
 		do
-			if [ $num_s = $number ]; then space[$number]=" → ${number}."
+			if [ $num_s = $number ]; then space[$number]=" ${C_cor}${Cor}${Cend} ${number}."
 			else space[$number]="    ${number}."; fi
 		done
 		
@@ -231,7 +232,7 @@ local num_s=1
 		echo
 		echo -e "${C_mode}[display] > [menu] > [Setting]${Cend}"
 		echo -e "*******************${C_title}Setting${Cend}********************"
-		echo    "${space[1]} number of showing file.(display)          [${S_num[1]}]"
+		echo -e "${space[1]} number of showing file.(display)          [${S_num[1]}]"
 		echo -e "${space[2]} color of directory.(display)              [\e[3${S_num[2]}msample${Cend}]"
 		echo -e "${space[3]} color of unknown file.(display)           [\e[3${S_num[3]}msample${Cend}]"
 		echo -e "${space[4]} color of path.                            [\e[3${S_num[4]}msample${Cend}]"
@@ -240,7 +241,9 @@ local num_s=1
 		echo -e "${space[7]} Color of warning text.(menu)              [\e[3${S_num[7]}msample${Cend}]"
 		echo -e "${space[8]} Color of Normal file.(display)            [\e[3${S_num[8]}msample${Cend}]"
 		echo -e "${space[9]} Color of mode.                            [\e[3${S_num[9]}msample${Cend}]"
-		echo -e "${space[10]} Color of subfield list.(subfield)        [\e[3${S_num[10]}msample${Cend}]" 
+		echo -e "${space[10]} Color of subfield list.(subfield)        [\e[3${S_num[10]}msample${Cend}]"
+		echo -e "${space[11]} Color of cursor.                         [\e[3${S_num[11]}msample${Cend}]"
+		echo -e "${space[12]} Cursor type.                             [${S_num[12]}]"
 		
 		read -n 1 _getcher
 		case $_getcher in
@@ -254,13 +257,16 @@ local num_s=1
 			exit
 			;;
 			d)
-			for number in {1..10}
+			for number in {1..11}
 			do
 				if [ $num_s -eq $number ]; then S_num[$number]=$((S_num[number]+1)); fi
 			done
+			if [ $num_s -eq 12 ]; then
+				echo " Enter the cursor type."; read _cursor
+				S_num[12]="$_cursor"; fi
 			;;
 			a)
-			for number in {1..10}
+			for number in {1..11}
 			do
 				if [ $num_s -eq $number ]; then S_num[$number]=$((S_num[number]-1)); fi
 			done
@@ -268,12 +274,12 @@ local num_s=1
 		esac
 
 		#各パラメータの制約
-		for number in {2..10}
+		for number in {2..11}
 		do
 			if [ ${S_num[$number]} -eq 8 ]; then S_num[$number]=7
 			elif [ ${S_num[$number]} -lt 1 ]; then S_num[$number]=1; fi
 		done
-		if [ $num_s -eq 11 ]; then num_s=10
+		if [ $num_s -eq 13 ]; then num_s=12
 		elif [ $num_s -eq 0 ]; then num_s=1; fi
 		if [ ${S_num[1]} -eq 3 ]; then S_num[1]=4; fi
 
@@ -281,7 +287,7 @@ local num_s=1
 		
 		#Settingファイルへの書き込み
 		rm $PATH_Set && touch $PATH_Set
-		for number in {1..10}
+		for number in {1..12}
 		do
 			echo ${S_num[$number]} >> $PATH_Set
 			

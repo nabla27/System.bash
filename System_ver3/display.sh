@@ -14,8 +14,8 @@ num_tpwd=1
 mode="display"
 Cend="\e[m"
 C_dir="\e[3`sed -n 2p $PATH_Set`m"; C_path="\e[3`sed -n 4p $PATH_Set`m"; C_f="\e[3`sed -n 3p $PATH_Set`m"
-C_nf="\e[3`sed -n 8p $PATH_Set`m"; C_mode="\e[3`sed -n 9p $PATH_Set`m"
-supNum=`sed -n 1p $PATH_Set`
+C_nf="\e[3`sed -n 8p $PATH_Set`m"; C_mode="\e[3`sed -n 9p $PATH_Set`m"; C_cor="\e[3`sed -n 11p $PATH_Set`m"
+supNum=`sed -n 1p $PATH_Set`; Cor="`sed -n 12p $PATH_Set`"
 
 #subfieldからnumの取得
 IFS_BACKUP=$IFS
@@ -42,10 +42,10 @@ function output(){
 	for line in `cat $PATH_direct_list`
 	do
 		if [ "$num" -eq "$list_num" ]; then
-			if [ -h "$line" ]; then echo -e " → ${list_num}. ${C_f}${line}@${Cend}" >> "$PATH_file_show"
-			elif [ -d "$line" ]; then echo -e " → ${list_num}. ${C_dir}${line}/${Cend}" >> "$PATH_file_show"
-			elif [ -f "$line" ]; then echo -e " → ${list_num}. ${C_nf}$line${Cend}" >> "$PATH_file_show"
-			else echo -e " → ${list_num}. ${C_f}$line${Cend}" >> "$PATH_file_show"; fi
+			if [ -h "$line" ]; then echo -e " ${C_cor}${Cor}${Cend} ${list_num}. ${C_f}${line}@${Cend}" >> "$PATH_file_show"
+			elif [ -d "$line" ]; then echo -e " ${C_cor}${Cor}${Cend} ${list_num}. ${C_dir}${line}/${Cend}" >> "$PATH_file_show"
+			elif [ -f "$line" ]; then echo -e " ${C_cor}${Cor}${Cend} ${list_num}. ${C_nf}$line${Cend}" >> "$PATH_file_show"
+			else echo -e " ${C_cor}${Cor}${Cend} ${list_num}. ${C_f}$line${Cend}" >> "$PATH_file_show"; fi
 		elif [ "$num" -ne "$list_num" ]; then
 			if [ -h "$line" ]; then echo -e "    ${list_num}. ${C_f}${line}@${Cend}" >> "$PATH_file_show"
 			elif [ -d "$line" ]; then echo -e "    ${list_num}. ${C_dir}${line}/${Cend}" >> "$PATH_file_show"

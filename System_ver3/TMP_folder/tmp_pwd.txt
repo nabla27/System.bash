@@ -1,0 +1,2 @@
+/home/nabla27_2/work/test_dir1
+/home/nabla27_2/work
