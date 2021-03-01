@@ -216,13 +216,13 @@ local num_s=1
 		clear
 
 		#設定の反映
-		for number in {1..12}
+		for number in {1..13}
 		do
 			S_num[$number]="`sed -n ${number}p $PATH_Set`"
 		done
 		
 		#カーソル位置を設定
-		for number in {1..12}
+		for number in {1..13}
 		do
 			if [ $num_s = $number ]; then space[$number]=" ${C_cor}${Cor}${Cend} ${number}."
 			else space[$number]="    ${number}."; fi
@@ -244,6 +244,7 @@ local num_s=1
 		echo -e "${space[10]} Color of subfield list.(subfield)        [\e[3${S_num[10]}msample${Cend}]"
 		echo -e "${space[11]} Color of cursor.                         [\e[3${S_num[11]}msample${Cend}]"
 		echo -e "${space[12]} Cursor type.                             [${S_num[12]}]"
+		echo -e "${space[13]} Show hidden files.                       [${S_num[13]}]"
 		
 		read -n 1 _getcher
 		case $_getcher in
@@ -264,12 +265,20 @@ local num_s=1
 			if [ $num_s -eq 12 ]; then
 				echo " Enter the cursor type."; read _cursor
 				S_num[12]="$_cursor"; fi
+			if [ $num_s -eq 13 ]; then
+				if [ ${S_num[13]} = No ]; then S_num[13]="Yes"
+				elif [ ${S_num[13]} = Yes ]; then S_num[13]="No"; fi
+			fi
 			;;
 			a)
 			for number in {1..11}
 			do
 				if [ $num_s -eq $number ]; then S_num[$number]=$((S_num[number]-1)); fi
 			done
+			if [ $num_s -eq 13 ]; then
+				if [ ${S_num[13]} = No ]; then S_num[13]="Yes"
+				elif [ ${S_num[13]} = Yes ]; then S_num[13]="No"; fi
+			fi
 			;;
 		esac
 
@@ -279,7 +288,7 @@ local num_s=1
 			if [ ${S_num[$number]} -eq 8 ]; then S_num[$number]=7
 			elif [ ${S_num[$number]} -lt 1 ]; then S_num[$number]=1; fi
 		done
-		if [ $num_s -eq 13 ]; then num_s=12
+		if [ $num_s -eq 14 ]; then num_s=13
 		elif [ $num_s -eq 0 ]; then num_s=1; fi
 		if [ ${S_num[1]} -eq 3 ]; then S_num[1]=4; fi
 
@@ -287,7 +296,7 @@ local num_s=1
 		
 		#Settingファイルへの書き込み
 		rm $PATH_Set && touch $PATH_Set
-		for number in {1..12}
+		for number in {1..13}
 		do
 			echo ${S_num[$number]} >> $PATH_Set
 			
