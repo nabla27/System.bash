@@ -190,7 +190,7 @@ function File_Searching(){
 		if [ $point -eq 0 ]; then
 			point=1
 		elif [ $point -eq 1 ]; then
-			point1="${C_cor}${Cor}${Cend} "; point2="  "; point3="  "; point4="  "; point5="  "
+			point1="${C_cor}${Cor}${Cend}"; point2="  "; point3="  "; point4="  "; point5="  "
 		elif [ $point -eq 2 ]; then
 			point1="  "; point2="${C_cor}${Cor}${Cend}"; point3="  "; point4="  "; point5="  "
 		elif [ $point -eq 3 ]; then

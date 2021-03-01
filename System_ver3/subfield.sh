@@ -151,7 +151,6 @@ do
 
 	echo
 	echo "____________________"
-	echo "terget=$terget"
 
 	if [ -h "$terget" ]; then
 		path_link=`readlink -f "$terget"`
