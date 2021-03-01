@@ -267,7 +267,18 @@ do
 			elif [ $other_num -eq 2 ]; then
 				echo "other_num=2"; read -n 1 a
 			elif [ $other_num -eq 3 ]; then
-				echo "other_num=3"; read -n 1 a
+				if [[ "$terget" = *".zip"* ]]; then
+					echo "Select an operation from"
+					echo -e "${C_c}[1]${Cend}Unzip    ${C_c}[2]${Cend}View details"
+					read -n 1 _operate
+					if [ $_operate -eq 1 ]; then 
+						unzip -q "$string2"; rm -r "$string2"
+						mode="display" && echo "display" > $PATH_mode; exit
+					elif [ $_operate -eq 2 ]; then unzip -l "$string2"; read -n 1 _wait; fi
+				else
+					zip -rq "${string2}.zip" "${string2}"; rm -r "$string2"
+					mode="display" && echo "display" > $PATH_mode; exit
+				fi
 			elif [ $other_num -eq 4 ]; then
 				roop="true"
 				while [ $roop = true ]
@@ -305,8 +316,13 @@ do
 		comment[1]="Create hard or symbolic links."
 		comment[2]=""
 	elif [ $other_num -eq 3 ]; then
-		comment[1]="Make it a zip file or unzip. Or display its details."
-		comment[2]=""
+		if [[ "$terget" = *".zip"* ]]; then
+			comment[1]="This is a zip file."
+			comment[2]="Unzip this file or view its details."
+		else
+			comment[1]="Make it a zip file."
+			comment[2]=""
+		fi
 	elif [ $other_num -eq 4 ]; then
 		comment[1]="Move the file to a different path."
 		comment[2]=""

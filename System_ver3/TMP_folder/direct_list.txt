@@ -1,5 +1,5 @@
-test.sh
-test__f
-test_dir1
-test_dir1_cp
-test_dir2
+Git
+How_to
+data_folder
+my_folder
+work

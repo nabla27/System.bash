@@ -1,5 +1,5 @@
- [36m >[m 1 [37mtest.sh[m
-    2 [37mtest__f[m
-    3 [36mtest_dir1/[m
-    4 [36mtest_dir1_cp/[m
-    5 [36mtest_dir2/[m
+    1 [36mGit/[m
+    2 [36mHow_to/[m
+    3 [36mdata_folder/[m
+    4 [36mmy_folder/[m
+ [36m >[m 5 [36mwork/[m

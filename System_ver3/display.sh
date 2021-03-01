@@ -39,7 +39,7 @@ function output(){
 	IFS=$'\n'
 	local list_num=1
 	if [ $tf_hf = No ]; then ls -1 `cat $PATH_pwd` > $PATH_direct_list
-	elif [ $tf_hf = Yes ]; then ls -1 -a `cat $PATH_pwd` > $PATH_direct_list; fi
+	elif [ $tf_hf = Yes ]; then ls -1 -A `cat $PATH_pwd` > $PATH_direct_list; fi
 	for line in `cat $PATH_direct_list`
 	do
 		if [ "$num" -eq "$list_num" ]; then
