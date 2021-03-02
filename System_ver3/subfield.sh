@@ -263,7 +263,28 @@ do
 		if [ $num -eq 9 ]; then 
 			if [ $other_num -eq 0 ]; then other_num=1
 			elif [ $other_num -eq 1 ]; then
-				echo "other_num=1"; read -n 1 a
+				echo "Please enter the permission. Ex)u+w Ex)755 Ex)rwxrw-rw-"
+				read _operation; array_num=1
+				for moji in `echo "$_operation" | fold -s1`
+				do
+					moji[$array_num]="$moji"
+					array_num=$((array_num+1))
+				done
+				echo -ne "${C_caution}"
+				if [ "$array_num" -eq 4 ]; then chmod "$_operation" "$terget"
+				elif [ "$array_num" -eq 10 ]; then
+					for number in {1..9}
+					do
+						if [ $((number%3)) -eq 1 -a "${moji[$number]}" = r ]; then pp[$number]=4
+						elif [ $((number%3)) -eq 2 -a "${moji[$number]}" = w ]; then pp[$number]=2
+						elif [ $((number%3)) -eq 0 -a "${moji[$number]}" = x ]; then pp[$number]=1
+						elif [ "${moji[$number]}" = "-" ]; then pp[$number]=0
+						else echo "The ${number}'s character is incorrect."; read -n 1 _wait; fi
+					done
+					p1=$((pp[1]+pp[2]+pp[3])); p2=$((pp[4]+pp[5]+pp[6])); p3=$((pp[7]+pp[8]+pp[9]))
+					chmod "${p1}${p2}${p3}" "$terget"
+				else echo "!! Incorrect operation !!"; read -n 1 _wait
+				fi
 			elif [ $other_num -eq 2 ]; then
 				echo "other_num=2"; read -n 1 a
 			elif [ $other_num -eq 3 ]; then
@@ -293,7 +314,7 @@ do
 			elif [ $other_num -eq 5 ]; then
 				echo -e "${C_c}>${Cend} Which way do you excute??"
 				echo -e " ${C_c}[1]${Cend}:bash    ${C_c}[2]${Cend}:source"
-				read _operation
+				read -n 1 _operation; echo; echo "________________________________________"
 				if [ "$_operation" -eq 1 -o "$_operation" = bash ]; then bash "$terget"
 				elif [ "$_operation" -eq 2 -o "$_operation" = source ]; then source "$terget"
 				else echo -e "${C_caution}!! Not correct operation !!${Cend}"; fi
@@ -306,7 +327,7 @@ do
 		;;
 	esac
 
-	perm=`ls -ld $terget | awk '{print $1}'`
+	perm=`ls -ld "$terget" | awk '{print $1}'`
 
 	if [ $other_num -eq 1 ]; then
 		comment[1]="Change the permission of this file."

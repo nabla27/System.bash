@@ -1,5 +1,2 @@
-Git
-How_to
-data_folder
-my_folder
-work
+Test_dir1
+test_file1
