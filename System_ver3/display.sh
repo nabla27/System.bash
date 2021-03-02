@@ -106,20 +106,21 @@ do
 		exit
 		;;
 		:)
-		echo -e "${C_mode}< Command Line >${Cend}"
-		read _getcher
-		if expr "$_getcher" : "[0-9]*$" >&/dev/null; then
-			mvd="`cat $PATH_pwd`/`cat $PATH_direct_list | sed -n ${_getcher}p`"
-			if [ -f "$mvd" ]; then cat "$mvd"; read -n 1 a
-			elif [ -d "$mvd" ]; then echo "→" > $PATH_file_show; cd $mvd
-			else echo "cannot operate"; fi
-		else
-			if [[ "$_getcher" = cd* ]]; then echo "→" > $PATH_file_show; fi
-			$_getcher
-			read -n 1 a
-		fi
-		echo `pwd` > $PATH_pwd
-		exit
+		mode="Command_Line" && echo "Command_Line" > $PATH_mode; exit
+		#echo -e "${C_mode}< Command Line >${Cend}"
+		#read _getcher
+		#if expr "$_getcher" : "[0-9]*$" >&/dev/null; then
+		#	mvd="`cat $PATH_pwd`/`cat $PATH_direct_list | sed -n ${_getcher}p`"
+		#	if [ -f "$mvd" ]; then cat "$mvd"; read -n 1 a
+		#	elif [ -d "$mvd" ]; then echo "→" > $PATH_file_show; cd $mvd
+		#	else echo "cannot operate"; fi
+		#else
+		#	if [[ "$_getcher" = cd* ]]; then echo "→" > $PATH_file_show; fi
+		#	$_getcher
+		#	read -n 1 a
+		#fi
+		#echo `pwd` > $PATH_pwd
+		#exit
 		;;
 		r)
 		mode="menu" && echo "menu" > $PATH_mode

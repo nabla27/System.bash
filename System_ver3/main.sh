@@ -7,6 +7,7 @@ PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_disp="$PATH_/display.sh"
 PATH_subfield="$PATH_/subfield.sh"
 PATH_menu="$PATH_/menu.sh"
+PATH_cmd="$PATH_/Command_Line.sh"
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_file_show="$PATH_/TMP_folder/show_file.txt"
@@ -39,6 +40,9 @@ do
 	elif [ $mode = "menu" ]; then
 		cd `cat $PATH_pwd`
 		bash $PATH_menu
+	elif [ $mode = "Command_Line" ]; then
+		cd `cat $PATH_pwd`
+		bash $PATH_cmd
 	fi
 	IFS=$IFS_BACKUP
 done

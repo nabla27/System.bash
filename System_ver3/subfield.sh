@@ -263,7 +263,7 @@ do
 		if [ $num -eq 9 ]; then 
 			if [ $other_num -eq 0 ]; then other_num=1
 			elif [ $other_num -eq 1 ]; then
-				echo "Please enter the permission. Ex)u+w Ex)755 Ex)rwxrw-rw-"
+				echo "> Please enter the permission. Ex)u+w Ex)755 Ex)rwxrw-rw-"
 				read _operation; array_num=1
 				for moji in `echo "$_operation" | fold -s1`
 				do
@@ -286,7 +286,14 @@ do
 				else echo "!! Incorrect operation !!"; read -n 1 _wait
 				fi
 			elif [ $other_num -eq 2 ]; then
-				echo "other_num=2"; read -n 1 a
+				echo "> Enter a new name for a link."; read _linkname
+				echo "> Which link would you like to make??"
+				echo -e "    ${C_c}[1]${Cend}Hard link     ${C_c}[2]${Cend}Symbolic link"
+				read -n 1 _operation; echo -ne "${C_caution}"
+				if [ $_operation -eq 1 -a -d "$terget" ]; then sudo ln -id "$terget" "$_linkname" || read -n 1 _wait
+				elif [ $_operation -eq 1 ]; then ln -i "$terget" "$_linkname"
+				elif [ $_operation -eq 2 ]; then ln -is "$terget" "$_linkname"; fi
+				echo -e "${Cend}"; mode="display" && echo "display" > $PATH_mode
 			elif [ $other_num -eq 3 ]; then
 				if [[ "$terget" = *".zip"* ]]; then
 					echo "Select an operation from"
