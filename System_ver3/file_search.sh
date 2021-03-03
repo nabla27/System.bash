@@ -1,20 +1,19 @@
 #!/bin/bash
-##########################################################
-PATH_="/home/nabla27/data_folder/System.bash/System_ver3"
-##########################################################
+###########################################################
+PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
+###########################################################
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_searf="$PATH_/TMP_folder/search_file.txt"
 PATH_Set="$PATH_/List/Setting"
-##########################################################
+###########################################################
 C_path="\e[3`sed -n 4p $PATH_Set`m"; C_title="\e[3`sed -n 6p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"
 C_mode="\e[3`sed -n 9p $PATH_Set`m"; C_cor="\e[3`sed -n 11p $PATH_Set`m"
 Cor="`sed -n 12p $PATH_Set`"
 Cend="\e[m"
 
 mode="search_file"
-rm $PATH_searf && touch $PATH_searf
-prin[1]="→"; prin[2]="  "; prin[3]="  "; prin[4]="  "; prin[5]="  "; prin[6]="  "; prin[7]="  "; prin[8]="  "
+prin[1]="${C_cor}${Cor}${Cend}"; prin[2]="  "; prin[3]="  "; prin[4]="  "; prin[5]="  "; prin[6]="  "; prin[7]="  "; prin[8]="  "
 ppath="none"; kkeyword1="none"; kkeyword2="none"; exkeyword="none"; oorder="none"; condition="and"
 num=1
 
@@ -44,16 +43,17 @@ function search(){
 			fi
 		else
 			if [ "${condition}" = "and" ]; then	
-			if [[ "${path}" = *"${keyword1}"* ]]; then
-				if [[ "${path}" = *"${keyword2}"* ]]; then
+				if [[ "${path}" = *"${keyword1}"* ]]; then
+					if [[ "${path}" = *"${keyword2}"* ]]; then
+						echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
+					fi
+				fi
+			elif [ "${condition}" = "or" ]; then
+				if [[ "${path}" = *"${keyword1}"* ]]; then
+					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
+				elif [[ "${path}" = *"${keyword2}"* ]]; then
 					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
 				fi
-			fi
-			elif [ "${condition}" = "or" ]; then
-			if [[ "${path}" = *"${keyword1}"* ]]; then
-				echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
-			elif [[ "${path}" = *"${keyword2}"* ]]; then
-				echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf; fi
 			fi
 		fi
 		count=$((count+1))
@@ -96,6 +96,9 @@ do
 	s)
 	num=$((num+1))
 	;;
+	q|a)
+	mode="menu" && echo "menu" > $PATH_mode; exit
+	;;
 	d)
 	if [ $num -eq 1 ]; then
 		loop="true"
@@ -128,12 +131,13 @@ do
 		read _getcher
 		exkeyword="${_getcher}"
 	elif [ $num -eq 6 ]; then
-		echo "> Select the order form \"time\" or \"size\"."
+		echo "> Select the order from \"time\" or \"size\"."
 		read _getcher
 		oorder="${_getcher}"
 	elif [ $num -eq 7 ]; then
-		ppath="none"; kkeyword1="none"; kkeyword2="none"; exkeyword="none"; oorder="none"
+		ppath="none"; kkeyword1="none"; kkeyword2="none"; exkeyword="none"; oorder="none"; condition="and"
 	elif [ $num -eq 8 ]; then
+		rm $PATH_searf && touch $PATH_searf
 		echo; echo -e "*****************${C_title}waiting${Cend}********************"
 		if [ "${ppath}" = "none" ]; then ppath=`cat $PATH_pwd`; fi
 		num_file=`ls -pR -U1 "${ppath}" | grep -v -e / -e '^\s*$' | wc -l`
