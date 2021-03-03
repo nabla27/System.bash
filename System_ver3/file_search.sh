@@ -138,7 +138,7 @@ do
 		ppath="none"; kkeyword1="none"; kkeyword2="none"; exkeyword="none"; oorder="none"; condition="and"
 	elif [ $num -eq 8 ]; then
 		rm $PATH_searf && touch $PATH_searf
-		echo; echo -e "*****************${C_title}waiting${Cend}********************"
+		echo; echo -e "****************${C_title}waiting${Cend}*******************"
 		if [ "${ppath}" = "none" ]; then ppath=`cat $PATH_pwd`; fi
 		num_file=`ls -pR -U1 "${ppath}" | grep -v -e / -e '^\s*$' | wc -l`
 		block=$((num_file/100))
