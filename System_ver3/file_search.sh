@@ -6,6 +6,7 @@ PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_searf="$PATH_/TMP_folder/search_file.txt"
 PATH_Set="$PATH_/List/Setting"
+PATH_show_sf="$PATH_/TMP_folder/show_sf.txt"
 ###########################################################
 C_path="\e[3`sed -n 4p $PATH_Set`m"; C_title="\e[3`sed -n 6p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"
 C_mode="\e[3`sed -n 9p $PATH_Set`m"; C_cor="\e[3`sed -n 11p $PATH_Set`m"
@@ -13,7 +14,7 @@ Cor="`sed -n 12p $PATH_Set`"
 Cend="\e[m"
 
 mode="search_file"
-prin[1]="${C_cor}${Cor}${Cend}"; prin[2]="  "; prin[3]="  "; prin[4]="  "; prin[5]="  "; prin[6]="  "; prin[7]="  "; prin[8]="  "
+prin[1]="${C_cor}${Cor}${Cend}"; prin[2]="  "; prin[3]="  "; prin[4]="  "; prin[5]="  "; prin[6]="  "; prin[7]="  "; prin[8]="  "; prin[9]="  "
 ppath="none"; kkeyword1="none"; kkeyword2="none"; exkeyword="none"; oorder="none"; condition="and"
 num=1
 
@@ -112,6 +113,7 @@ do
 	echo
 	echo -e "${prin[7]} Clear"
 	echo -e "${prin[8]} Search"
+	echo -e "${prin[9]} view with less"
 	echo "******************************************"
 	
 	read -n 1 _getch
@@ -176,29 +178,38 @@ do
 		num_file=`ls -pR -U1 "${ppath}" | grep -v -e / -e '^\s*$' | wc -l`
 		block=$((num_file/100))
 		if [ $num_file -ge 100 ]; then
-			echo "|_________|_________|_________|_________|_________|_________|_________|_________|_________|_________|${num_file}"; fi
+			echo "|_________1_________2_________3_________4_________5_________6_________7_________8_________9_________|${num_file}"; fi
 		count=0; num_show=1
 		search "${ppath}" "${kkeyword1}" "${kkeyword2}" "${condition}" "${exkeyword}"
 		
 		echo
-		if [ "${oorder}" = time ]; then cat $PATH_searf | sort -k 2,3V
-		elif [ "${oorder}" = size ]; then cat $PATH_searf | sort -k 1V
+		echo         "----------------------------------------------------------------------------------------------------"
+		if [ "${oorder}" = time ]; then 
+			#cat $PATH_searf | sort -k 2,3V
+			sort -k 2,3V $PATH_searf > $PATH_show_sf
+			cat $PATH_show_sf
+		elif [ "${oorder}" = size ]; then 
+			#cat $PATH_searf | sort -k 1V
+			sort -k 1V $PATH_searf > $PATH_show_sf
+			cat $PATH_show_sf
 		elif [ "${oorder}" = none ]; then cat $PATH_searf
 		else 
 			echo -e "${C_caution}!! order is not correct !!${Cend}"; read -n 1 _wait
 			cat $PATH_searf; fi
 		echo -e "*******************${C_title}end${Cend}********************"
 		read -n 1 _wait
+	elif [ $num -eq 9 ]; then
+		less $PATH_show_sf
 	fi
 	;;
 	esac
 
 	#numの制約
 	if [ $num -eq 0 ]; then num=1
-	elif [ $num -eq 9 ]; then num=8; fi
+	elif [ $num -eq 10 ]; then num=9; fi
 
 	#カーソル位置の取得
-	for number in {1..8}
+	for number in {1..9}
 	do
 		if [ $number -eq $num ]; then
 			prin[${number}]="${C_cor}${Cor}${Cend}"
