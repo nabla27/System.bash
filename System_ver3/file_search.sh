@@ -9,7 +9,7 @@ PATH_Set="$PATH_/List/Setting"
 PATH_show_sf="$PATH_/TMP_folder/show_sf.txt"
 ###########################################################
 C_path="\e[3`sed -n 4p $PATH_Set`m"; C_title="\e[3`sed -n 6p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"
-C_mode="\e[3`sed -n 9p $PATH_Set`m"; C_cor="\e[3`sed -n 11p $PATH_Set`m"
+C_mode="\e[3`sed -n 9p $PATH_Set`m"; C_cor="\e[3`sed -n 11p $PATH_Set`m"; C_c="\e[3`sed -n 5p $PATH_Set`m"
 Cor="`sed -n 12p $PATH_Set`"
 Cend="\e[m"
 
@@ -199,7 +199,13 @@ do
 		echo -e "*******************${C_title}end${Cend}********************"
 		read -n 1 _wait
 	elif [ $num -eq 9 ]; then
-		less $PATH_show_sf
+		echo "> Select the display method"
+		echo -e "  ${C_c}[1]${Cend}${oorder}(less)    ${C_c}[2]${Cend}none(less)    ${C_c}[3]${Cend}${oorder}(cat)"
+		read -n 1 _choice
+		if [ $_choice -eq 1 ]; then less $PATH_show_sf
+		elif [ $_choice -eq 2 ]; then less $PATH_searf
+		elif [ $_choice -eq 3 ]; then cat $PATH_show_sf; read -n 1 _wait
+		fi
 	fi
 	;;
 	esac
