@@ -28,12 +28,30 @@ function search(){
 	local keyword2="$3"
 	local condition="$4"
 	local exkeyword="$5"
-#echo "keyword1=${keyword1},    keyword2=${keyword2}"; read -n 1 _wait
+
+#	rm ~/data_folder/System.bash/System_ver3/TMP_folder/progress.txt 
+#	touch ~/data_folder/System.bash/System_ver3/TMP_folder/progress.txt
+#	if [ $count -gt $((block*num_show)) ]; then
+#		num_show=$((num_show+1))
+#	fi
+#	local start_=1
+#	while [ $start_ -le $num_show ]
+#	do
+#		#echo "${start_}:${num_show}"
+#		start_=$((start_+1))
+#		echo -n "#" >> ~/data_folder/System.bash/System_ver3/TMP_folder/progress.txt
+#	done
+#	cat ~/data_folder/System.bash/System_ver3/TMP_folder/progress.txt
+#	read -n 1 _wait
+#	echo
+
+
 
 	if [ $count -gt $((block*num_show)) -a $num_show -le 100 -a $num_file -ge 100 ]; then
 		echo -ne "${C_title}/${Cend}"
 		num_show=$((num_show+1))
 	fi
+
 	if [ -f "${path}" -o -h "${path}" ]; then
 		function exsearf(){
 		if [ "${keyword1}" = "none" ]; then
@@ -68,7 +86,7 @@ function search(){
 		count=$((count+1))
 	elif [ -d "${path}" ]; then
 		local fname
-		for fname in `ls "${path}"`
+		for fname in `ls "${path}" 2>/dev/null` 
 		do
 			search "${path}/${fname}" "${keyword1}" "${keyword2}" "${condition}" "${exkeyword}"
 		done
@@ -107,6 +125,12 @@ do
 	;;
 	q|a)
 	mode="menu" && echo "menu" > $PATH_mode; exit
+	;;
+	"[")
+	num=1
+	;;
+	"]")
+	num=8
 	;;
 	d)
 	if [ $num -eq 1 ]; then
