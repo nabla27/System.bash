@@ -1,2 +1,4 @@
- \e[32m>\e[m echo "Hello"
-Hello
+ \e[32m>\e[m
+
+ \e[32m>\e[mfeogjwpeg
+

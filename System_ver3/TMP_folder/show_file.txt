@@ -1,5 +1,5 @@
- [36m >[m 1 [36mGit/[m
-    2 [36mHow_to/[m
-    3 [36mdata_folder/[m
-    4 [36mmy_folder/[m
-    5 [36mwork/[m
+ [36m >[m 1 [36mApple/[m
+    2 [36mAvast Software/[m
+    3 [36mServices/[m
+    4 [36mSystem/[m
+    5 [36mmicrosoft shared/[m

@@ -12,8 +12,12 @@ C_mode="\e[3`sed -n 9p $PATH_Set`m"; C_c="\e[3`sed -n 5p $PATH_Set`m"; C_caution
 Cend="\e[m"
 supNum=`sed -n 1p $PATH_Set`; Cor="`sed -n 12p $PATH_Set`"
 mode="Command_Line"
-
+############################################################
+shopt -s expand_aliases
+alias ls='ls -C'
+############################################################
 rm $PATH_cmd_hist && touch $PATH_cmd_hist
+line_sup=0; line_inf=1; line_op=0
 
 #numの取得
 IFS_BACKUP=$IFS
@@ -40,7 +44,8 @@ if [ $get_show_num -eq 0 ]; then get_show_num=1; fi
 while [ $mode = "Command_Line" ]
 do
 
-	mode=`cat $PATH_mode`; clear
+	#mode=`cat $PATH_mode`
+	clear
 
 	#display
 	number=$((num/supNum)); inf=$((number*supNum)); sup=$((inf+supNum)); if [ $inf -eq 0 ]; then inf=1; fi
@@ -48,25 +53,48 @@ do
 
 	#コマンドライン
 	echo; echo -e " ${C_mode}<Command Line>${Cend}"
-	#描写範囲の取得
-	count=1; cm_count=1
-	for line in `cat $PATH_cmd_hist`
+
+	#範囲取得
+	line_sup=`cat $PATH_cmd_hist | wc -l`
+	if [ $line_sup -lt 0 ]; then line_sup=0; fi
+	line_inf=$((line_sup-10))
+	if [ $line_inf -le 0 ]; then line_inf=1; fi
+	
+	#描写
+	line_=$line_inf
+	#echo "line_=$line_    line_sup=$line_sup"
+	while [ $line_ -le $line_sup ]
 	do
-		if [[ "$line" = *"${C_c}>${Cend}"* ]]; then
-			cm_line[$cm_count]=$count
-			cm_count=$((cm_count+1))
-		fi
-		count=$((count+1))
-	done
-	echo -e `cat $PATH_cmd_hist | tail -n 5`
+		echo -e "${C_c}${line_}${Cend} `sed -n ${line_}p $PATH_cmd_hist`"
+		line_=$((line_+1))
+	done	
+
+#	for line in `cat $PATH_cmd_hist`
+#	do
+#		echo -e "$line"
+#	done
 
 
 	#入力待機
-	echo -ne " ${C_c}>${Cend} "; read _cmd
+	echo -ne "${C_c}$((line_sup+1))${Cend}  ${C_c}>${Cend}"
+	roop=true; cmd_=""
+	read _cmd_
+	while [ $roop = "true" ]
+	do
+		read -n 1 _cmd
+		if [ "${_cmd}" = "" ]; then roop=false
+		else
+			cmd_="${cmd_}${_cmd}"
+		fi
+	done
+	
 	#実行
-	eval ${_cmd} || echo -e "${C_caution}"
-	echo -e "${Cend}"; echo " ${C_c}>${Cend} $_cmd" >> $PATH_cmd_hist
-	eval ${_cmd} >> $PATH_cmd_hist
+	echo -ne "${C_caution}"
+	eval ${cmd_} || read -n 1
+	echo -e "${Cend}"
+	#書き込み
+        echo " ${C_c}>${Cend}${cmd_}" >> $PATH_cmd_hist
+	echo "`eval ${cmd_} 2> /dev/null`" >> $PATH_cmd_hist
 
 done
 
