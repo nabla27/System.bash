@@ -78,7 +78,7 @@ do
 	#入力待機
 	echo -ne "${C_c}$((line_sup+1))${Cend}  ${C_c}>${Cend}"
 	roop=true; cmd_=""
-	read _cmd_
+#	read _cmd_
 	while [ $roop = "true" ]
 	do
 		read -n 1 _cmd
