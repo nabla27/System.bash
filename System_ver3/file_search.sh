@@ -35,13 +35,13 @@ function search(){
 		num_show=$((num_show+1))
 	fi
 	if [ -f "${path}" -o -h "${path}" ]; then
+		function exsearf(){
 		if [ "${keyword1}" = "none" ]; then
 			echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 		elif [ "${keyword1}" != "none" -a "${keyword2}" = "none" ]; then
 			if [[ "${path}" = *"${keyword1}"* ]]; then
 				echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
-			fi
-		else
+			fi			else
 			if [ "${condition}" = "and" ]; then	
 				if [[ "${path}" = *"${keyword1}"* ]]; then
 					if [[ "${path}" = *"${keyword2}"* ]]; then
@@ -54,6 +54,15 @@ function search(){
 				elif [[ "${path}" = *"${keyword2}"* ]]; then
 					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 				fi
+			fi
+		fi
+		}
+
+		if [ "${exkeyword}" = "none" ]; then
+			exsearf
+		elif [ "${exkeyword}" != "none" ]; then
+			if [[ "${path}" != *"${exkeyword}"* ]]; then
+				exsearf
 			fi
 		fi
 		count=$((count+1))
@@ -154,6 +163,7 @@ do
 		else 
 			echo -e "${C_caution}!! order is not correct !!${Cend}"; read -n 1 _wait
 			cat $PATH_searf; fi
+		echo -e "*******************${C_title}end${Cend}********************"
 		read -n 1 _wait
 	fi
 	;;
