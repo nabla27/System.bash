@@ -36,23 +36,23 @@ function search(){
 	fi
 	if [ -f "${path}" -o -h "${path}" ]; then
 		if [ "${keyword1}" = "none" ]; then
-			echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
+			echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 		elif [ "${keyword1}" != "none" -a "${keyword2}" = "none" ]; then
 			if [[ "${path}" = *"${keyword1}"* ]]; then
-				echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
+				echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 			fi
 		else
 			if [ "${condition}" = "and" ]; then	
 				if [[ "${path}" = *"${keyword1}"* ]]; then
 					if [[ "${path}" = *"${keyword2}"* ]]; then
-						echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
+						echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 					fi
 				fi
 			elif [ "${condition}" = "or" ]; then
 				if [[ "${path}" = *"${keyword1}"* ]]; then
-					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
+					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 				elif [[ "${path}" = *"${keyword2}"* ]]; then
-					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-6 --delim=" " >> $PATH_searf
+					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 				fi
 			fi
 		fi
