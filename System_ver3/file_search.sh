@@ -30,24 +30,6 @@ function search(){
 	local condition="$4"
 	local exkeyword="$5"
 
-#	rm ~/data_folder/System.bash/System_ver3/TMP_folder/progress.txt 
-#	touch ~/data_folder/System.bash/System_ver3/TMP_folder/progress.txt
-#	if [ $count -gt $((block*num_show)) ]; then
-#		num_show=$((num_show+1))
-#	fi
-#	local start_=1
-#	while [ $start_ -le $num_show ]
-#	do
-#		#echo "${start_}:${num_show}"
-#		start_=$((start_+1))
-#		echo -n "#" >> ~/data_folder/System.bash/System_ver3/TMP_folder/progress.txt
-#	done
-#	cat ~/data_folder/System.bash/System_ver3/TMP_folder/progress.txt
-#	read -n 1 _wait
-#	echo
-
-
-
 	if [ $count -gt $((block*num_show)) -a $num_show -le 100 -a $num_file -ge 100 ]; then
 		echo -ne "${C_title}/${Cend}"
 		num_show=$((num_show+1))
@@ -56,22 +38,22 @@ function search(){
 	if [ -f "${path}" -o -h "${path}" ]; then
 		function exsearf(){
 		if [ "${keyword1}" = "none" ]; then
-			echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
+			echo `ls --time-style=long-iso -oqg "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 		elif [ "${keyword1}" != "none" -a "${keyword2}" = "none" ]; then
 			if [[ "${path}" = *"${keyword1}"* ]]; then
-				echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
+				echo `ls --time-style=long-iso -oqg "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 			fi			else
 			if [ "${condition}" = "and" ]; then	
 				if [[ "${path}" = *"${keyword1}"* ]]; then
 					if [[ "${path}" = *"${keyword2}"* ]]; then
-						echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
+						echo `ls --time-style=long-iso -oqg "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 					fi
 				fi
 			elif [ "${condition}" = "or" ]; then
 				if [[ "${path}" = *"${keyword1}"* ]]; then
-					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
+					echo `ls --time-style=long-iso -oqg "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 				elif [[ "${path}" = *"${keyword2}"* ]]; then
-					echo `ls --time-style=long-iso -oqgh "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
+					echo `ls --time-style=long-iso -oqg "${path}"` | cut -f 3-10 --delim=" " >> $PATH_searf
 				fi
 			fi
 		fi
@@ -142,7 +124,7 @@ do
 			echo "> Enter the path for searching."
 			read _getcher
 			if [ -d "${_getcher}" ]; then ppath="${_getcher}"; loop="false"
-			elif [ "${_getcher}" = "exit" -o "${_getcher}" = "none" ]; then ppaht="none"; loop="false"
+			elif [ "${_getcher}" = "exit" -o "${_getcher}" = "none" ]; then ppath="none"; loop="false"
 			else echo -e "${C_caution}!! Not exits the path !!${Cend}"; fi
 		done
 	elif [ $num -eq 2 ]; then
@@ -179,24 +161,40 @@ do
 		block=$((num_file/100))
 		if [ $num_file -ge 100 ]; then
 			echo "|_________1_________2_________3_________4_________5_________6_________7_________8_________9_________|${num_file}"; fi
-		count=0; num_show=1
+		count=0; num_show=1; sum_file=0; sum_size=0
 		search "${ppath}" "${kkeyword1}" "${kkeyword2}" "${condition}" "${exkeyword}"
 		
 		echo
 		echo         "----------------------------------------------------------------------------------------------------"
+		#####
+		sum_file=`cat $PATH_searf | wc -l`
+		for size_b in `cut -f 1 --delim=" " "$PATH_searf"`
+		do
+			sum_size=$((sum_size+size_b))
+		done
+		if [ $((sum_size/(1024**3))) -ne 0 ]; then
+			show_size="$((sum_size/(1024**3)))GB"
+		elif [ $((sum_size/(1024**2))) -ne 0 ]; then
+			show_size="$((sum_size/(1024**2)))MB"
+		elif [ $((sum_size/(1024**1))) -ne 0 ]; then
+			show_size="$((sum_size/1024))KB"
+		else
+			show_size="${sum_size}B"
+		fi
+		####
 		if [ "${oorder}" = time ]; then 
-			#cat $PATH_searf | sort -k 2,3V
 			sort -k 2,3V $PATH_searf > $PATH_show_sf
 			cat $PATH_show_sf
 		elif [ "${oorder}" = size ]; then 
-			#cat $PATH_searf | sort -k 1V
 			sort -k 1V $PATH_searf > $PATH_show_sf
 			cat $PATH_show_sf
-		elif [ "${oorder}" = none ]; then cat $PATH_searf
+		elif [ "${oorder}" = none ]; then cat $PATH_searf > $PATH_show_sf; cat $PATH_searf
 		else 
 			echo -e "${C_caution}!! order is not correct !!${Cend}"; read -n 1 _wait
 			cat $PATH_searf; fi
-		echo -e "*******************${C_title}end${Cend}********************"
+		echo         "----------------------------------------------------------------------------------------------------"
+		echo -e "The total number of files is ${C_c}${sum_file}${Cend}. The total is ${C_c}${sum_size}${Cend} bytes. (${C_c}${show_size}${Cend})"
+		echo         "----------------------------------------------------------------------------------------------------"
 		read -n 1 _wait
 	elif [ $num -eq 9 ]; then
 		echo "> Select the display method"

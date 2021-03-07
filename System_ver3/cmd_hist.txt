@@ -1,2 +1,10 @@
- \e[32m>\e[mecho "Hello"
-Hello
+ \e[32m>\e[mexi
+
+ \e[32m>\e[mxit
+
+ \e[32m>\e[mxiti
+
+ \e[32m>\e[meti
+
+ \e[32m>\e[mxie
+

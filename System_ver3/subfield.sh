@@ -99,7 +99,9 @@ function choices_f(){
 }
 function choices_d(){
 	if [ $num -eq 1 ]; then
-		cd "$terget" && echo `pwd` > $PATH_pwd
+		echo -ne "${C_caution}"
+		cd "$terget" || read -n 1; echo -ne "${Cend}"
+		echo `pwd` > $PATH_pwd
 		mode="display" && echo "display" > $PATH_mode
 		echo "→" > $PATH_file_show
 	elif [ $num -eq 2 ]; then
