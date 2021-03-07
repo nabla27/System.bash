@@ -77,6 +77,7 @@ local num_s=1
 		echo -e "${space[11]} Color of cursor.                         [\e[3${S_num[11]}msample${Cend}]"
 		echo -e "${space[12]} Cursor type.                             [${S_num[12]}]"
 		echo -e "${space[13]} Show hidden files.                       [${S_num[13]}]"
+		echo    "**********************************************"
 		
 		read -n 1 _getcher
 		case $_getcher in
