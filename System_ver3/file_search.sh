@@ -98,7 +98,7 @@ do
 	echo -e "${prin[9]} view with less"
 	echo "******************************************"
 	
-	read -n 1 _getch
+	read -s -n 1 _getch
 
 	case $_getch in 
 	w)
@@ -122,7 +122,7 @@ do
 		while [ "${loop}" = "true" ]
 		do
 			echo "> Enter the path for searching."
-			read _getcher
+			read -e _getcher
 			if [ -d "${_getcher}" ]; then ppath="${_getcher}"; loop="false"
 			elif [ "${_getcher}" = "exit" -o "${_getcher}" = "none" ]; then ppath="none"; loop="false"
 			else echo -e "${C_caution}!! Not exits the path !!${Cend}"; fi
@@ -166,7 +166,7 @@ do
 		
 		echo
 		echo         "----------------------------------------------------------------------------------------------------"
-		#####
+		#######################################################
 		sum_file=`cat $PATH_searf | wc -l`
 		for size_b in `cut -f 1 --delim=" " "$PATH_searf"`
 		do
@@ -181,7 +181,7 @@ do
 		else
 			show_size="${sum_size}B"
 		fi
-		####
+		#######################################################
 		if [ "${oorder}" = time ]; then 
 			sort -k 2,3V $PATH_searf > $PATH_show_sf
 			cat $PATH_show_sf
@@ -190,19 +190,19 @@ do
 			cat $PATH_show_sf
 		elif [ "${oorder}" = none ]; then cat $PATH_searf > $PATH_show_sf; cat $PATH_searf
 		else 
-			echo -e "${C_caution}!! order is not correct !!${Cend}"; read -n 1 _wait
+			echo -e "${C_caution}!! order is not correct !!${Cend}"; read -s -n 1
 			cat $PATH_searf; fi
 		echo         "----------------------------------------------------------------------------------------------------"
 		echo -e "The total number of files is ${C_c}${sum_file}${Cend}. The total is ${C_c}${sum_size}${Cend} bytes. (${C_c}${show_size}${Cend})"
 		echo         "----------------------------------------------------------------------------------------------------"
-		read -n 1 _wait
+		read -s -n 1
 	elif [ $num -eq 9 ]; then
 		echo "> Select the display method"
 		echo -e "  ${C_c}[1]${Cend}${oorder}(less)    ${C_c}[2]${Cend}none(less)    ${C_c}[3]${Cend}${oorder}(cat)"
-		read -n 1 _choice
+		read -s -n 1 _choice
 		if [ $_choice -eq 1 ]; then less $PATH_show_sf
 		elif [ $_choice -eq 2 ]; then less $PATH_searf
-		elif [ $_choice -eq 3 ]; then cat $PATH_show_sf; read -n 1 _wait
+		elif [ $_choice -eq 3 ]; then cat $PATH_show_sf; read -s -n 1
 		fi
 	fi
 	;;
