@@ -341,11 +341,11 @@ do
 						elif [ $((number%3)) -eq 2 -a "${moji[$number]}" = w ]; then pp[$number]=2
 						elif [ $((number%3)) -eq 0 -a "${moji[$number]}" = x ]; then pp[$number]=1
 						elif [ "${moji[$number]}" = "-" ]; then pp[$number]=0
-						else echo "The ${number}'s character is incorrect."; read -n 1 _wait; fi
+						else echo "The ${number}'s character is incorrect."; read -s -n 1; fi
 					done
 					p1=$((pp[1]+pp[2]+pp[3])); p2=$((pp[4]+pp[5]+pp[6])); p3=$((pp[7]+pp[8]+pp[9]))
 					chmod "${p1}${p2}${p3}" "$terget"
-				else echo "!! Incorrect operation !!"; read -n 1 _wait
+				else echo "!! Incorrect operation !!"; read -s -n 1
 				fi
 			elif [ $other_num -eq 2 ]; then
 				echo "> Enter a new name for a link."; read _linkname

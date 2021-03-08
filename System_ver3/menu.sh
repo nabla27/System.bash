@@ -79,7 +79,7 @@ local num_s=1
 		echo -e "${space[13]} Show hidden files.                       [${S_num[13]}]"
 		echo    "**********************************************"
 		
-		read -n 1 _getcher
+		read -s -n 1 _getcher
 		case $_getcher in
 			w)
 			num_s=$((num_s-1))
@@ -155,7 +155,7 @@ function Directory_hist(){
 	if [ $list_sup -eq 0 ]; then
 		echo
 		echo -e "${C_caution}!! There is no directory history !!${Cend}"
-		read -n 1 _wait
+		read -s -n 1
 	fi
 	while [ $list_sup -ne 0 ]
 	do
@@ -179,7 +179,7 @@ function Directory_hist(){
 				echo `sed -n ${_getcher}p $PATH_tpwd` > $PATH_pwd
 				exit
 			else echo -e "${C_caution}!! This is an unassigned number !!${Cend}"
-			read -n 1 _wait
+			read -s -n 1
 			fi
 			;;
 			q|exit)
@@ -239,7 +239,7 @@ do
 		done
 		echo "> Select the operation for the above file from the following."
 		echo -e "  ${C_title}[1]${Cend}:Complete deletion   or   ${C_title}[2]${Cend}:Unzip   or   ${C_title}[3]${Cend}:Detail view"
-		read -n 1 _operation
+		read -s -n 1 _operation
 		array_num=1; echo
 		echo "****************************************************************"
 		while [ $array_num -le $field_sup ]
@@ -264,7 +264,7 @@ do
 						while [ $tf -eq 1 ]
 						do
 						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
-						read _path
+						read -e _path
 						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
 						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 						done
@@ -284,7 +284,7 @@ do
 						while [ $tf -eq 1 ]
 						do
 						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
-						read _path
+						read -e _path
 						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
 						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 						done
@@ -339,7 +339,7 @@ do
 		done
 		echo "> Select the operation for the above file from the following."
 		echo -e "  ${C_title}[1]${Cend}:Complete deletion   or   ${C_title}[2]${Cend}:Unzip   or   ${C_title}[3]${Cend}:Detail view"
-		read -n 1 _operation
+		read -s -n 1 _operation
 		array_num=$num_inf; echo
 		echo "****************************************************************"
 		while [ $array_num -le $num_sup ]
@@ -364,7 +364,7 @@ do
 						while [ $tf -eq 1 ]
 						do
 						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
-						read _path
+						read -e _path
 						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
 						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 						done
@@ -384,7 +384,7 @@ do
 						while [ $tf -eq 1 ]
 						do
 						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
-						read _path
+						read -e _path
 						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2	
 						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 						done
@@ -427,7 +427,7 @@ do
 		fi
 		echo "> Select the operation for the above file from the following."
 		echo -e "  ${C_title}[1]${Cend}:Complete deletion   or   ${C_title}[2]${Cend}:Unzip   or   ${C_title}[3]${Cend}:Detail view"
-		read -n 1 _operation
+		read -s -n 1 _operation
 		echo "****************************************************************"
 		if [ "$_operation" -eq 1 ]; then
 			if [ -e "${PATH_Tb_d}/${file_name}" ]; then
@@ -449,7 +449,7 @@ do
 					while [ $tf -eq 1 ]
 					do
 					echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
-					read _path
+					read -e _path
 					if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
 					else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 					done
@@ -469,7 +469,7 @@ do
 					while [ $tf -eq 1 ]
 					do
 					echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
-					read _path
+					read -e _path
 					if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
 					else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 					done
@@ -501,7 +501,7 @@ do
 		fi
 	else echo -e "${C_caution}!! The key is incorrect !!${Cend}"
 	fi
-	read -n 1 a
+	read -s -n 1
 done
 }
 
@@ -526,7 +526,7 @@ do
 	output
 
 	#パラメータ変化
-	read -n 1 _getch
+	read -s -n 1 _getch
 	
 	case $_getch in
 		w)
