@@ -1,5 +1,3 @@
- [36m >[m 1 [36mGit/[m
-    2 [36mHow_to/[m
-    3 [36mdata_folder/[m
-    4 [36mmy_folder/[m
-    5 [36mwork/[m
+    1 [36mTest_dir1/[m
+ [36m >[m 2 [37mtest_file1[m
+    3 [35mtest_file1.sl@[m

@@ -169,26 +169,85 @@ do
 	echo
 	echo "____________________"
 
+	#シンボリックリンク選択
 	if [ -h "$terget" ]; then
 		path_link=`readlink -f "$terget"`
 		echo -e " ${C_c}${string2}${Cend} is a Symbolic link."
-		echo -e " The path to this link is ${C_c}${path_link}${Cend}."; echo
-		if [ -d "$path_link" ]; then
-			echo -e " Do you want to move the path??(${C_c}y/n${Cend})"
-			read -n 1 _yn
-			if [ "$_yn" = y ]; then cd "$path_link" && echo `pwd` > $PATH_pwd
-						mode="display" && echo "display" > $PATH_mode
-						echo "→" > $PATH_file_show && exit
-			else mode="display" && echo "display" > $PATH_mode && exit; fi
-		elif [ -f "$path_link" ]; then
-			echo " This is not directory."
-			echo " Plese select the operation from \"cat\", \"less\", \"vim\", \"none\"."
-			read _getcher
-			if [ "$_getcher" = cat ]; then cat "$path_link"; read -n 1 _wait
-			elif [ "$_getcher" = less ]; then less "$path_link"
-			elif [ "$_getcher" = vim ]; then vim "$path_link"; fi
-			mode="display" && echo "display" > $PATH_mode && exit
+		echo -e " The path to this link is ${C_c}${path_link}${Cend}."
+		echo    " Select the operation from the following."
+		
+		if [ -d "${path_link}" ]; then
+		echo -e " ${C_c}[1]${Cend}move to the path ${C_c}[2]${Cend}move the link ${C_c}[3]${Cend}delete"
+		read -s -n 1 _operation
+			if [ $_operation -eq 1 ]; then
+				cd "${path_link}"
+				echo `pwd` > $PATH_pwd
+				mode="display" && echo "display" > $PATH_mode
+				echo "${Cor}" > $PATH_file_show && exit
+			elif [ $_operation -eq 2 ]; then
+				loop=true
+				while [ $loop = true ]
+				do
+					echo " Enter the destination path"
+					read -e _mvpath
+					if [ -d "${_mvpath}" ]; then
+						mv "${terget}" "${_mvpath}"
+						loop=false
+					elif [ "${_mvpath}" = exit ]; then loop=false
+					else
+						echo -e " ${C_caution}!! The path is incorrect !!${Cend}"
+					fi
+				done
+				mode="display" && echo "display" > $PATH_mode
+				echo "${Cor}" > $PATH_file_show && exit
+			elif [ $_operation -eq 3 ]; then
+				rm "${terget}"
+				mode="display" && echo "display" > $PATH_mode
+				echo "${Cor}" > $PATH_file_show && exit
+			fi
+		elif [ -f "${path_link}" ]; then
+		echo -e " ${C_c}[1]${Cend}view the file ${C_c}[2]${Cend}move the link ${C_c}[3]${Cend}delete"
+		read -s -n 1 _operation
+			if [ $_operation -eq 1 ]; then
+				echo -e " ${C_c}[1]${Cend}cat ${C_c}[2]${Cend}less ${C_c}[3]${Cend}vim"
+				read -s -n 1 _show
+				if [ $_show -eq 1 ]; then 
+					cat "$path_link"
+					read -s -n 1 _wait
+					mode="display" && echo "display" > $PATH_mode
+					exit
+				elif [ $_show -eq 2 ]; then 
+					less "${path_link}"
+					mode="display" && echo "display" > $PATH_mode
+					exit
+				elif [ $_show -eq 3 ]; then 
+					vim "${path_link}"
+					mode="display" && echo "display" > $PATH_mode
+					exit
+				fi
+			elif [ $_operation -eq 2 ]; then
+				loop=true
+				while [ $loop = true ]
+				do
+					echo " Enter the destination path"
+					read -e _mvpath
+					if [ -d "${_mvpath}" ]; then
+						mv "${terget}" "${_mvpath}"
+						loop=false
+					elif [ "${_mvpath}" = exit ]; then loop=false
+					else
+						echo -e " ${C_caution}!! The path is incorrect !!${Cend}"
+					fi
+				done
+				mode="display" && echo "display" > $PATH_mode
+				echo "${Cor}" > $PATH_file_show && exit
+			elif [ $_operation -eq 3 ]; then
+				rm "${terget}"
+				mode="display" && echo "display" > $PATH_mode
+				echo "${Cor}" > $PATH_file_show && exit
+			fi
 		fi
+	#通常ファイル
 	elif [ -f "$terget" ]; then
 		echo -e " ${C_c}${string2}${Cend} is a file."
 		echo
@@ -208,6 +267,7 @@ do
 			list_num2=$((list_num2+1))
 		done
 		if [ $other_num -gt 0 ]; then Other; fi
+	#ディレクトリ
 	elif [ -d "$terget" ]; then
 		echo -e " ${C_c}${string2}${Cend} is a directory."
 		echo
