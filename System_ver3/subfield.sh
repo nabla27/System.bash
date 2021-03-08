@@ -80,7 +80,7 @@ function choices_f(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
 		echo -e " [Are you sure to ${C_caution}delete${Cend} ${C_c}${string2}${Cend} ?(y/n)]"
-		read -n 1 _getcher
+		read -s -n 1 _getcher
 		if [ $_getcher = "y" ]; then
 			if [ -s "$terget" ]; then sed -i -e "1i `cat $PATH_pwd`" "$terget"
 			else echo `cat $PATH_pwd` > "$terget"; fi
@@ -93,17 +93,17 @@ function choices_f(){
 	elif [ $num -eq 8 ]; then
 		echo
 		ls -l "$terget"
-		read -n 1 _gether
+		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi
 }
 function choices_d(){
 	if [ $num -eq 1 ]; then
 		echo -ne "${C_caution}"
-		cd "$terget" || read -n 1; echo -ne "${Cend}"
+		cd "$terget" || read -s -n 1; echo -ne "${Cend}"
 		echo `pwd` > $PATH_pwd
 		mode="display" && echo "display" > $PATH_mode
-		echo "→" > $PATH_file_show
+		echo "${Cor}" > $PATH_file_show
 	elif [ $num -eq 2 ]; then
 		new_name=`echo "$string2" | sed -e "s/\//_cp/g"`
 		cp -r "$terget" "$new_name"
@@ -125,7 +125,7 @@ function choices_d(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
 		echo -e " [Are you sure to ${C_caution}delete${Cend} ${C_c}${string2}${Cend} ?(y/n)]"
-		read -n 1 _getcher
+		read -s -n 1 _getcher
 		if [ $_getcher = "y" ]; then
 			touch "${terget}/.tpwd"; echo `cat $PATH_pwd` > "${terget}/.tpwd"
 			new_name="${string2}.zip"
@@ -137,7 +137,7 @@ function choices_d(){
 	elif [ $num -eq 8 ]; then
 		echo
 		ls -l "$terget"
-		read -n 1 _getcher
+		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi
 }
@@ -290,18 +290,18 @@ do
 	elif [ -z "$terget" ]; then
 		echo " There is no file."
 		echo -e " Do you create the file??(${C_c}y/n${Cend})"
-		read -n 1 _yn
+		read -s -n 1 _yn
 		if [ $_yn = y ]; then
 			echo; echo " Enter the name of new file."
 			read _name
-			echo; echo -e " Created ${C_c}${_name}${Cend}."; read -n 1 _wait
+			echo; echo -e " Created ${C_c}${_name}${Cend}."; read -s -n 1
 			touch "${_name}"; echo "→" > $PATH_file_show
 			mode="display" && echo "display" > $PATH_mode; exit
 		else mode="display" && echo "display" > $PATH_mode; exit; fi
-	else echo -e " ${C_c}${string2}${Cend} is unknown type"; read -n 1 a; echo "display" > $PATH_mode; exit
+	else echo -e " ${C_c}${string2}${Cend} is unknown type"; read -s -n 1; echo "display" > $PATH_mode; exit
 	fi
 
-	read -n 1 _getch
+	read -s -n 1 _getch
 	
 	case $_getch in
 		w)
@@ -351,8 +351,8 @@ do
 				echo "> Enter a new name for a link."; read _linkname
 				echo "> Which link would you like to make??"
 				echo -e "    ${C_c}[1]${Cend}Hard link     ${C_c}[2]${Cend}Symbolic link"
-				read -n 1 _operation; echo -ne "${C_caution}"
-				if [ $_operation -eq 1 -a -d "$terget" ]; then sudo ln -id "$terget" "$_linkname" || read -n 1 _wait
+				read -s -n 1 _operation; echo -ne "${C_caution}"
+				if [ $_operation -eq 1 -a -d "$terget" ]; then sudo ln -id "$terget" "$_linkname" || read -s -n 1
 				elif [ $_operation -eq 1 ]; then ln -i "$terget" "$_linkname"
 				elif [ $_operation -eq 2 ]; then ln -is "$terget" "$_linkname"; fi
 				echo -e "${Cend}"; mode="display" && echo "display" > $PATH_mode
@@ -360,11 +360,11 @@ do
 				if [[ "$terget" = *".zip"* ]]; then
 					echo "Select an operation from"
 					echo -e "${C_c}[1]${Cend}Unzip    ${C_c}[2]${Cend}View details"
-					read -n 1 _operate
+					read -s -n 1 _operate
 					if [ $_operate -eq 1 ]; then 
 						unzip -q "$string2"; rm -r "$string2"
 						mode="display" && echo "display" > $PATH_mode; exit
-					elif [ $_operate -eq 2 ]; then unzip -l "$string2"; read -n 1 _wait; fi
+					elif [ $_operate -eq 2 ]; then unzip -l "$string2"; read -s -n 1; fi
 				else
 					zip -rq "${string2}.zip" "${string2}"; rm -r "$string2"
 					mode="display" && echo "display" > $PATH_mode; exit
@@ -374,7 +374,7 @@ do
 				while [ $roop = true ]
 				do
 				echo "${C_c}>${Cend} Enter the destination path."
-				read _mvpath
+				read -e _mvpath
 				if [ -d "$_mvpath" ]; then 
 					mv "$terget" "$_mvpath"; roop="false"
 					mode="display" && echo "display" > $PATH_mode; exit
@@ -383,11 +383,11 @@ do
 			elif [ $other_num -eq 5 ]; then
 				echo -e "${C_c}>${Cend} Which way do you excute??"
 				echo -e " ${C_c}[1]${Cend}:bash    ${C_c}[2]${Cend}:source"
-				read -n 1 _operation; echo; echo "________________________________________"
+				read -s -n 1 _operation; echo; echo "________________________________________"
 				if [ "$_operation" -eq 1 -o "$_operation" = bash ]; then bash "$terget"
 				elif [ "$_operation" -eq 2 -o "$_operation" = source ]; then source "$terget"
 				else echo -e "${C_caution}!! Not correct operation !!${Cend}"; fi
-				read -n 1 _wait
+				read -s -n 1
 			fi
 		fi
 		;;
