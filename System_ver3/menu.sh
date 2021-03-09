@@ -10,6 +10,8 @@ PATH_Set="$PATH_/List/Setting"
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_Tb_d="$PATH_/List/Trash_Boxd"
 PATH_Tb_f="$PATH_/List/Trash_Boxf"
+PATH_bm="$PATH_/TMP_folder/book_mark.txt"
+PATH_file_show="$PATH_/TMP_folder/show_file.txt"
 ############################################################
 mode="menu"
 num=1
@@ -38,7 +40,47 @@ function Command_Searching(){
 }
 
 function Book_Mark(){
-	echo "Book_Mark"
+	local num_b=1
+	while [ $num_b -ne 0 ]
+	do
+		clear
+		echo -e "${C_path}`cat $PATH_pwd`${Cend}"
+		echo
+		echo -e "${C_mode}[display] > [menu] > [Book_Mark]${Cend}"
+		echo -e "********************${C_title}Book_Mark${Cend}********************"
+		local num_line=1
+		for line in `cat $PATH_bm`
+		do
+			echo -e "${C_title}${num_line}${Cend}. $line"
+			num_line=$((num_line+1))
+		done
+		echo    "*************************************************"
+		
+		read _operation
+		case "$_operation" in
+			q|exit)
+			exit
+			;;
+			"-"*)
+			local delete_num=`echo ${_operation##*-}`
+			sed -i -e ${delete_num}d $PATH_bm
+			;;
+			[1-9]|[1-9][0-9])
+			local max=`cat $PATH_bm | wc -l`
+			if [ $_operation -le $max ]; then
+				local mvpath=`sed -n ${_operation}p $PATH_bm`
+				cd "${mvpath}" || read -s -n 1
+				mode="display" && echo "display" > $PATH_mode
+				echo "${Cor}" > $PATH_file_show; echo `pwd` > $PATH_pwd; exit
+			else
+				echo -e "${C_caution}!! The number is incorrect !!${Cend}"
+				read -s -n 1
+			fi
+			;;
+		esac
+
+
+	done
 }
 
 function Setting(){

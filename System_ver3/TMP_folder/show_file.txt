@@ -1,1 +1,24 @@
- [36m >[m 1 [36mnabla27_2/[m
+ [36m >[m 1 [35mbin@[m
+    2 [36mboot/[m
+    3 [36mdev/[m
+    4 [36metc/[m
+    5 [36mhome/[m
+    6 [37minit[m
+    7 [35mlib@[m
+    8 [35mlib32@[m
+    9 [35mlib64@[m
+    10 [35mlibx32@[m
+    11 [36mlost+found/[m
+    12 [36mmedia/[m
+    13 [36mmnt/[m
+    14 [36mopt/[m
+    15 [36mproc/[m
+    16 [36mroot/[m
+    17 [36mrun/[m
+    18 [35msbin@[m
+    19 [36msnap/[m
+    20 [36msrv/[m
+    21 [36msys/[m
+    22 [36mtmp/[m
+    23 [36musr/[m
+    24 [36mvar/[m
