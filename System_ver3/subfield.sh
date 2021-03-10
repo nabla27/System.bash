@@ -117,8 +117,10 @@ function choices_d(){
 		mode="display" && echo "display" > $PATH_mode
 		echo "${Cor}" > $PATH_file_show
 	elif [ $num -eq 2 ]; then
-		new_name=`echo "$string2" | sed -e "s/\//_cp/g"`
-		cp -r "$terget" "$new_name"
+		new_name="`echo ${string2%*/}`_cp"
+		local bin=`echo ${terget%*/*}`
+		echo "bin=$bin   new_name=$new_name"; read -s -n 1
+		cp -r "${terget}" "${bin}/${new_name}" || read -s -n 1
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 3 ]; then
 		echo " [Enter the name of new folder]"

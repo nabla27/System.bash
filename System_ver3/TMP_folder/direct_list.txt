@@ -1,4 +1,6 @@
+CP_test_file
 How_to
+How_to_cp
 TT_dir1
 TT_dir2
 TT_dir3

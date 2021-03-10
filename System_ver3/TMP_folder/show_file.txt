@@ -1,10 +1,12 @@
-    1 [36mHow_to/[m
-    2 [36mTT_dir1/[m
-    3 [36mTT_dir2/[m
-    4 [36mTT_dir3/[m
-    5 [36mTT_dir4/[m
- [36m >[m 6 [37mprogress.txt[m
-    7 [37mtest.sh_cp[m
-    8 [36mtest_dir/[m
-    9 [36mtest_dir2/[m
-    10 [36mtest_dir5/[m
+    1 [37mCP_test_file[m
+    2 [36mHow_to/[m
+ [36m >[m 3 [36mHow_to_cp/[m
+    4 [36mTT_dir1/[m
+    5 [36mTT_dir2/[m
+    6 [36mTT_dir3/[m
+    7 [36mTT_dir4/[m
+    8 [37mprogress.txt[m
+    9 [37mtest.sh_cp[m
+    10 [36mtest_dir/[m
+    11 [36mtest_dir2/[m
+    12 [36mtest_dir5/[m
