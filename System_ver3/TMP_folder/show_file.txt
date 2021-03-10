@@ -1,9 +1,9 @@
     1 [36mHow_to/[m
- [36m >[m 2 [36mTT_dir1/[m
+    2 [36mTT_dir1/[m
     3 [36mTT_dir2/[m
     4 [36mTT_dir3/[m
     5 [36mTT_dir4/[m
-    6 [37mprogress.txt[m
+ [36m >[m 6 [37mprogress.txt[m
     7 [37mtest.sh_cp[m
     8 [36mtest_dir/[m
     9 [36mtest_dir2/[m

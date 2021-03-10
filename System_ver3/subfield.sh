@@ -72,7 +72,7 @@ function choices_f(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 5 ]; then
 		echo " [Enter the name of new file]"
-		read _getcher
+		 _getcher
 		touch $_getcher
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 6 ]; then
@@ -94,17 +94,17 @@ function choices_f(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
-		echo "This is a `stat --format="%F" "${terget}"`."
-		echo "Permission : `stat --format="%A" "${terget}"`"
-		echo "User name  : `stat --format="%U" "${terget}"`"
-		echo "Group name : `stat --format="%G" "${terget}"`"
-		echo "File Size  : `stat --format="%s" "${terget}"`"
-		echo "Device     : `stat --format="%D" "${terget}"`"
-		echo "Node number: `stat --format="%i" "${terget}"`"
-		echo "Hard Link  : `stat --format="%h" "${terget}"`"
-		echo "Last access: `stat --format="%x" "${terget}"`"
-		echo "Last Modify: `stat --format="%z" "${terget}"`"
-		echo "Created    : `stat --format="%w" "${terget}"`"
+		echo -e "This is a ${C_sub}`stat --format="%F" "${terget}"`${Cend}."
+		echo -e "Permission : ${C_sub}`stat --format="%A" "${terget}"`${Cend}"
+		echo -e "User name  : ${C_sub}`stat --format="%U" "${terget}"`${Cend}"
+		echo -e "Group name : ${C_sub}`stat --format="%G" "${terget}"`${Cend}"
+		echo -e "File Size  : ${C_sub}`stat --format="%s" "${terget}"`${Cend}"
+		echo -e "Device     : ${C_sub}`stat --format="%D" "${terget}"`${Cend}"
+		echo -e "Node number: ${C_sub}`stat --format="%i" "${terget}"`${Cend}"
+		echo -e "Hard Link  : ${C_sub}`stat --format="%h" "${terget}"`${Cend}"
+		echo -e "Last access: ${C_sub}`stat --format="%x" "${terget}"`${Cend}"
+		echo -e "Last Modify: ${C_sub}`stat --format="%z" "${terget}"`${Cend}"
+		echo -e "Created    : ${C_sub}`stat --format="%w" "${terget}"`${Cend}"
 		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi
@@ -148,17 +148,17 @@ function choices_d(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
-		echo "This is a `stat --format="%F" "${terget}"`."
-		echo "Permission : `stat --format="%A" "${terget}"`"
-		echo "User name  : `stat --format="%U" "${terget}"`"
-		echo "Group name : `stat --format="%G" "${terget}"`"
-		echo "File Size  : `stat --format="%s" "${terget}"`"
-		echo "Device     : `stat --format="%D" "${terget}"`"
-		echo "Node number: `stat --format="%i" "${terget}"`"
-		echo "Hard Link  : `stat --format="%h" "${terget}"`"
-		echo "Last access: `stat --format="%x" "${terget}"`"
-		echo "Last Modify: `stat --format="%z" "${terget}"`"
-		echo "Created    : `stat --format="%w" "${terget}"`"
+		echo -e "This is a ${C_sub}`stat --format="%F" "${terget}"`${Cend}."
+		echo -e "Permission : ${C_sub}`stat --format="%A" "${terget}"`${Cend}"
+		echo -e "User name  : ${C_sub}`stat --format="%U" "${terget}"`${Cend}"
+		echo -e "Group name : ${C_sub}`stat --format="%G" "${terget}"`${Cend}"
+		echo -e "File Size  : ${C_sub}`stat --format="%s" "${terget}"`${Cend}"
+		echo -e "Device     : ${C_sub}`stat --format="%D" "${terget}"`${Cend}"
+		echo -e "Node number: ${C_sub}`stat --format="%i" "${terget}"`${Cend}"
+		echo -e "Hard Link  : ${C_sub}`stat --format="%h" "${terget}"`${Cend}"
+		echo -e "Last access: ${C_sub}`stat --format="%x" "${terget}"`${Cend}"
+		echo -e "Last Modify: ${C_sub}`stat --format="%z" "${terget}"`${Cend}"
+		echo -e "Created    : ${C_sub}`stat --format="%w" "${terget}"`${Cend}"
 		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi
