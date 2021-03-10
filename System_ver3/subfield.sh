@@ -1,6 +1,6 @@
 #!/bin/bash
 ############################################################
-PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
+PATH_="/home/nabla27/data_folder/System.bash/System_ver3"
 ############################################################
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
@@ -94,7 +94,17 @@ function choices_f(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
-		ls -l "$terget"
+		echo "This is a `stat --format="%F" "${terget}"`."
+		echo "Permission : `stat --format="%A" "${terget}"`"
+		echo "User name  : `stat --format="%U" "${terget}"`"
+		echo "Group name : `stat --format="%G" "${terget}"`"
+		echo "File Size  : `stat --format="%s" "${terget}"`"
+		echo "Device     : `stat --format="%D" "${terget}"`"
+		echo "Node number: `stat --format="%i" "${terget}"`"
+		echo "Hard Link  : `stat --format="%h" "${terget}"`"
+		echo "Last access: `stat --format="%x" "${terget}"`"
+		echo "Last Modify: `stat --format="%z" "${terget}"`"
+		echo "Created    : `stat --format="%w" "${terget}"`"
 		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi
@@ -138,7 +148,17 @@ function choices_d(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
-		ls -l "$terget"
+		echo "This is a `stat --format="%F" "${terget}"`."
+		echo "Permission : `stat --format="%A" "${terget}"`"
+		echo "User name  : `stat --format="%U" "${terget}"`"
+		echo "Group name : `stat --format="%G" "${terget}"`"
+		echo "File Size  : `stat --format="%s" "${terget}"`"
+		echo "Device     : `stat --format="%D" "${terget}"`"
+		echo "Node number: `stat --format="%i" "${terget}"`"
+		echo "Hard Link  : `stat --format="%h" "${terget}"`"
+		echo "Last access: `stat --format="%x" "${terget}"`"
+		echo "Last Modify: `stat --format="%z" "${terget}"`"
+		echo "Created    : `stat --format="%w" "${terget}"`"
 		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi

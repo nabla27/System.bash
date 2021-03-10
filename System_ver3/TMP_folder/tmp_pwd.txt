@@ -1,3 +1,2 @@
-/home/nabla27_2/my_folder
-/home/nabla27_2
-/home
+/home/nabla27/work
+/home/nabla27
