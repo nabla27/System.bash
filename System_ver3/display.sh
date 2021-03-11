@@ -31,8 +31,12 @@ do
 done
 IFS=$IFS_BACKUP
 
-function error(){
-	echo "${C_caution}"; read -s -n 1; echo "${Cend}"
+function error_(){
+	read -s -n 1; echo -e "${Cend}"
+}
+
+function _error(){
+	echo -ne "${C_caution}"
 }
 
 #描写
@@ -42,8 +46,8 @@ function output(){
 	IFS_BACKUP=$IFS
 	IFS=$'\n'
 	local list_num=1
-	if [ $tf_hf = No ]; then ls -1 `cat $PATH_pwd` > $PATH_direct_list || error
-	elif [ $tf_hf = Yes ]; then ls -1 -A `cat $PATH_pwd` > $PATH_direct_list || error; fi
+	if [ $tf_hf = No ]; then _error; ls -1 `cat $PATH_pwd` > $PATH_direct_list || error_
+	elif [ $tf_hf = Yes ]; then _error; ls -1 -A `cat $PATH_pwd` > $PATH_direct_list || error_; fi
 	for line in `cat $PATH_direct_list`
 	do
 		if [ "$num" -eq "$list_num" ]; then
