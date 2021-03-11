@@ -1,1 +1,2 @@
-/home/nabla27_2/my_folder
+//mnt/c
+//mnt/c/Users/pc
