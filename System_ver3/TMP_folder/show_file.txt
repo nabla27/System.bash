@@ -1,35 +1,5 @@
- [36m >[m 1 [36m3D Objects/[m
-    2 [36mAppData/[m
-    3 [35mApplication Data@[m
-    4 [36mContacts/[m
-    5 [35mCookies@[m
-    6 [36mDocuments/[m
-    7 [36mDownloads/[m
-    8 [36mFavorites/[m
-    9 [36mIntelGraphicsProfiles/[m
-    10 [36mLinks/[m
-    11 [35mLocal Settings@[m
-    12 [36mMicrosoftEdgeBackups/[m
-    13 [36mMusic/[m
-    14 [35mMy Documents@[m
-    15 [37mNTUSER.DAT[m
-    16 [37mNTUSER.DAT{fd9a35db-49fe-11e9-aa2c-248a07783950}.TM.blf[m
-    17 [37mNTUSER.DAT{fd9a35db-49fe-11e9-aa2c-248a07783950}.TMContainer00000000000000000001.regtrans-ms[m
-    18 [37mNTUSER.DAT{fd9a35db-49fe-11e9-aa2c-248a07783950}.TMContainer00000000000000000002.regtrans-ms[m
-    19 [35mNetHood@[m
-    20 [36mOneDrive/[m
-    21 [35mPrintHood@[m
-    22 [35mRecent@[m
-    23 [36mSaved Games/[m
-    24 [36mSearches/[m
-    25 [35mSendTo@[m
-    26 [36mSystem.bash/[m
-    27 [35mTemplates@[m
-    28 [36mVideos/[m
-    29 [36mWSL TEST_folder/[m
-    30 [36manaconda3/[m
-    31 [37mntuser.dat.LOG1[m
-    32 [37mntuser.dat.LOG2[m
-    33 [37mntuser.ini[m
-    34 [36msource/[m
-    35 [35mスタート メニュー@[m
+    1 [36mGit/[m
+    2 [36mHow_to/[m
+    3 [36mdata_folder/[m
+    4 [36mmy_folder/[m
+ [36m >[m 5 [36mwork/[m

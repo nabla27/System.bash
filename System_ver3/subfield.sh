@@ -42,7 +42,7 @@ do
 done
 IFS=$IFS_BACKUP
 function Other(){
-	for number in {1..6}
+	for number in {1..5}
 	do
 		if [ $number = $other_num ]; then space[$number]="${C_cor}${Cor}${Cend}"
 		else space[$number]="  "; fi
@@ -52,7 +52,6 @@ function Other(){
 	echo -e "          ${space[3]} |${C_sub}Zip or Unzip${Cend}|${comment[3]}"
 	echo -e "          ${space[4]} |${C_sub}Movement${Cend}    |${comment[4]}"
 	echo -e "          ${space[5]} |${C_sub}Exeution${Cend}    |${comment[5]}"
-	echo -e "          ${space[6]} |${C_sub}Book_Mark${Cend}   |${comment[6]}"
 }
 
 function error_(){
@@ -138,6 +137,10 @@ function choices_d(){
 		read _getcher
 		_error; touch "$_getcher" || error_
 		mode="display" && echo "display" > $PATH_mode
+	elif [ $num -eq 5 ]; then
+		echo "Do you want to bookmark this path??(y/n)"
+		read -s -n 1 _yn
+		if [ "$_yn" = y ]; then echo "${terget}" >> $PATH_bm; fi
 	elif [ $num -eq 6 ]; then
 		echo " [Enter the new name]"
 		read _getcher
@@ -184,7 +187,7 @@ do
 	elif [ $num -eq 10 ]; then num=1; fi
 	#other_numの制約
 	if [ $other_num -lt 0 ]; then other_num=0
-	elif [ $other_num -gt 6 ]; then other_num=6; fi
+	elif [ $other_num -gt 5 ]; then other_num=5; fi
 	
 	#描写
 	clear
@@ -423,10 +426,6 @@ do
 				elif [ "$_operation" -eq 2 -o "$_operation" = source ]; then source "$terget"
 				else echo -e "${C_caution}!! Not correct operation !!${Cend}"; fi
 				read -s -n 1
-			elif [ $other_num -eq 6 ]; then
-				echo "Do you want to bookmark this path??(y/n)"
-				read -s -n 1 _yn
-				if [ "$_yn" = y ]; then echo "${terget}" >> $PATH_bm; fi
 			fi
 		fi
 		;;
@@ -457,9 +456,6 @@ do
 		comment[2]=""
 	elif [ $other_num -eq 5 ]; then
 		comment[1]="Execute with the sorce or bash command."
-		comment[2]=""
-	elif [ $other_num -eq 6 ]; then
-		comment[1]="Add ${C_c}${terget}${Cend} to bookmark."
 		comment[2]=""
 	fi
 
