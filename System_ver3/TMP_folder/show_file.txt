@@ -1,1 +1,4 @@
- [36m >[m 1 [36mnabla27_2/[m
+    1 [36mTest_folder_eg/[m
+    2 [37mtest.ppt[m
+ [36m >[m 3 [37mtest.txt[m
+    4 [36mテスト　ファイル_ja/[m

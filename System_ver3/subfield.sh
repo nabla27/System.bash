@@ -66,9 +66,9 @@ function _error(){
 
 function choices_f(){
 	if [ $num -eq 1 ]; then
-		_error; less "$terget" || error_
+		less "$terget"
 	elif [ $num -eq 2 ]; then
-		_error; vim "$terget" || error_
+		vim "$terget"
 	elif [ $num -eq 3 ]; then
 		_error; cp "$terget" "${string2}_cp" || error_
 		mode="display" && echo "display" > $PATH_mode
