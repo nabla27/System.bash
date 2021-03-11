@@ -1,3 +1,18 @@
+<<<<<<< HEAD
 Test_dir1
 Test_dir2
 test_file1
+=======
+CP_test_file
+How_to
+How_to_cp
+TT_dir1
+TT_dir2
+TT_dir3
+TT_dir4
+progress.txt
+test.sh_cp
+test_dir
+test_dir2
+test_dir5
+>>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a

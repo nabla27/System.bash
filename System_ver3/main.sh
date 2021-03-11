@@ -1,7 +1,7 @@
 #!/bin/bash
 ################################################################################
 #It is necessary to set the following path to "System_ver3" exists.
-PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
+PATH_="/home/nabla27/data_folder/System.bash/System_ver3"
 ################################################################################
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_disp="$PATH_/display.sh"

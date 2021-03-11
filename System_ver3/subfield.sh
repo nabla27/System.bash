@@ -1,6 +1,6 @@
 #!/bin/bash
 ############################################################
-PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
+PATH_="/home/nabla27/data_folder/System.bash/System_ver3"
 ############################################################
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
@@ -74,8 +74,13 @@ function choices_f(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 5 ]; then
 		echo " [Enter the name of new file]"
+<<<<<<< HEAD
 		read _getcher
 		touch "$_getcher" || error
+=======
+		 _getcher
+		touch $_getcher
+>>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 6 ]; then
 		echo " [Enter the new name]"
@@ -96,7 +101,21 @@ function choices_f(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
+<<<<<<< HEAD
 		ls -l "$terget" || error
+=======
+		echo -e "This is a ${C_sub}`stat --format="%F" "${terget}"`${Cend}."
+		echo -e "Permission : ${C_sub}`stat --format="%A" "${terget}"`${Cend}"
+		echo -e "User name  : ${C_sub}`stat --format="%U" "${terget}"`${Cend}"
+		echo -e "Group name : ${C_sub}`stat --format="%G" "${terget}"`${Cend}"
+		echo -e "File Size  : ${C_sub}`stat --format="%s" "${terget}"`${Cend}"
+		echo -e "Device     : ${C_sub}`stat --format="%D" "${terget}"`${Cend}"
+		echo -e "Node number: ${C_sub}`stat --format="%i" "${terget}"`${Cend}"
+		echo -e "Hard Link  : ${C_sub}`stat --format="%h" "${terget}"`${Cend}"
+		echo -e "Last access: ${C_sub}`stat --format="%x" "${terget}"`${Cend}"
+		echo -e "Last Modify: ${C_sub}`stat --format="%z" "${terget}"`${Cend}"
+		echo -e "Created    : ${C_sub}`stat --format="%w" "${terget}"`${Cend}"
+>>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
 		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi
@@ -108,8 +127,15 @@ function choices_d(){
 		mode="display" && echo "display" > $PATH_mode
 		echo "${Cor}" > $PATH_file_show
 	elif [ $num -eq 2 ]; then
+<<<<<<< HEAD
 		new_name=`echo "$string2" | sed -e "s/\//_cp/g"`
 		cp -r "$terget" "$new_name" || error
+=======
+		new_name="`echo ${string2%*/}`_cp"
+		local bin=`echo ${terget%*/*}`
+		echo "bin=$bin   new_name=$new_name"; read -s -n 1
+		cp -r "${terget}" "${bin}/${new_name}" || read -s -n 1
+>>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 3 ]; then
 		echo " [Enter the name of new folder]"
@@ -139,7 +165,21 @@ function choices_d(){
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
+<<<<<<< HEAD
 		ls -l "$terget" || error
+=======
+		echo -e "This is a ${C_sub}`stat --format="%F" "${terget}"`${Cend}."
+		echo -e "Permission : ${C_sub}`stat --format="%A" "${terget}"`${Cend}"
+		echo -e "User name  : ${C_sub}`stat --format="%U" "${terget}"`${Cend}"
+		echo -e "Group name : ${C_sub}`stat --format="%G" "${terget}"`${Cend}"
+		echo -e "File Size  : ${C_sub}`stat --format="%s" "${terget}"`${Cend}"
+		echo -e "Device     : ${C_sub}`stat --format="%D" "${terget}"`${Cend}"
+		echo -e "Node number: ${C_sub}`stat --format="%i" "${terget}"`${Cend}"
+		echo -e "Hard Link  : ${C_sub}`stat --format="%h" "${terget}"`${Cend}"
+		echo -e "Last access: ${C_sub}`stat --format="%x" "${terget}"`${Cend}"
+		echo -e "Last Modify: ${C_sub}`stat --format="%z" "${terget}"`${Cend}"
+		echo -e "Created    : ${C_sub}`stat --format="%w" "${terget}"`${Cend}"
+>>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
 		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi

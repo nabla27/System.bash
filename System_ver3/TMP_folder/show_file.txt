@@ -1,3 +1,18 @@
+<<<<<<< HEAD
     1 [36mTest_dir1/[m
     2 [36mTest_dir2/[m
  [36m >[m 3 [37mtest_file1[m
+=======
+    1 [37mCP_test_file[m
+    2 [36mHow_to/[m
+ [36m >[m 3 [36mHow_to_cp/[m
+    4 [36mTT_dir1/[m
+    5 [36mTT_dir2/[m
+    6 [36mTT_dir3/[m
+    7 [36mTT_dir4/[m
+    8 [37mprogress.txt[m
+    9 [37mtest.sh_cp[m
+    10 [36mtest_dir/[m
+    11 [36mtest_dir2/[m
+    12 [36mtest_dir5/[m
+>>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
