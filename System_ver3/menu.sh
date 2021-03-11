@@ -226,7 +226,11 @@ function Directory_hist(){
 			[1-9]|[1-9][0-9])
 			if [ $_getcher -le $list_sup ]; then
 				#cat "$PATH_pwd" >> $PATH_tpwd
-				echo `sed -n ${_getcher}p $PATH_tpwd` > $PATH_pwd
+				local mvpath=`sed -n ${_getcher}p $PATH_tpwd`
+				_error; cd "${mvpath}" || error_
+				echo "${mvpath}" > $PATH_pwd
+				mode="display" && echo "display" > $PATH_mode
+				echo "${Cor}" > $PATH_file_show
 				exit
 			else echo -e "${C_caution}!! This is an unassigned number !!${Cend}"
 			read -s -n 1
