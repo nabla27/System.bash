@@ -1,6 +1,6 @@
 #!/bin/bash
 ############################################################
-PATH_="/home/nabla27/data_folder/System.bash/System_ver3"
+PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
 ############################################################
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
@@ -55,55 +55,52 @@ function Other(){
 	echo -e "          ${space[6]} |${C_sub}Book_Mark${Cend}   |${comment[6]}"
 }
 
-function error(){
-	echo "${C_caution}"; read -s -n 1; echo "${Cend}"
+function error_(){
+	read -s -n 1; echo -e "${Cend}"
 }
+
+function _error(){
+	echo -ne "${C_caution}"
+}
+
 
 function choices_f(){
 	if [ $num -eq 1 ]; then
-		less "$terget" || error
+		_error; less "$terget" || error_
 	elif [ $num -eq 2 ]; then
-		vim "$terget" || error
+		_error; vim "$terget" || error_
 	elif [ $num -eq 3 ]; then
-		cp "$terget" "${string2}_cp" || error
+		_error; cp "$terget" "${string2}_cp" || error_
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 4 ]; then
 		echo " [Enter the name of new folder]"
 		read _getcher
-		mkdir "$_getcher" || error
+		_error; mkdir "$_getcher" || error_
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 5 ]; then
 		echo " [Enter the name of new file]"
-<<<<<<< HEAD
 		read _getcher
-		touch "$_getcher" || error
-=======
-		 _getcher
-		touch $_getcher
->>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
+		_error; touch "$_getcher" || error_
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 6 ]; then
 		echo " [Enter the new name]"
 		read _getcher
-		if [ "$_getcher" != "exit" ]; then mv "$terget" "$_getcher" || error; fi
+		if [ "$_getcher" != "exit" ]; then _error; mv "$terget" "$_getcher" || error_; fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
 		echo -e " [Are you sure to ${C_caution}delete${Cend} ${C_c}${string2}${Cend} ?(y/n)]"
 		read -s -n 1 _getcher
 		if [ $_getcher = "y" ]; then
-			if [ -s "$terget" ]; then sed -i -e "1i `cat $PATH_pwd`" "$terget" || error
-			else echo `cat $PATH_pwd` > "$terget" || error; fi
+			if [ -s "$terget" ]; then _error; sed -i -e "1i `cat $PATH_pwd`" "$terget" || error_
+			else echo `cat $PATH_pwd` > "$terget"; fi
 			new_name="$string2.zip"
-			zip -q "${new_name}_$date" "$string2" || error
-			mv "${new_name}_$date" $PATH_trash_f || error
-			rm "$terget" || error
+			_error; zip -q "${new_name}_$date" "$string2" || error_
+			_error; mv "${new_name}_$date" $PATH_trash_f || error_
+			_error; rm "$terget" || error_
 		fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
-<<<<<<< HEAD
-		ls -l "$terget" || error
-=======
 		echo -e "This is a ${C_sub}`stat --format="%F" "${terget}"`${Cend}."
 		echo -e "Permission : ${C_sub}`stat --format="%A" "${terget}"`${Cend}"
 		echo -e "User name  : ${C_sub}`stat --format="%U" "${terget}"`${Cend}"
@@ -115,59 +112,50 @@ function choices_f(){
 		echo -e "Last access: ${C_sub}`stat --format="%x" "${terget}"`${Cend}"
 		echo -e "Last Modify: ${C_sub}`stat --format="%z" "${terget}"`${Cend}"
 		echo -e "Created    : ${C_sub}`stat --format="%w" "${terget}"`${Cend}"
->>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
 		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi
 }
 function choices_d(){
 	if [ $num -eq 1 ]; then
-		cd "$terget" || error
+		_error; cd "$terget" || error_
 		echo `pwd` > $PATH_pwd
 		mode="display" && echo "display" > $PATH_mode
 		echo "${Cor}" > $PATH_file_show
 	elif [ $num -eq 2 ]; then
-<<<<<<< HEAD
-		new_name=`echo "$string2" | sed -e "s/\//_cp/g"`
-		cp -r "$terget" "$new_name" || error
-=======
 		new_name="`echo ${string2%*/}`_cp"
 		local bin=`echo ${terget%*/*}`
 		echo "bin=$bin   new_name=$new_name"; read -s -n 1
 		cp -r "${terget}" "${bin}/${new_name}" || read -s -n 1
->>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 3 ]; then
 		echo " [Enter the name of new folder]"
 		read _getcher
-		mkdir "$_getcher" || error
+		_error; mkdir "$_getcher" || error_
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 4 ]; then
 		echo " [Enter the name of new file]"
 		read _getcher
-		touch "$_getcher" || error
+		_error; touch "$_getcher" || error_
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 6 ]; then
 		echo " [Enter the new name]"
 		read _getcher
-		if [ "$_getcher" != "exit" ]; then mv "$terget" "$_getcher" || error; fi
+		if [ "$_getcher" != "exit" ]; then _error; mv "$terget" "$_getcher" || error_; fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 7 ]; then
 		echo -e " [Are you sure to ${C_caution}delete${Cend} ${C_c}${string2}${Cend} ?(y/n)]"
 		read -s -n 1 _getcher
 		if [ $_getcher = "y" ]; then
-			touch "${terget}/.tpwd" || error; echo `cat $PATH_pwd` > "${terget}/.tpwd"
+			_error; touch "${terget}/.tpwd" || error_; echo `cat $PATH_pwd` > "${terget}/.tpwd"
 			new_name="${string2}.zip"
-			zip -rq "${new_name}_$date" "$string2" || error
-			mv "${new_name}_$date" $PATH_trash_d || error
-			rm -r "$terget" || error
+			_error; zip -rq "${new_name}_$date" "$string2" || error_
+			_error; mv "${new_name}_$date" $PATH_trash_d || error_
+			_error; rm -r "$terget" || error_
 		fi
 		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
-<<<<<<< HEAD
-		ls -l "$terget" || error
-=======
 		echo -e "This is a ${C_sub}`stat --format="%F" "${terget}"`${Cend}."
 		echo -e "Permission : ${C_sub}`stat --format="%A" "${terget}"`${Cend}"
 		echo -e "User name  : ${C_sub}`stat --format="%U" "${terget}"`${Cend}"
@@ -179,7 +167,6 @@ function choices_d(){
 		echo -e "Last access: ${C_sub}`stat --format="%x" "${terget}"`${Cend}"
 		echo -e "Last Modify: ${C_sub}`stat --format="%z" "${terget}"`${Cend}"
 		echo -e "Created    : ${C_sub}`stat --format="%w" "${terget}"`${Cend}"
->>>>>>> caf7c20134d3744abfa4e52fa42320f3a5e5cd4a
 		read -s -n 1
 	elif [ $num -eq 9 ]; then Other
 	fi
@@ -223,7 +210,7 @@ do
 		echo -e " ${C_c}[1]${Cend}move to the path ${C_c}[2]${Cend}move the link ${C_c}[3]${Cend}delete"
 		read -s -n 1 _operation
 			if [ $_operation -eq 1 ]; then
-				cd "${path_link}" || error
+				_error; cd "${path_link}" || error_
 				echo `pwd` > $PATH_pwd
 				mode="display" && echo "display" > $PATH_mode
 				echo "${Cor}" > $PATH_file_show && exit
@@ -234,7 +221,7 @@ do
 					echo " Enter the destination path"
 					read -e _mvpath
 					if [ -d "${_mvpath}" ]; then
-						mv "${terget}" "${_mvpath}" || error
+						_error; mv "${terget}" "${_mvpath}" || error_
 						loop=false
 					elif [ "${_mvpath}" = exit ]; then loop=false
 					else
@@ -244,7 +231,7 @@ do
 				mode="display" && echo "display" > $PATH_mode
 				echo "${Cor}" > $PATH_file_show && exit
 			elif [ $_operation -eq 3 ]; then
-				rm "${terget}" || error
+				_error; rm "${terget}" || error_
 				mode="display" && echo "display" > $PATH_mode
 				echo "${Cor}" > $PATH_file_show && exit
 			fi
@@ -255,16 +242,16 @@ do
 				echo -e " ${C_c}[1]${Cend}cat ${C_c}[2]${Cend}less ${C_c}[3]${Cend}vim"
 				read -s -n 1 _show
 				if [ $_show -eq 1 ]; then 
-					cat "$path_link" || error
+					_error; cat "$path_link" || error_
 					read -s -n 1 _wait
 					mode="display" && echo "display" > $PATH_mode
 					exit
 				elif [ $_show -eq 2 ]; then 
-					less "${path_link}" || error
+					_error; less "${path_link}" || error_
 					mode="display" && echo "display" > $PATH_mode
 					exit
 				elif [ $_show -eq 3 ]; then 
-					vim "${path_link}" || error
+					_error; vim "${path_link}" || error_
 					mode="display" && echo "display" > $PATH_mode
 					exit
 				fi
@@ -275,7 +262,7 @@ do
 					echo " Enter the destination path"
 					read -e _mvpath
 					if [ -d "${_mvpath}" ]; then
-						mv "${terget}" "${_mvpath}" || error
+						_error; mv "${terget}" "${_mvpath}" || error_
 						loop=false
 					elif [ "${_mvpath}" = exit ]; then loop=false
 					else
@@ -285,7 +272,7 @@ do
 				mode="display" && echo "display" > $PATH_mode
 				echo "${Cor}" > $PATH_file_show && exit
 			elif [ $_operation -eq 3 ]; then
-				rm "${terget}" || error
+				_error; rm "${terget}" || error_
 				mode="display" && echo "display" > $PATH_mode
 				echo "${Cor}" > $PATH_file_show && exit
 			fi
@@ -338,7 +325,7 @@ do
 			echo; echo " Enter the name of new file."
 			read _name
 			echo; echo -e " Created ${C_c}${_name}${Cend}."; read -s -n 1
-			touch "${_name}" || error; echo "→" > $PATH_file_show
+			_error; touch "${_name}" || error_; echo "→" > $PATH_file_show
 			mode="display" && echo "display" > $PATH_mode; exit
 		else mode="display" && echo "display" > $PATH_mode; exit; fi
 	else echo -e " ${C_c}${string2}${Cend} is unknown type"; read -s -n 1; echo "display" > $PATH_mode; exit
@@ -376,7 +363,7 @@ do
 					array_num=$((array_num+1))
 				done
 				echo -ne "${C_caution}"
-				if [ "$array_num" -eq 4 ]; then chmod "$_operation" "$terget" || error
+				if [ "$array_num" -eq 4 ]; then _error; chmod "$_operation" "$terget" || error_
 				elif [ "$array_num" -eq 10 ]; then
 					for number in {1..9}
 					do
@@ -387,7 +374,7 @@ do
 						else echo "The ${number}'s character is incorrect."; read -s -n 1; fi
 					done
 					p1=$((pp[1]+pp[2]+pp[3])); p2=$((pp[4]+pp[5]+pp[6])); p3=$((pp[7]+pp[8]+pp[9]))
-					chmod "${p1}${p2}${p3}" "$terget" || error
+					_error; chmod "${p1}${p2}${p3}" "$terget" || error_
 				else echo "!! Incorrect operation !!"; read -s -n 1
 				fi
 			elif [ $other_num -eq 2 ]; then
@@ -395,9 +382,9 @@ do
 				echo "> Which link would you like to make??"
 				echo -e "    ${C_c}[1]${Cend}Hard link     ${C_c}[2]${Cend}Symbolic link"
 				read -s -n 1 _operation; echo -ne "${C_caution}"
-				if [ $_operation -eq 1 -a -d "$terget" ]; then sudo ln -id "$terget" "$_linkname" || error
-				elif [ $_operation -eq 1 ]; then ln -i "$terget" "$_linkname" || error
-				elif [ $_operation -eq 2 ]; then ln -is "$terget" "$_linkname" || error; fi
+				if [ $_operation -eq 1 -a -d "$terget" ]; then _error; sudo ln -id "$terget" "$_linkname" || error_
+				elif [ $_operation -eq 1 ]; then _error; ln -i "$terget" "$_linkname" || error_
+				elif [ $_operation -eq 2 ]; then _error; ln -is "$terget" "$_linkname" || error_; fi
 				echo -e "${Cend}"; mode="display" && echo "display" > $PATH_mode
 			elif [ $other_num -eq 3 ]; then
 				if [[ "$terget" = *".zip"* ]]; then
@@ -405,16 +392,16 @@ do
 					echo -e "${C_c}[1]${Cend}Unzip    ${C_c}[2]${Cend}View details"
 					read -s -n 1 _operate
 					if [ $_operate -eq 1 ]; then 
-						unzip -q "$string2" || error
-						rm -r "$string2" || error
+						_error; unzip -q "$string2" || error_
+						_error; rm -r "$string2" || error_
 						mode="display" && echo "display" > $PATH_mode; exit
 					elif [ $_operate -eq 2 ]; then 
-						unzip -l "$string2" || error
+						_error; unzip -l "$string2" || error_
 						read -s -n 1
 					fi
 				else
-					zip -rq "${string2}.zip" "${string2}" || error
-					rm -r "$string2" || error
+					_error; zip -rq "${string2}.zip" "${string2}" || error_
+					_error; rm -r "$string2" || error_
 					mode="display" && echo "display" > $PATH_mode; exit
 				fi
 			elif [ $other_num -eq 4 ]; then
@@ -424,7 +411,7 @@ do
 				echo "${C_c}>${Cend} Enter the destination path."
 				read -e _mvpath
 				if [ -d "$_mvpath" ]; then 
-					mv "$terget" "$_mvpath" || error; roop="false"
+					_error; mv "$terget" "$_mvpath" || error_; roop="false"
 					mode="display" && echo "display" > $PATH_mode; exit
 				else echo -e "${C_caution}!! Not correct path !!${Cend}"; fi
 				done	
