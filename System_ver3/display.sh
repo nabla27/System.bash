@@ -105,7 +105,8 @@ do
 		num_tpwd=1
 		;;
 		e)
-		cd `cat $PATH_tpwd | tail -n $num_tpwd | head -n 1` && echo `pwd` > $PATH_pwd
+		test_=`cat $PATH_tpwd | tail -n $num_tpwd | head -n 1`; echo "$test_"; read -s -n 1
+		cd "`cat $PATH_tpwd | tail -n $num_tpwd | head -n 1`" && echo `pwd` > $PATH_pwd
 		num_tpwd=$((num_tpwd+1))
 		echo "→" > $PATH_file_show
 		;;
