@@ -35,6 +35,14 @@ function output(){
 	done
 }
 
+function _error(){
+	echo -ne "${C_caution}"
+}
+
+function error_(){
+	read -s -n 1; echo -e"${Cend}"
+}
+
 function Command_Searching(){
 	echo "Command_Searching"
 }
@@ -69,7 +77,7 @@ function Book_Mark(){
 			local max=`cat $PATH_bm | wc -l`
 			if [ $_operation -le $max ]; then
 				local mvpath=`sed -n ${_operation}p $PATH_bm`
-				cd "${mvpath}" || read -s -n 1
+				_error; cd "${mvpath}" || error_
 				mode="display" && echo "display" > $PATH_mode
 				echo "${Cor}" > $PATH_file_show; echo `pwd` > $PATH_pwd; exit
 			else
@@ -288,18 +296,19 @@ do
 		do
 			if [ "$_operation" -eq 1 ]; then
 				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
-					rm "${PATH_Tb_d}/${file_name[array_num]}"
+					_error; rm "${PATH_Tb_d}/${file_name[array_num]}" || error_
 				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
-					rm "${PATH_Tb_f}/${file_name[array_num]}"; fi
+					_error; rm "${PATH_Tb_f}/${file_name[array_num]}"|| error_; fi
 			elif [ "$_operation" -eq 2 ]; then
 				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
-					cd $PATH_Tb_d
-					unzip -q "${PATH_Tb_d}/${file_name[array_num]}"
+					_error; cd "$PATH_Tb_d" || error_
+					_error; unzip -q "${PATH_Tb_d}/${file_name[array_num]}" || error_
 					name_=`echo ${file_name[array_num]} | awk -F '.zip' '{print $(NF-1)}'`
 					mv_path=`cat ${name_}/.tpwd`
 					echo -e "The original path for ${C_title}${name_}${Cend} is ${C_title}${mv_path}${Cend}."
-					rm "${name_}/.tpwd" && rm ${file_name[array_num]}
-					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
+					_error; rm "${name_}/.tpwd" || error_
+					_error; rm ${file_name[array_num]} || error_
+					if [ -d "$mv_path" ]; then _error; mv ${name_} "$mv_path" || error_
 					else
 						echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
 						tf=1
@@ -307,19 +316,20 @@ do
 						do
 						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
 						read -e _path
-						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+						if [ -d "$_path" ]; then _error; mv ${name_} "$_path" || error_; tf=2
 						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 						done
 					fi
 					cd `cat $PATH_pwd`
 				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
-					cd $PATH_Tb_f
-					unzip -q "${PATH_Tb_f}/${file_name[array_num]}"
+					_error; cd "$PATH_Tb_f" || error_
+					_error; unzip -q "${PATH_Tb_f}/${file_name[array_num]}" || error_
 					name_=`echo ${file_name[array_num]} | awk -F '.zip' '{print $(NF-1)}'`
 					mv_path=`cat ${name_} | sed -n 1p`
 					echo -e "The original path for ${C_title}${name_}${Cend} is ${C_title}${mv_path}${Cend}."
-					sed -i -e 1d ${name_} && rm ${file_name[array_num]}
-					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
+					_error; sed -i -e 1d ${name_} || error_
+					_error; rm ${file_name[array_num]} || error_
+					if [ -d "$mv_path" ]; then _error; mv ${name_} "$mv_path" || error_
 					else 
 						echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
 						tf=1
@@ -327,15 +337,15 @@ do
 						do
 						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
 						read -e _path
-						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+						if [ -d "$_path" ]; then _error; mv ${name_} "$_path" || error_; tf=2
 						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 						done
 					fi
-					cd `cat $PATH_pwd`
+					_error; cd `cat $PATH_pwd` || error_
 				fi
 			elif [ "$_operation" -eq 3 ]; then
 				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
-					cd "$PATH_Tb_d"
+					_error; cd "$PATH_Tb_d" || error_
 					local int=1
 					for line in `unzip -l "${file_name[array_num]}"`
 					do
@@ -343,9 +353,9 @@ do
 						else echo "$line"; fi
 						int=$((int+1))
 					done
-					cd `cat $PATH_pwd`
+					_error; cd `cat $PATH_pwd` || error_
 				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
-					cd "$PATH_Tb_f"
+					_error; cd "$PATH_Tb_f" || error_
 					local int=1
 					for line in `unzip -l "${file_name[array_num]}"`
 					do
@@ -353,7 +363,7 @@ do
 						else echo "$line"; fi
 						int=$((int+1))
 					done
-					cd `cat $PATH_pwd`
+					_error; cd `cat $PATH_pwd` || error_
 				fi
 			fi
 			array_num=$((array_num+1))
@@ -388,18 +398,19 @@ do
 		do
 			if [ "$_operation" -eq 1 ]; then
 				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
-					rm "${PATH_Tb_d}/${file_name[array_num]}"
+					_error; rm "${PATH_Tb_d}/${file_name[array_num]}" || error_
 				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
-					rm "${PATH_Tb_f}/${file_name[array_num]}"; fi	
+					_error; rm "${PATH_Tb_f}/${file_name[array_num]}" || error_; fi	
 			elif [ "$_operation" -eq 2 ]; then
 				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
-					cd $PATH_Tb_d
-					unzip -q "${PATH_Tb_d}/${file_name[array_num]}"
+					_error; cd "$PATH_Tb_d" || error_
+					_error; unzip -q "${PATH_Tb_d}/${file_name[array_num]}" || error_
 					name_=`echo ${file_name[array_num]} | awk -F '.zip' '{print $(NF-1)}'`
 					mv_path=`cat ${name_}/.tpwd`
 					echo -e "The original path for ${C_title}${name_}${Cend} is ${C_title}${mv_path}${Cend}."
-					rm "${name_}/.tpwd" && rm ${file_name[array_num]}
-					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
+					_error; rm "${name_}/.tpwd" || error_
+					_error; rm ${file_name[array_num]} || error_
+					if [ -d "$mv_path" ]; then _error; mv ${name_} "$mv_path" || error_
 					else
 						echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
 						tf=1
@@ -407,19 +418,20 @@ do
 						do
 						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
 						read -e _path
-						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+						if [ -d "$_path" ]; then _error; mv ${name_} "$_path" || error_; tf=2
 						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 						done
 					fi
 					cd `cat $PATH_pwd`
 				elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
-					cd $PATH_Tb_f
-					unzip -q "${PATH_Tb_f}/${file_name[array_num]}"
+					_error; cd "$PATH_Tb_f" || error_
+					_error; unzip -q "${PATH_Tb_f}/${file_name[array_num]}" || error_
 					name_=`echo ${file_name[array_num]} | awk -F '.zip' '{print $(NF-1)}'`
 					mv_path=`cat ${name_} | sed -n 1p`
 					echo -e "The original path for ${C_title}${name_}${Cend} is ${C_title}${mv_path}${Cend}."
-					sed -i -e 1d ${name_} && rm ${file_name[array_num]}
-					if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
+					_error; sed -i -e 1d ${name_} || error_
+					_error; rm ${file_name[array_num]} || error_
+					if [ -d "$mv_path" ]; then _error; mv ${name_} "$mv_path" || error_
 					else
 						echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}."
 						tf=1
@@ -427,15 +439,15 @@ do
 						do
 						echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
 						read -e _path
-						if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2	
+						if [ -d "$_path" ]; then _error; mv ${name_} "$_path" || error_; tf=2	
 						else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 						done
 					fi
-					cd `cat $PATH_pwd`
+					_error; cd `cat $PATH_pwd` || error_
 				fi	
 			elif [ "$_operation" -eq 3 ]; then
 				if [ -e "${PATH_Tb_d}/${file_name[array_num]}" ]; then
-				cd "$PATH_Tb_d"
+				_error; cd "$PATH_Tb_d" || error_
 				local int=1
 				for line in `unzip -l "${file_name[array_num]}"`
 				do
@@ -443,9 +455,9 @@ do
 					else echo "$line"; fi
 					int=$((int+1))
 				done
-				cd `cat $PATH_pwd`
+				_error; cd `cat $PATH_pwd` || error_
 			elif [ -e "${PATH_Tb_f}/${file_name[array_num]}" ]; then
-				cd "$PATH_Tb_f"
+				_error; cd "$PATH_Tb_f" || error_
 				local int=1
 				for line in `unzip -l "${file_name[array_num]}"`
 				do
@@ -453,7 +465,7 @@ do
 					else echo "$line"; fi
 					int=$((int+1))
 				done
-				cd `cat $PATH_pwd`
+				_error; cd `cat $PATH_pwd` || error_
 			fi
 		fi
 		array_num=$((array_num+1))
@@ -473,18 +485,19 @@ do
 		echo "****************************************************************"
 		if [ "$_operation" -eq 1 ]; then
 			if [ -e "${PATH_Tb_d}/${file_name}" ]; then
-				rm "${PATH_Tb_d}/${file_name}"
+				_error; rm "${PATH_Tb_d}/${file_name}" || error_
 			elif [ -e "${PATH_Tb_f}/${file_name}" ]; then
-				rm "${PATH_Tb_f}/${file_name}"; fi
+				_error; rm "${PATH_Tb_f}/${file_name}" || error_; fi
 		elif [ "$_operation" -eq 2 ]; then
 			if [ -e "${PATH_Tb_d}/${file_name}" ]; then
-				cd $PATH_Tb_d
-				unzip -q "${PATH_Tb_d}/${file_name}"
+				_error; cd "$PATH_Tb_d" || error_
+				_error; unzip -q "${PATH_Tb_d}/${file_name}" || error_
 				name_=`echo ${file_name} | awk -F '.zip' '{print $(NF-1)}'`
 				mv_path=`cat ${name_}/.tpwd`
 				echo -e "The original path for ${C_title}${name_}${Cend} is ${C_title}${mv_path}${Cend}."
-				rm "${name_}/.tpwd" && rm ${file_name}
-				if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
+				_error; rm "${name_}/.tpwd" || error_
+				_error; rm ${file_name} || error_
+				if [ -d "$mv_path" ]; then _error; mv ${name_} "$mv_path" || error_
 				else
 					echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
 					tf=1
@@ -492,19 +505,20 @@ do
 					do
 					echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
 					read -e _path
-					if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+					if [ -d "$_path" ]; then _error; mv ${name_} "$_path" || error_; tf=2
 					else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 					done
 				fi
-				cd `cat $PATH_pwd`
+				_error; cd `cat $PATH_pwd` || error_
 			elif [ -e "${PATH_Tb_f}/${file_name}" ]; then
-				cd $PATH_Tb_f
-				unzip -q "${PATH_Tb_f}/${file_name}"
+				_error; cd "$PATH_Tb_f" || error_
+				_error; unzip -q "${PATH_Tb_f}/${file_name}" || error_
 				name_=`echo ${file_name} | awk -F '.zip' '{print $(NF-1)}'`
 				mv_path=`cat ${name_} | sed -n 1p`
 				echo -e "The original path for ${C_title}${name_}${Cend} is ${C_title}${mv_path}${Cend}."
-				sed -i -e 1d ${name_} && rm ${file_name}
-				if [ -d "$mv_path" ]; then mv ${name_} "$mv_path"
+				_error; sed -i -e 1d ${name_} || error_
+				_error; rm ${file_name} || error_
+				if [ -d "$mv_path" ]; then _error; mv ${name_} "$mv_path" || error_
 				else
 					echo -e "${C_caution}!! The original path does not currently exits. !!${Cend}"
 					tf=1
@@ -512,15 +526,15 @@ do
 					do
 					echo -e " Enter the destination directory for ${C_title}${name_}${Cend}."
 					read -e _path
-					if [ -d "$_path" ]; then mv ${name_} "$_path"; tf=2
+					if [ -d "$_path" ]; then _error; mv ${name_} "$_path" || error_; tf=2
 					else echo -e "${C_caution}!! Enter the correct directory !!${Cend}"; fi
 					done
 				fi
-				cd `cat $PATH_pwd`
+				_error; cd `cat $PATH_pwd` || error_
 			fi
 		elif [ "$_operation" -eq 3 ]; then
 			if [ -e "${PATH_Tb_d}/${file_name}" ]; then
-				cd "$PATH_Tb_d"
+				_error; cd "$PATH_Tb_d" || error_
 				local int=1
 				for line in `unzip -l "${file_name}"`
 				do
@@ -528,9 +542,9 @@ do
 					else echo "$line"; fi
 					int=$((int+1))
 				done
-				cd `cat $PATH_pwd`
+				_error; cd `cat $PATH_pwd` || error_
 			elif [ -e "$PATH_Tb_f}/${file_name}" ]; then
-				cd "$PATH_Tb_f"
+				_error; cd "$PATH_Tb_f" || error_
 				local int=1
 				for line in `unzip -l "${file_name}"`
 				do

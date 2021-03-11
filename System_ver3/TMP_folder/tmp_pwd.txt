@@ -1,11 +1,1 @@
-/home/nabla27_2/work/test_dir1/Test_dir2
-/home/nabla27_2/work/test_dir1/Test_dir2
-/home/nabla27_2/work/test_dir1/Test_dir2
-/home/nabla27_2/work/test_dir1
-/home/nabla27_2/work/TT_dir1
-/home/nabla27_2/work/TT_dir2
-/home/nabla27_2/work/TT_dir2
-/home/nabla27_2/work/test_dir1
-/home/nabla27_2/work/test_dir2
-/home/nabla27_2/work/test_dir1/Test_dir2
-/home/nabla27_2/work/test_dir1
+/home/nabla27_2

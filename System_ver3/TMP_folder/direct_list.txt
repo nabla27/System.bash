@@ -1,7 +1,1 @@
-TT_dir1
-TT_dir2
-progress.txt
-test.sh
-test_dir1
-test_dir1_cp
-test_dir2
+nabla27_2
