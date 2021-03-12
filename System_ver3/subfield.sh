@@ -16,7 +16,7 @@ PATH_bm="$PATH_/TMP_folder/book_mark.txt"
 ############################################################
 mode="subfield"
 list_num=1
-other_num=0
+other_num=0; ex_num=0
 num=1
 date=`date '+%Y-%m-%d'`
 C_path="\e[3`sed -n 4p $PATH_Set`m"; C_c="\e[3`sed -n 5p $PATH_Set`m"; C_mode="\e[3`sed -n 9p $PATH_Set`m"
@@ -51,7 +51,19 @@ function Other(){
 	echo -e "          ${space[2]} |${C_sub}Link${Cend}        |${comment[2]}"
 	echo -e "          ${space[3]} |${C_sub}Zip or Unzip${Cend}|${comment[3]}"
 	echo -e "          ${space[4]} |${C_sub}Movement${Cend}    |${comment[4]}"
-	echo -e "          ${space[5]} |${C_sub}Exeution${Cend}    |${comment[5]}"
+	if [ $ex_num -eq 0 ]; then
+	echo -e "          ${space[5]} |${C_sub}Execution${Cend}   |${comment[5]}"
+	elif [ $ex_num -gt 0 ]; then
+	for number in {1..4}
+	do
+		if [ $number = $ex_num ]; then ex_sp[$number]="${C_cor}${Cor}${Cend}"
+		else ex_sp[$number]="  "; fi
+	done
+	echo -e "          ${space[5]} |${C_sub}Execution${Cend}   |${ex_sp[1]} ${C_sub}bash${Cend}    |"
+	echo -e "                          |${ex_sp[2]} ${C_sub}source${Cend}  |"
+	echo -e "                          |${ex_sp[3]} ${C_sub}./${Cend}      |"
+	echo -e "                          |${ex_sp[4]} ${C_sub}program${Cend} |"
+	fi
 }
 
 function error_(){
@@ -188,6 +200,9 @@ do
 	#other_numの制約
 	if [ $other_num -lt 0 ]; then other_num=0
 	elif [ $other_num -gt 5 ]; then other_num=5; fi
+	#ex_numの制約
+	if [ $ex_num -lt 0 ]; then ex_num=0
+	elif [ $ex_num -gt 4 ]; then ex_num=4; fi
 	
 	#描写
 	clear
@@ -338,16 +353,22 @@ do
 	
 	case $_getch in
 		w)
-		if [ $other_num -gt 0 ]; then other_num=$((other_num-1))
+		if [ $other_num -gt 0 -a $ex_num -eq 0 ]; then other_num=$((other_num-1))
+		elif [ $ex_num -gt 0 ]; then ex_num=$((ex_num-1))
 		else num=$((num-1)); fi
 		;;
 		s)
-		if [ $other_num -gt 0 ]; then other_num=$((other_num+1))
+		if [ $other_num -gt 0 -a $ex_num -eq 0 ]; then other_num=$((other_num+1))
+		elif [ $ex_num -gt 0 ]; then ex_num=$((ex_num+1))
 		else num=$((num+1)); fi
 		;;
 		a|q)
-		if [ $other_num -gt 0 ]; then other_num=0
-		else echo "display" > $PATH_mode; exit; fi
+		if [ $ex_num -eq 0 ]; then
+			if [ $other_num -gt 0 ]; then other_num=0
+			else echo "display" > $PATH_mode; exit; fi
+		elif [ $ex_num -gt 0 ]; then
+			ex_num=0
+		fi
 		;;
 		d)
 		if [ -f "$terget" -a $num -ne 9 ]; then
@@ -419,13 +440,14 @@ do
 				else echo -e "${C_caution}!! Not correct path !!${Cend}"; fi
 				done	
 			elif [ $other_num -eq 5 ]; then
-				echo -e "${C_c}>${Cend} Which way do you excute??"
-				echo -e " ${C_c}[1]${Cend}:bash    ${C_c}[2]${Cend}:source"
-				read -s -n 1 _operation; echo; echo "________________________________________"
-				if [ "$_operation" -eq 1 -o "$_operation" = bash ]; then bash "$terget"
-				elif [ "$_operation" -eq 2 -o "$_operation" = source ]; then source "$terget"
-				else echo -e "${C_caution}!! Not correct operation !!${Cend}"; fi
-				read -s -n 1
+				if [ $ex_num -eq 0 ]; then ex_num=1
+				elif [ $ex_num -eq 1 ]; then
+					bash "${terget}" || read -s -n 1
+				elif [ $ex_num -eq 2 ]; then
+					source "${terget}" || read -s -n 1
+				elif [ $ex_num -eq 3 ]; then
+					./"${string2}" || read -s -n 1
+				fi
 			fi
 		fi
 		;;

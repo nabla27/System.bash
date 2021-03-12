@@ -1,4 +1,7 @@
-    1 [36mTest_folder_eg/[m
- [36m >[m 2 [37mtest.ppt[m
-    3 [37mtest.txt[m
-    4 [36mテスト　ファイル_ja/[m
+    1 [36mTT_dir1/[m
+    2 [36mTT_dir2/[m
+    3 [37mprogress.txt[m
+ [36m >[m 4 [37mtest.sh[m
+    5 [36mtest_dir1/[m
+    6 [36mtest_dir1_cp/[m
+    7 [36mtest_dir2/[m
