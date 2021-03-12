@@ -10,6 +10,7 @@ Then run `bash main.sh`. <br>
 
 ## Requirement
 
+The shell must be bash. And you need to install some packages. <br>
 *Ubuntu 20.04.2 LTS* <br>
 - zip command for trash box. `sudo apt install zip unzip` <br>
 - xdg command to open file. `sudo apt install zdg-utils` <br>
