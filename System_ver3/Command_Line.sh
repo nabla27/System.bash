@@ -123,10 +123,14 @@ do
 
 
 	#入力待機
-	echo -ne "${C_c}$((line_sup+1))${Cend}  ${C_c}>${Cend}"
-	read -e _cmd
+	read -ep `echo -e "${C_c}$((line_sup+1))${Cend}  ${C_c}>${Cend}"` _cmd
 	
-	#実行
+	#条件実行
+	if [ "${_cmd}" = "exit" ]; then
+		mode="display" && echo "display" > $PATH_mode; exit
+	fi
+
+	#コマンド実行
 	eval "${_cmd}" || read -s -n 1
 	echo `pwd` > "$PATH_pwd"; output
 	#書き込み
