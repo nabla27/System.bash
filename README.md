@@ -1,6 +1,6 @@
 # System_ver3
 
-This "Systen.bash(ver3)" makes command line operation easy and convenient(No command required). <br>
+This "Systen.bash(ver3)" makes command line operation easy and convenient (No command required). <br>
 
 ## Usage
 
@@ -10,7 +10,7 @@ Then run `bash main.sh`. <br>
 
 ## Requirement
 
-The shell must be bash. And you need to install some packages. <br>
+The shell must be bash. And you need to install some packages (You can use other than some functions without it). <br>
 *Ubuntu 20.04.2 LTS* <br>
 - zip command for trash box. `sudo apt install zip unzip` <br>
 - xdg command to open file. `sudo apt install zdg-utils` <br>
