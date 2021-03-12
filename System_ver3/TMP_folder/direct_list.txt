@@ -1,5 +1,4 @@
-Git
-How_to
-data_folder
-my_folder
-work
+Test_folder_eg
+test.ppt
+test.txt
+テスト　ファイル_ja

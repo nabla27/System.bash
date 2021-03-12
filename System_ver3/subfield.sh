@@ -65,7 +65,7 @@ function _error(){
 
 function choices_f(){
 	if [ $num -eq 1 ]; then
-		less "$terget"
+		xdg-open "${string2}" || less "${terget}"
 	elif [ $num -eq 2 ]; then
 		vim "$terget"
 	elif [ $num -eq 3 ]; then

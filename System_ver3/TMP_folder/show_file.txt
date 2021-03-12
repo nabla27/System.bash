@@ -1,5 +1,4 @@
- [36m >[m 1 [36mGit/[m
-    2 [36mHow_to/[m
-    3 [36mdata_folder/[m
-    4 [36mmy_folder/[m
-    5 [36mwork/[m
+    1 [36mTest_folder_eg/[m
+ [36m >[m 2 [37mtest.ppt[m
+    3 [37mtest.txt[m
+    4 [36mテスト　ファイル_ja/[m
