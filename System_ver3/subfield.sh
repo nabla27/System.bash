@@ -108,8 +108,8 @@ function choices_f(){
 			_error; zip -q "${new_name}_$date" "$string2" || error_
 			_error; mv "${new_name}_$date" $PATH_trash_f || error_
 			_error; rm "$terget" || error_
+			mode="display" && echo "display" > $PATH_mode
 		fi
-		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
 		echo -e "This is a ${C_sub}`stat --format="%F" "${terget}"`${Cend}."
@@ -167,8 +167,8 @@ function choices_d(){
 			_error; zip -rq "${new_name}_$date" "$string2" || error_
 			_error; mv "${new_name}_$date" $PATH_trash_d || error_
 			_error; rm -r "$terget" || error_
+			mode="display" && echo "display" > $PATH_mode_
 		fi
-		mode="display" && echo "display" > $PATH_mode
 	elif [ $num -eq 8 ]; then
 		echo
 		echo -e "This is a ${C_sub}`stat --format="%F" "${terget}"`${Cend}."
@@ -432,11 +432,12 @@ do
 				roop="true"
 				while [ $roop = true ]
 				do
-				echo "${C_c}>${Cend} Enter the destination path."
+				echo -e "${C_c}>${Cend} Enter the destination path."
 				read -e _mvpath
 				if [ -d "$_mvpath" ]; then 
 					_error; mv "$terget" "$_mvpath" || error_; roop="false"
 					mode="display" && echo "display" > $PATH_mode; exit
+				elif [ "$_mvpath" = "exit" ]; then roop="false"
 				else echo -e "${C_caution}!! Not correct path !!${Cend}"; fi
 				done	
 			elif [ $other_num -eq 5 ]; then
