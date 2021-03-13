@@ -442,11 +442,24 @@ do
 			elif [ $other_num -eq 5 ]; then
 				if [ $ex_num -eq 0 ]; then ex_num=1
 				elif [ $ex_num -eq 1 ]; then
-					bash "${terget}" || read -s -n 1
+					bash "${terget}"; read -s -n 1
 				elif [ $ex_num -eq 2 ]; then
-					source "${terget}" || read -s -n 1
+					source "${terget}"; read -s -n 1
 				elif [ $ex_num -eq 3 ]; then
-					./"${string2}" || read -s -n 1
+					./"${string2}"; read -s -n 1
+				elif [ $ex_num -eq 4 ]; then
+					case "${string2}" in
+						*.py)
+						python "${string2}" 2> /dev/null || python3 "${string2}"
+						;;
+						*.c)
+						gcc -o pgm_file "${string2}" && ./pgm_file && rm ./pgm_file || echo -e "${C_c}build-essential${Cend} package required."
+						;;
+						*.cpp|*.cc|*.cxx)
+						gcc -o ./pgm_file "${string2}" 2> /dev/null || g++ -o pgm_file "${string2}" && ./pgm_file && rm ./pgm_file || echo -e "${C_c}g++${Cend} package required."
+						;;
+					esac
+					read -s -n 1
 				fi
 			fi
 		fi
