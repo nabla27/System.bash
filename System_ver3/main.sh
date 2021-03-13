@@ -12,6 +12,7 @@ PATH_sf="$PATH_/file_search.sh"
 PATH_tpwd="$PATH_/TMP_folder/tmp_pwd.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_file_show="$PATH_/TMP_folder/show_file.txt"
+PATH_cmd_hist="$PATH_/TMP_folder/cmd_hist.txt"
 ################################################################################
 cd $PATH_ && echo $PATH_ > $PATH_pwd
 ################################################################################
@@ -19,10 +20,12 @@ sed -i -e 3d display.sh && sed -i -e "3i PATH_=\"${PATH_}\"" display.sh
 sed -i -e 3d subfield.sh && sed -i -e "3i PATH_=\"${PATH_}\"" subfield.sh
 sed -i -e 3d menu.sh && sed -i -e "3i PATH_=\"${PATH_}\"" menu.sh
 sed -i -e 3d file_search.sh && sed -i -e "3i PATH_=\"${PATH_}\"" file_search.sh
+sed -i -e 3d Command_Line.sh && sed -i -e "3i PATH_=\"${PATH_}\"" Command_Line.sh
 ################################################################################
 cd ~ && echo `pwd` > $PATH_pwd
 clear
 rm $PATH_tpwd && touch $PATH_tpwd
+rm $PATH_cmd_hist && touch $PATH_cmd_hist
 echo "display" > $PATH_mode
 mode="display"
 echo "→" > $PATH_file_show

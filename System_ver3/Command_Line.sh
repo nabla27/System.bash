@@ -6,7 +6,7 @@ PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_Set="$PATH_/List/Setting"
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_file_show="$PATH_/TMP_folder/show_file.txt"
-PATH_cmd_hist="$PATH_/cmd_hist.txt"
+PATH_cmd_hist="$PATH_/TMP_folder/cmd_hist.txt"
 PATH_direct_list="$PATH_/TMP_folder/direct_list.txt"
 ############################################################
 C_mode="\e[3`sed -n 9p $PATH_Set`m"; C_c="\e[3`sed -n 5p $PATH_Set`m"; C_caution="\e[3`sed -n 7p $PATH_Set`m"
@@ -19,8 +19,8 @@ mode="Command_Line"
 shopt -s expand_aliases
 alias ls='ls -C'
 ############################################################
-rm $PATH_cmd_hist && touch $PATH_cmd_hist
 line_sup=0; line_inf=1; line_op=0
+cmd_mode="__getch"; upd=0
 
 #numの取得
 IFS_BACKUP=$IFS
@@ -103,17 +103,24 @@ do
 	cat $PATH_file_show | sed -n ${inf},${sup}p
 
 	#コマンドライン
-	echo; echo -e " ${C_mode}<Command Line>${Cend}"
+	if [ "$cmd_mode" = "__getch" ]; then
+		echo; echo -e " ${C_mode}<Command Line>${Cend}"
+	elif [ "$cmd_mode" = "getch__" ]; then
+		echo; echo -e " ${C_mode}<Command Line>${Cend} ${C_c}--processing--${Cend}"
+	fi
 
 	#範囲取得
-	line_sup=`cat $PATH_cmd_hist | wc -l`
-	if [ $line_sup -lt 0 ]; then line_sup=0; fi
-	line_inf=$((line_sup-10))
-	if [ $line_inf -le 0 ]; then line_inf=1; fi
+	line_tmp_sup=`cat $PATH_cmd_hist | wc -l`
+	if [ $line_tmp_sup -lt 0 ]; then line_tmp_sup=0; fi
+	line_tmp_inf=$((line_tmp_sup-10))
+	if [ $line_tmp_inf -le 0 ]; then line_tmp_inf=1; fi
+
+	#
+	line_sup=$((line_tmp_sup-upd))
+	line_inf=$((line_tmp_inf-upd))
 	
 	#描写
 	line_=$line_inf
-	#echo "line_=$line_    line_sup=$line_sup"
 	while [ $line_ -le $line_sup ]
 	do
 		echo -e "${C_c}${line_}${Cend} `sed -n ${line_}p $PATH_cmd_hist`"
@@ -123,19 +130,56 @@ do
 
 
 	#入力待機
-	read -ep `echo -e "${C_c}$((line_sup+1))${Cend}  ${C_c}>${Cend}"` _cmd
+	if [ "$cmd_mode" = "__getch" ]; then
+		read -ep `echo -e "${C_c}$((line_sup+1))${Cend}  ${C_c}>${Cend}"` _cmd
+	elif [ "$cmd_mode" = "getch__" ]; then
+		read -s -n 1 _key
+	fi
 	
-	#条件実行
-	if [ "${_cmd}" = "exit" ]; then
-		mode="display" && echo "display" > $PATH_mode; exit
+	#コマンド実行
+	if [ "$cmd_mode" = "__getch" ]; then
+	case "${_cmd}" in
+		exit)
+		mode="display" && echo "display" > $PATH_mode && exit
+		;;
+		[1-9]|[1-9][0-9]|[1-9][0-9][0-9])
+		if [ "${_cmd}" -le `cat $PATH_direct_list | wc -l` ]; then
+			mvfile=`sed -n ${_cmd}p $PATH_direct_list`
+			if [ -d "${mvfile}" ]; then
+				cd "${mvfile}" && echo `pwd` > $PATH_pwd
+			elif [ -f "${mvfile}" ]; then
+				cat "${mvfile}"; read -s -n 1
+			fi
+			mode="display" && echo "display" > $PATH_mode && exit
+		fi
+		;;
+		:)
+		cmd_mode="getch__"
+		;;
+		*)
+		eval "${_cmd}" || read -s -n 1
+		echo `pwd` > "$PATH_pwd"; output
+		;;
+	esac
+	elif [ "$cmd_mode" = "getch__" ]; then
+	case "${_key}" in
+		w)
+		if [ $((line_tmp_inf-upd-1)) -gt 0 ]; then upd=$((upd+1)); fi
+		;;
+		s)
+		if [ $((line_tmp_sup-upd+1)) -le $line_tmp_sup ]; then upd=$((upd-1)); fi
+		;;
+		:)
+		cmd_mode="__getch"
+		;;
+	esac
 	fi
 
-	#コマンド実行
-	eval "${_cmd}" || read -s -n 1
-	echo `pwd` > "$PATH_pwd"; output
 	#書き込み
-        echo " ${C_c}>${Cend}${_cmd}" >> $PATH_cmd_hist
-	echo "`eval ${_cmd} 2> /dev/null`" >> $PATH_cmd_hist
+	if [ "$cmd_mode" = "__getch" ]; then
+        	echo " ${C_c}>${Cend}${_cmd}" >> $PATH_cmd_hist
+		echo "`eval ${_cmd} 2> /dev/null`" >> $PATH_cmd_hist
+	fi
 
 done
 
