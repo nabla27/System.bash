@@ -1,22 +1,8 @@
- \e[32m>\e[mecho "a"
-a
- \e[32m>\e[mecho "b"
-b
- \e[32m>\e[mecho "c"
-c
- \e[32m>\e[mecho "d"
-d
- \e[32m>\e[mecho "e"
-e
- \e[32m>\e[mecho "f"
-f
- \e[32m>\e[mecho "g"
-g
- \e[32m>\e[mecho "h"
-h
- \e[32m>\e[mecho "i"
-i
- \e[32m>\e[m:
-
- \e[32m>\e[m:
-
+ \e[32m>\e[mecho "Hello"
+Hello
+ \e[32m>\e[mecho "OK"
+OK
+ \e[32m>\e[mecho "Yes"
+Yes
+ \e[32m>\e[mecho "NO"
+NO

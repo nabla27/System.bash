@@ -19,8 +19,8 @@ mode="Command_Line"
 shopt -s expand_aliases
 alias ls='ls -C'
 ############################################################
-line_sup=0; line_inf=1; line_op=0
-cmd_mode="__getch"; upd=0
+line_sup=0; line_inf=1; line_op=0; get_hist=0
+cmd_mode="__getch"; comment=""; upd=0; sn=0; line_tmp_sup=`cat $PATH_cmd_hist | wc -l`
 
 #numの取得
 IFS_BACKUP=$IFS
@@ -78,6 +78,20 @@ function output(){
 	IFS=$IFS_BACKUP
 }
 
+function Get_cmd_hist(){
+	if [ $sn -le 0 ]; then sn=0; comment=""
+	elif [ $sn -ge $get_hist ]; then sn=$get_hist; fi
+	local get_line=0; get_hist=0
+	while [ $get_line -lt $line_tmp_sup ]
+	do
+		tmp_comment=`sed -n $((line_tmp_sup-get_line))p $PATH_cmd_hist`
+		if [[ $tmp_comment = *">"* ]]; then 
+			get_hist=$((get_hist+1))
+			if [ $sn -eq $get_hist ]; then comment=`echo ${tmp_comment#*>"\e[m"}`; fi
+		fi
+		get_line=$((get_line+1))
+	done
+}
 
 #メイン
 while [ $mode = "Command_Line" ]
@@ -90,6 +104,7 @@ do
 
 	#描写ファイルの更新
 	output
+	Get_cmd_hist
 
 	#カレントディレクトリの描写
 	echo `pwd` > $PATH_pwd
@@ -125,15 +140,18 @@ do
 	do
 		echo -e "${C_c}${line_}${Cend} `sed -n ${line_}p $PATH_cmd_hist`"
 		line_=$((line_+1))
-	done	
+	done
+	if [ "$cmd_mode" = "getch__" ]; then
+		read -s -n 1 -p `echo -e "${C_c}$((line_tmp_sup+1))${Cend}  ${C_c}>${Cend}${comment}"` _key
+	elif [ "$cmd_mode" = "__getch" ]; then
+		comment=""
+	fi	
 
 
 
 	#入力待機
 	if [ "$cmd_mode" = "__getch" ]; then
 		read -ep `echo -e "${C_c}$((line_sup+1))${Cend}  ${C_c}>${Cend}"` _cmd
-	elif [ "$cmd_mode" = "getch__" ]; then
-		read -s -n 1 _key
 	fi
 	
 	#コマンド実行
@@ -169,6 +187,12 @@ do
 		s)
 		if [ $((line_tmp_sup-upd+1)) -le $line_tmp_sup ]; then upd=$((upd-1)); fi
 		;;
+		d)
+		sn=$((sn+1))
+		;;
+		a)
+		sn=$((sn-1))
+		;;
 		:)
 		cmd_mode="__getch"
 		;;
@@ -178,7 +202,9 @@ do
 	#書き込み
 	if [ "$cmd_mode" = "__getch" ]; then
         	echo " ${C_c}>${Cend}${_cmd}" >> $PATH_cmd_hist
+		if [ "$_cmd" != "" ]; then
 		echo "`eval ${_cmd} 2> /dev/null`" >> $PATH_cmd_hist
+		fi
 	fi
 
 done
