@@ -1,20 +1,9 @@
- \e[32m>\e[mcd ..
- \e[32m>\e[mcd ..
- \e[32m>\e[mcd ..
- \e[32m>\e[mcd ..
- \e[32m>\e[mcd home
- \e[32m>\e[mcd ..
- \e[32m>\e[mc home
- \e[32m>\e[mc home
- \e[32m>\e[mc home
- \e[32m>\e[mc home
- \e[32m>\e[mc home
- \e[32m>\e[mc home
- \e[32m>\e[mcd ..
- \e[32m>\e[mcd ..
- \e[32m>\e[mcd home
- \e[32m>\e[mcd nabla27_2/
- \e[32m>\e[mcd ..
- \e[32m>\e[mcd ..
- \e[32m>\e[mcd home
- \e[32m>\e[mcd nabla27_2/
+ \e[32m>\e[mecho "Hello"
+Hello
+ \e[32m>\e[mecho "OK"
+OK
+ \e[32m>\e[mcat test.c
+ \e[32m>\e[mcd work
+ \e[32m>\e[mcat test_file 
+ \e[32m>\e[mecho `cat test_file`
+Hello

@@ -1,8 +1,8 @@
- [36m >[m 1 [36mGit/[m
-    2 [36mHow_to/[m
-    3 [36mdata_folder/[m
-    4 [36mmy_folder/[m
-    5 [37mtest.c[m
-    6 [37mtest.cc[m
-    7 [37mtest.sh[m
-    8 [36mwork/[m
+ [36m >[m 1 [36mTT_dir1/[m
+    2 [36mTT_dir2/[m
+    3 [37mprogress.txt[m
+    4 [37mtest.sh[m
+    5 [36mtest_dir1/[m
+    6 [36mtest_dir1_cp/[m
+    7 [36mtest_dir2/[m
+    8 [37mtest_file[m

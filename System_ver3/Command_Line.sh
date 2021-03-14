@@ -225,13 +225,23 @@ do
         		echo " ${C_c}>${Cend}${_cmd}" >> $PATH_cmd_hist
 		fi
 		if [ "$_cmd" != "" ]; then
+			tf_ex="true"
 			case "$_cmd" in	
 				*vim*|*less*)				#出力が端末でなければならないコマンド
+				tf_ex="true"
 				;;
+				*cat*)
+				if [ `echo "${_cmd}" | awk '{print NF}'` -eq 2 ]; then read -s -n 1
+					tf_ex="false"
+				else
+					tf_ex="true"
+				fi
+				;;&
 				"["|"]")
 				;;
 				*)
-				if [ `eval ${_cmd} 2> /dev/null` != "" ]; then
+				result=`eval ${_cmd} 2> /dev/null`
+				if [ "${result}" != "" -a $tf_ex = "true" ]; then
 					echo "`eval ${_cmd} 2> /dev/null`" >> $PATH_cmd_hist
 				fi
 				;;
