@@ -129,8 +129,7 @@ do
 	if [ $line_tmp_sup -lt 0 ]; then line_tmp_sup=0; fi
 	line_tmp_inf=$((line_tmp_sup-10))
 	if [ $line_tmp_inf -le 0 ]; then line_tmp_inf=1; fi
-
-	#
+	#########
 	line_sup=$((line_tmp_sup-upd))
 	line_inf=$((line_tmp_inf-upd))
 	
@@ -203,7 +202,17 @@ do
 	if [ "$cmd_mode" = "__getch" ]; then
         	echo " ${C_c}>${Cend}${_cmd}" >> $PATH_cmd_hist
 		if [ "$_cmd" != "" ]; then
-		echo "`eval ${_cmd} 2> /dev/null`" >> $PATH_cmd_hist
+			case "$_cmd" in				#出力が端末でなければならないコマンドを除外 
+				*vim*)
+				;;
+				*less*)
+				;;
+				*)
+				if [ `eval ${_cmd} 2> /dev/null` != "" ]; then
+					echo "`eval ${_cmd} 2> /dev/null`" >> $PATH_cmd_hist
+				fi
+				;;
+			esac
 		fi
 	fi
 

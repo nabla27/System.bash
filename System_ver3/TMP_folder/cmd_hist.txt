@@ -2,7 +2,5 @@
 Hello
  \e[32m>\e[mecho "OK"
 OK
- \e[32m>\e[mecho "Yes"
-Yes
- \e[32m>\e[mecho "NO"
-NO
+ \e[32m>\e[mcd work
+ \e[32m>\e[mcd ..
