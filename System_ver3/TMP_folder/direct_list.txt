@@ -1,8 +1,8 @@
-TT_dir1
-TT_dir2
-progress.txt
+Git
+How_to
+data_folder
+my_folder
+test.c
+test.cc
 test.sh
-test_dir1
-test_dir1_cp
-test_dir2
-test_file
+work

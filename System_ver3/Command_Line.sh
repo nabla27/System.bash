@@ -161,8 +161,6 @@ do
 		comment=""
 	fi	
 
-
-
 	#入力待機
 	if [ "$cmd_mode" = "__getch" ]; then
 		read -ep `echo -e "${C_c}$((line_sup+1))${Cend}  ${C_c}>${Cend}"` _cmd
@@ -193,6 +191,7 @@ do
 		;;
 		:)
 		cmd_mode="getch__"
+		sn=0
 		;;
 		*)
 		eval "${_cmd}" || read -s -n 1
@@ -216,12 +215,39 @@ do
 		:)
 		cmd_mode="__getch"
 		;;
+		"")
+		if [ "$comment" != "" ]; then
+		echo " ${C_c}>${Cend}${comment}" >> $PATH_cmd_hist
+		tf_ex="true"
+		case "$comment" in
+			*vim*|*less*)
+			tf_ex="true"
+			;;
+			*cat*)
+			if [ `echo "${comment}" | awk '{print NF}'` -eq 2 ]; then read -s -n 1
+				tf_ex="false"
+			else
+				tf="true"
+			fi
+			;;&
+			*)
+			result=`eval "${comment}" 2> /dev/null`
+			if [ "${result}" != "" -a $tf_ex = "true" ]; then
+				echo "`eval "${comment}" 2> /dev/null`" >> $PATH_cmd_hist
+			fi
+			;;
+		esac
+		cmd_mode="__getch"
+		fi
+		;;
+		*)
+		;;
 	esac
 	fi
 
 	#書き込み
 	if [ "$cmd_mode" = "__getch" ]; then
-		if [ "$_cmd" != "[" -a "$_cmd" != "]" ]; then
+		if [ "$_cmd" != "[" -a "$_cmd" != "]" -a "$_key" != ":" -a "$comment" = "" ]; then
         		echo " ${C_c}>${Cend}${_cmd}" >> $PATH_cmd_hist
 		fi
 		if [ "$_cmd" != "" ]; then
