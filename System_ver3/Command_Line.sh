@@ -116,6 +116,21 @@ do
 	#display
 	number=$((num/supNum)); inf=$((number*supNum)); sup=$((inf+supNum)); if [ $inf -eq 0 ]; then inf=1; fi
 	cat $PATH_file_show | sed -n ${inf},${sup}p
+	get_blank=1; blank_num=0
+	for line in `cat $PATH_file_show`
+	do
+		if [ $get_blank -ge $inf ]; then blank_num=$((blank_num+1)); fi
+		get_blank=$((get_blank+1))
+	done
+	if [ $blank_num -gt $supNum ]; then blank_num=$supNum; fi
+	blank_count=0; #blank_sup=$((supNum-blank_num))
+	while [ $blank_count -lt $((supNum-blank_num)) ]
+	do
+		echo
+		blank_count=$((blank_count+1))
+	done
+	
+		
 
 	#コマンドライン
 	if [ "$cmd_mode" = "__getch" ]; then
@@ -170,6 +185,12 @@ do
 			mode="display" && echo "display" > $PATH_mode && exit
 		fi
 		;;
+		"]")
+		num=$((num+supNum))
+		;;
+		"[")
+		num=$((num-supNum))
+		;;
 		:)
 		cmd_mode="getch__"
 		;;
@@ -200,12 +221,14 @@ do
 
 	#書き込み
 	if [ "$cmd_mode" = "__getch" ]; then
-        	echo " ${C_c}>${Cend}${_cmd}" >> $PATH_cmd_hist
+		if [ "$_cmd" != "[" -a "$_cmd" != "]" ]; then
+        		echo " ${C_c}>${Cend}${_cmd}" >> $PATH_cmd_hist
+		fi
 		if [ "$_cmd" != "" ]; then
-			case "$_cmd" in				#出力が端末でなければならないコマンドを除外 
-				*vim*)
+			case "$_cmd" in	
+				*vim*|*less*)				#出力が端末でなければならないコマンド
 				;;
-				*less*)
+				"["|"]")
 				;;
 				*)
 				if [ `eval ${_cmd} 2> /dev/null` != "" ]; then
