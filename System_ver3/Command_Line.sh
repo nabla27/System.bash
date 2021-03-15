@@ -134,9 +134,10 @@ do
 
 	#コマンドライン
 	if [ "$cmd_mode" = "__getch" ]; then
-		echo; echo -e " ${C_mode}<Command Line>${Cend}"
+		#echo; echo -e " ${C_mode}<Command Line>${Cend}"
+		echo; echo -e "\e[3`sed -n 9p $PATH_Set`;4m [Command Line]                    ${Cend}"
 	elif [ "$cmd_mode" = "getch__" ]; then
-		echo; echo -e " ${C_mode}<Command Line>${Cend} ${C_c}--processing--${Cend}"
+		echo; echo -e "\e[3`sed -n 9p $PATH_Set`;4m [Command Line]      ${C_c}--processing--${Cend}${Cend}"
 	fi
 
 	#範囲取得
@@ -181,6 +182,7 @@ do
 				cat "${mvfile}"; read -s -n 1
 			fi
 			mode="display" && echo "display" > $PATH_mode && exit
+			num=1
 		fi
 		;;
 		"]")
@@ -196,6 +198,7 @@ do
 		*)
 		eval "${_cmd}" || read -s -n 1
 		echo `pwd` > "$PATH_pwd"; output
+		num=1
 		;;
 	esac
 	elif [ "$cmd_mode" = "getch__" ]; then
