@@ -187,6 +187,9 @@ do
 		;;
 		"]")
 		num=$((num+supNum))
+		if [ $num -gt `cat $PATH_direct_list | wc -l` ]; then
+			num=`cat $PATH_direct_list | wc -l`
+		fi
 		;;
 		"[")
 		num=$((num-supNum))
