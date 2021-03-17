@@ -1,0 +1,5 @@
+/home/nabla27/anaconda3/bin
+/home/nabla27/anaconda3/envs
+/home/nabla27/anaconda3/condabin
+/home/nabla27/anaconda3/info
+/home/nabla27/anaconda3
