@@ -1,6 +1,6 @@
 #!/bin/bash
 ############################################################
-PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
+PATH_="/home/nabla27/data_folder/System.bash/System_ver3"
 ############################################################
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
 PATH_Set="$PATH_/List/Setting"

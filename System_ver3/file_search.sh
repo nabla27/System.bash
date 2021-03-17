@@ -1,6 +1,6 @@
 #!/bin/bash
 ###########################################################
-PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
+PATH_="/home/nabla27/data_folder/System.bash/System_ver3"
 ###########################################################
 PATH_mode="$PATH_/TMP_folder/mode.txt"
 PATH_pwd="$PATH_/TMP_folder/pwd.txt"
@@ -68,11 +68,17 @@ function search(){
 		fi
 		count=$((count+1))
 	elif [ -d "${path}" ]; then
-		local fname
-		for fname in `ls "${path}" 2>/dev/null` 
-		do
-			search "${path}/${fname}" "${keyword1}" "${keyword2}" "${condition}" "${exkeyword}"
-		done
+		if [[ "${path}" != *"${exkeyword}"* ]]; then
+			local fname
+			for fname in `ls "${path}" 2>/dev/null` 
+			do
+				search "${path}/${fname}" "${keyword1}" "${keyword2}" "${condition}" "${exkeyword}"
+			done
+		else
+			#除外ディレクトリのファイル数を変数countに足す
+			local add_exclude_numfile=`ls -pR -U1 "${path}" | grep -v -e / -e '^\s*$' | wc -l`
+			count=$((cout+add_exclude_numfile))
+		fi
 	fi
 }
 
