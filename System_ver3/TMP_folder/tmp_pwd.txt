@@ -1,8 +1,1 @@
-<<<<<<< HEAD
-=======
-/home/nabla27/anaconda3/bin
-/home/nabla27/anaconda3/envs
-/home/nabla27/anaconda3/condabin
-/home/nabla27/anaconda3/info
-/home/nabla27/anaconda3
->>>>>>> 9aba7749e6bd7e9e6d3137016a2669b0f41e8138
+/home/nabla27_2

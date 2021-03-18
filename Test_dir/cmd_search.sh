@@ -1,6 +1,6 @@
 #!/bin/bash
 ###############################################################
-PATH_="/home/nabla27/data_folder/System.bash/System_ver3"
+PATH_="/home/nabla27_2/data_folder/System.bash/System_ver3"
 ###############################################################
 PATH_cmdlist="$PATH_/List/CMD.List/cmd.bash"
 PATH_mode="$PATH_/TMP_folder/mode.txt"
@@ -13,7 +13,7 @@ Cend="\e[m"; Cor="`sed -n 12p $PATH_Set`"
 
 
 sp[1]="${C_cor}${Cor}${Cend}"; sp[2]="  "; sp[3]="  "; sp[4]="  "; sp[5]="  "; sp[6]="  "; sp[7]="  "
-sp4[1]="  "; sp4[2]="  "; sp[3]="  "; sp[4]="  "; sp[5]="  "
+sp4[1]="  "; sp4[2]="  "; sp4[3]="  "; sp4[4]="  "; sp4[5]="  "
 s_cmd="none"; s_opt="none"; s_key1="none"; s_key2="none"; s_key3="none"; s_key4="none"; s_key5="none"
 num=1; num4=0
 mode="cmd_search"
