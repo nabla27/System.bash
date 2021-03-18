@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 /home/nabla27_2
+=======
+/home/nabla27
+>>>>>>> 9aba7749e6bd7e9e6d3137016a2669b0f41e8138

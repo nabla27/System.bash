@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     1 [36mGit/[m
     2 [36mHow_to/[m
  [36m >[m 3 [36mdata_folder/[m
@@ -6,3 +7,20 @@
     6 [37mtest.cc[m
     7 [37mtest.sh[m
     8 [36mwork/[m
+=======
+ [36m >[m 1 [36mArduino/[m
+    2 [37mUntitled.ipynb[m
+    3 [37ma.out[m
+    4 [36manaconda3/[m
+    5 [36mbackup_data/[m
+    6 [36mdata_folder/[m
+    7 [37mfoo[m
+    8 [36mgit/[m
+    9 [36mgnuplot/[m
+    10 [36mmyfolder/[m
+    11 [37mpass[m
+    12 [36mprogram/[m
+    13 [37mtest.cpp[m
+    14 [37mtest_c++[m
+    15 [36mwork/[m
+>>>>>>> 9aba7749e6bd7e9e6d3137016a2669b0f41e8138
