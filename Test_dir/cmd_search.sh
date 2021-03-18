@@ -30,35 +30,34 @@ function cmd_search(){
 	local KEY[4]="$6"
 	local KEY[5]="$7"
 	local line_num=1
-	local tf_show="false"
+	local tf_cmd="false"
 	for line in `cat $PATH_cmdlist`
 	do
+		local tf_key="true"
+		local tf_opt="true"
+		#cmdによる絞り込み
 		if [ "$CMD" != "none" ]; then
 			if [[ "$line" = ">>${CMD}<<" ]]; then
-				tf_show="true"
+				tf_cmd="true"
 			elif [[ "$line" = ">><<" ]]; then
-				tf_show="false"
+				tf_cmd="false"
 			fi
 		fi
+		#keyによる絞り込み
+		if [ $tf_cmd = true ]; then
+			for number in {1..5}
+			do
+				if [ "${KEY[$number]}" != "none" -a "${KEY[$number]}" != "" ]; then
+					if [[ "${line}" != *"${KEY[$number]}"* ]]; then tf_key=false; fi; fi
+			done
+		fi
+		#optionによる絞り込み
+		if [ $tf_key = true ]; then
+			if [ "${OPT}" != "none" -a "${OPT}" != "" ]; then
+				if [[ "${line}" != "$ ${OPT}"* ]]; then
+					tf_opt=false; fi; fi; fi
 	
-	case "${line}" in
-		*"${KEY[1]}"*)
-			;;
-		*"${KEY[2]}"*)
-			;;
-		*"${KEY[3]}"*)
-			;;
-		*"${KEY[4]}"*)
-			;;
-		*"${KEY[5]}"*)
-			;;
-		*)
-			tf_show=false
-		;;
-	esac
-
-	
-		if [ $tf_show = true ]; then
+		if [ $tf_cmd = true -a $tf_key = true -a $tf_opt = true ]; then
 			echo "${line}"
 		fi
 	done
