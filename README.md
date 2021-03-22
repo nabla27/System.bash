@@ -19,6 +19,8 @@ The shell must be bash. And you need to install some packages (You can use other
   - zip command for trash box. `yum install zip unzip` <br>
   - xdg command to open file. `Not supported` <br>
  
+ ## Image
+ 
 ![Ubuntu 20 04 LTS 2021_03_22 15_33_33](https://user-images.githubusercontent.com/63175080/111949444-19a10a80-8b24-11eb-9371-10f705f18fb5.png)
 
 ![root@DESKTOP-2ODLCV0_~_data_folder_System bash_System_ver3 2021_03_22 15_23_45](https://user-images.githubusercontent.com/63175080/111948607-c37f9780-8b22-11eb-80d1-750063607738.png)
