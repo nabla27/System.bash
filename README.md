@@ -5,8 +5,9 @@ This "Systen.bash(ver3)" makes command line operation easy and convenient (No co
 ## Usage
 
 ```git clone https://github.com/nabla27/System.bash``` <br>
-First of all, it is necessary to rewrite the "PATH_" written at the beginning of "main.sh" to the path where "System_ver3" exists. <br>
-Then run `bash main.sh`. <br>
+When running for the first time, run the setup file. `bash setup.sh` <br>
+From the second time, execute the main file. `bash main.sh` <br>
+
 
 ## Requirement
 
