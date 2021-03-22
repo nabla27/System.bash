@@ -5,10 +5,8 @@ This "Systen.bash(ver3)" makes command line operation easy and convenient (No co
 ## Usage
 
 ```git clone https://github.com/nabla27/System.bash``` <br>
-When running for the first time, run the setup file. <br>
-`bash setup.sh` <br>
-From the second time, execute the main file. <br>
-`bash main.sh` <br>
+When running for the first time, run the setup file. `bash setup.sh` <br>
+From the second time, execute the main file. `bash main.sh` <br>
 
 
 ## Requirement
