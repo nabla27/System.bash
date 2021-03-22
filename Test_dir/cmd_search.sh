@@ -18,6 +18,8 @@ s_cmd="none"; s_opt="none"; s_key1="none"; s_key2="none"; s_key3="none"; s_key4=
 num=1; num4=0
 mode="cmd_search"
 
+#コマンドに色を付ける
+
 
 function cmd_search(){
 	IFS_BACKUP=$IFS
@@ -31,10 +33,17 @@ function cmd_search(){
 	local KEY[5]="$7"
 	local line_num=1
 	local tf_cmd="false"
+	local get_title=0
+	local tmp_num=0
 	for line in `cat $PATH_cmdlist`
 	do
 		local tf_key="true"
 		local tf_opt="true"
+		#タイトルの取得
+		if [[ "${line}" = ">>"?*"<<" ]]; then
+			local cmd_title="${line}"
+			get_title=$((get_title+1))
+		fi
 		#cmdによる絞り込み
 		if [ "$CMD" != "none" ]; then
 			if [[ "$line" = ">>${CMD}<<" ]]; then
@@ -42,6 +51,8 @@ function cmd_search(){
 			elif [[ "$line" = ">><<" ]]; then
 				tf_cmd="false"
 			fi
+		else
+			tf_cmd="true"
 		fi
 		#keyによる絞り込み
 		if [ $tf_cmd = true ]; then
@@ -56,8 +67,12 @@ function cmd_search(){
 			if [ "${OPT}" != "none" -a "${OPT}" != "" ]; then
 				if [[ "${line}" != "$ ${OPT}"* ]]; then
 					tf_opt=false; fi; fi; fi
-	
+
 		if [ $tf_cmd = true -a $tf_key = true -a $tf_opt = true ]; then
+			if [ $get_title -gt $tmp_num -a "$CMD" = "none" ]; then 
+				echo; echo "${cmd_title}"
+				tmp_num=$((tmp_num+1))
+			fi
 			echo "${line}"
 		fi
 	done
@@ -97,6 +112,12 @@ do
 		a)
 		if [ $num4 -ge 1 ]; then num4=$((num4-1))
 		else mode="menu"; exit; fi
+		;;
+		"[")
+		num=1
+		;;
+		"]")
+		num=6
 		;;
 		d)
 		if [ $num -eq 4 ]; then num4=$((num4+1))
