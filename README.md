@@ -15,3 +15,7 @@ The shell must be bash. And you need to install some packages (You can use other
 - *Ubuntu 20.04.2 LTS* <br>
   - zip command for trash box. `sudo apt install zip unzip` <br>
   - xdg command to open file. `sudo apt install zdg-utils` <br>
+- *CentOS 8.1 1911* <br>
+  - zip command for trash box. `yum install zip unzip` <br>
+  - xdg command to open file. `Not supported` <br>
+ 
