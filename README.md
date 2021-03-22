@@ -9,7 +9,7 @@ When running for the first time, run the setup file. `bash setup.sh` <br>
 From the second time, execute the main file. `bash main.sh` <br>
 <br>
 If you get an error about path, try changing `$PATH_` at the head of the main.sh file to path where System_ver3 exists. <br>
-Please move to the path where main.sh exists before runnig. <br>
+And please move to the path where main.sh exists before runnig. <br>
 
 
 ## Requirement
