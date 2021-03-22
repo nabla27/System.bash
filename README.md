@@ -19,3 +19,4 @@ The shell must be bash. And you need to install some packages (You can use other
   - zip command for trash box. `yum install zip unzip` <br>
   - xdg command to open file. `Not supported` <br>
  
+https://user-images.githubusercontent.com/63175080/111948607-c37f9780-8b22-11eb-80d1-750063607738.png
