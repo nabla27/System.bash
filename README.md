@@ -8,9 +8,7 @@ This "Systen.bash(ver3)" makes command line operation easy and convenient (No co
 When running for the first time, run the setup file. `bash setup.sh` <br>
 From the second time, execute the main file. `bash main.sh` <br>
 <br>
-If you get an error about path, try changing `$PATH_` at the head of the main.sh file to path where System_ver3 exists. <br>
-And please move to the path where main.sh exists before runnig. <br>
-
+The basic operation method is w,a,s,d and q,r. For details, please see this repository's wiki. <br>
 
 ## Requirement
 
@@ -21,6 +19,13 @@ The shell must be bash. And you need to install some packages (You can use other
 - *CentOS 8.1 1911* <br>
   - zip command for trash box. `yum install zip unzip` <br>
   - xdg command to open file. `Not supported` <br>
+ 
+## note
+ 
+I have only tested on Ubuntu(20.04.2) and CentOS(8.1 1911) in windows10 WSL environment. <br>
+If you get an error about path, try changing `$PATH_` at the head of the main.sh file to path where System_ver3 exists. <br>
+And please move to the path where main.sh exists before runnig. <br>
+
  
  ## Image
  
