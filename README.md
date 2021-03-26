@@ -8,7 +8,7 @@ This "Systen.bash(ver3)" makes command line operation easy and convenient (No co
 When running for the first time, run the setup file. `bash setup.sh` <br>
 From the second time, execute the main file. `bash main.sh` <br>
 <br>
-The basic operation method is w,a,s,d and q,r. For details, please see this repository's wiki. <br>
+The basic operation method is 'w','a','s','d' and 'q','r'. For details, please see this repository's wiki. <br>
 
 ## Requirement
 
